@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT dicts (dict*)>
+<!ELEMENT dict (from,key,val)>
+<!ATTLIST dict id ID #REQUIRED
+               orgright (none|id|no) "none">
+<!ELEMENT from (#PCDATA)>
+<!ATTLIST from name (exeid) "exeid">
+<!ELEMENT key (#PCDATA)>
+<!ELEMENT val (#PCDATA)>
+<!ATTLIST val separator CDATA "-">

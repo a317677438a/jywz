@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+        http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+	<context:component-scan base-package="com.kayak.*" />
+	<context:component-scan base-package="xft.workbench.*" />
+
+	<context:annotation-config />
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!-- 用于持有ApplicationContext,可以使用SpringContextHolder.getBean('xxxx')的静态方法得到spring 
+		bean对象 -->
+	<bean id="holder" class="com.kayak.web.base.spring.SpringContextHolder"
+		lazy-init="false" />
+
+	<!-- 全局配置信息 -->
+	<bean id="global" class="com.kayak.web.base.system.Global" scope="singleton"
+		init-method="init" destroy-method="destroy" lazy-init="false">
+		<property name="globalFiles"><!-- 指定多个全局配置文件或目录列表 -->
+			<list><!-- Global不支持使用大括号{}注入全局参数，原因是它自己就是全局参数 -->
+				<value>/WEB-INF/conf/sys</value>
+				<value>/WEB-INF/conf/prop</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- 数据源配置信息 -->
+	<bean id="propertyPlaceholderConfigurer"
+		class="com.kayak.web.base.spring.KPropertyPlaceholderConfigurer">
+		<property name="global">
+			<ref bean="global" />
+		</property>
+		<property name="locationPro">
+			<list>
+				<value>/WEB-INF/conf/sys/jdbc_dev.properties</value>
+				<value>/WEB-INF/conf/sys/jdbc_test.properties</value>
+				<value>/WEB-INF/conf/sys/jdbc_prod.properties</value>
+			</list>
+		</property>
+	</bean>
+	<!-- 定义公共的数据源属性 -->
+	<!-- 使用DBCP的连接配置 <bean id="parentDataSource" class="org.apache.commons.dbcp.BasicDataSource"> 
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" 
+		/> <property name="url" value="jdbc:oracle:thin:@192.168.0.4:1521:orcl" /> 
+		</bean> -->
+	<!-- 使用c3p0的连接配置 -->
+	<!-- 数据库密码不加密使用class="com.mchange.v2.c3p0.ComboPooledDataSource" -->
+	<!-- 数据库密码要加密使用class="com.kayak.web.base.dynamicds.KComboPooledDataSource" -->
+	<bean id="parentDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+
+		<!--连接池中保留的最小连接数。 -->
+		<property name="minPoolSize" value="1" />
+
+		<!--连接池中保留的最大连接数。Default: 15 -->
+		<property name="maxPoolSize" value="100" />
+
+		<!--初始化时获取的连接数，取值应在minPoolSize与maxPoolSize之间。Default: 3 -->
+		<property name="initialPoolSize" value="2" />
+
+		<!--最大空闲时间,60秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 -->
+		<property name="maxIdleTime" value="0" />
+
+		<!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->
+		<property name="acquireIncrement" value="3" />
+
+		<!--JDBC的标准参数，用以控制数据源内加载的PreparedStatements数量。 但由于预缓存的statements属于单个connection而不是整个连接池， 
+			所以设置这个参数需要考虑到多方面的因素。 如果maxStatements与maxStatementsPerConnection均为0，则缓存被关闭。 
+			Default: 0 -->
+		<property name="maxStatements" value="0" />
+		
+		<!--连接池用完时客户调用getConnection()后等待获取连接的时间，单位：毫秒。超时后会抛出-->  
+ 		<!--SQLEXCEPTION，如果设置0，则无限等待。Default:0-->  
+ 		<property name="checkoutTimeout" value="2000"/>  
+
+		<!--每60秒检查所有连接池中的空闲连接。Default: 0 -->
+		<property name="idleConnectionTestPeriod" value="7200" />
+
+		<!--定义在从数据库获取新连接失败后重复尝试的次数。Default: 30 -->
+		<property name="acquireRetryAttempts" value="30" />
+
+	</bean>
+
+	<bean id="dsSys" parent="parentDataSource">
+		<property name="jdbcUrl" value="${dsSys.jdbc.url}" />
+		<property name="driverClass" value="${dsSys.jdbc.driverClass}" />
+		<property name="user" value="${dsSys.jdbc.username}" />
+		<property name="password" value="${dsSys.jdbc.password}" />
+	</bean>
+
+	<bean id="dsSys2" parent="parentDataSource">
+		<property name="jdbcUrl" value="${dsSys2.jdbc.url}" />
+		<property name="driverClass" value="${dsSys.jdbc.driverClass}" />
+		<property name="user" value="${dsSys2.jdbc.username}" />
+		<property name="password" value="${dsSys2.jdbc.password}" />
+	</bean>
+	
+
+	<!-- <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean"> 
+		<property name="jndiName"><value>jdbc/fncorcl</value></property> <property 
+		name="resourceRef"><value>true</value></property> </bean> -->
+	<!-- 配置多数据源映射关系 -->
+	<bean id="dataSource" class="com.kayak.web.base.dynamicds.DynamicDataSource">
+		<property name="targetDataSources">
+			<map key-type="java.lang.String">
+				<entry key="dsSys" value-ref="dsSys" />
+				<entry key="dsSys2" value-ref="dsSys2" />
+			</map>
+		</property>
+		<!-- 默认数据源 -->
+		<property name="defaultTargetDataSource" ref="dsSys" />
+	</bean>
+	
+	
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"
+		scope="prototype">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="transactionTemplate"
+		class="org.springframework.transaction.support.TransactionTemplate">
+		<property name="transactionManager" ref="transactionManager" />
+		<!--ISOLATION_DEFAULT 表示由使用的数据库决定 -->
+		<property name="isolationLevelName" value="ISOLATION_DEFAULT" />
+		<property name="propagationBehaviorName" value="PROPAGATION_REQUIRED" />
+		<!-- <property name="timeout" value="30"/> -->
+	</bean>
+	
+	
+	
+	<!-- 邮件 -->
+	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"
+		p:defaultEncoding="${mail.defaultEncoding}" p:host="${mail.host}" p:username="${mail.username}"
+		p:password="${mail.password}" p:port="${mail.port}" p:javaMailProperties="classpath:mail.properties" />
+	<bean id="emailSender" class="xft.workbench.backstage.base.mail.impl.EmailSenderImpl" 
+		p:javaMailSender-ref="javaMailSender" p:from="${mail.username}" />
+	
+	
+</beans>

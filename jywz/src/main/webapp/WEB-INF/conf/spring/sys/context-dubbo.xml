@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	   http://code.alibabatech.com/schema/dubbo   
+	   http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<dubbo:application  name="workbench_bs" owner="workbench" organization="xft"/>
+	
+    <!--<dubbo:annotation package="xft.workbench.backstage.asset.biz" /> r-->
+
+    <!-- 注册中心地址 
+    <dubbo:registry id="absCashFlow" address="${zookeeper.address}" timeout="200000"/>
+    <dubbo:registry id="absDatabase" address="${zookeeper.address}" timeout="200000"/>
+	-->
+	
+	
+    <!--uncomment this if you want to test dubbo's monitor-->
+    <!--<dubbo:monitor protocol="registry"/>
+	<dubbo:reference id="assetCashFlowService" interface="xft.workbench.servers.cashflow.service.AssetCashFlowService" check="false" timeout="120000"  retries="0" registry="absCashFlow"/>
+	-->
+	
+	</beans>

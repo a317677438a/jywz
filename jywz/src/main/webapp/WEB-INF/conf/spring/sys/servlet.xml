@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:component-scan base-package="com.kayak.*" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <context:component-scan base-package="xft.workbench.*" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+
+    <context:annotation-config/>
+    <!-- -->
+    <mvc:interceptors>
+        <bean class="com.kayak.web.log.interceptor.LogInterceptor"></bean>
+    </mvc:interceptors>
+    <mvc:annotation-driven/>
+
+
+    <bean
+            class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="order" value="1"/>
+        <property name="favorParameter" value="false"/>
+        <property name="ignoreAcceptHeader" value="true"/>
+        <property name="defaultContentType" value="text/html;charset=utf-8"/>
+        <property name="mediaTypes">
+            <map>
+                <entry key="json" value="application/json;charset=utf-8"/>
+                <entry key="excel" value="application/atom+xml"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="templateResolver"
+          class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+        <property name="prefix" value="/"/>
+        <property name="templateMode" value="HTML5"/>
+        <property name="cacheable" value="false"/>
+        <property name="characterEncoding" value="UTF-8"/>
+    </bean>
+
+    <bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
+        <property name="templateResolver" ref="templateResolver"/>
+    </bean>
+
+    <bean id="viewResolver" class="com.kayak.web.base.view.MultiViewResolver">
+        <property name="resolvers">
+            <map>
+                <entry key="jsp">
+                    <bean
+                            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+                        <property name="order" value="5"/>
+                        <property name="viewClass"
+                                  value="org.springframework.web.servlet.view.JstlView"/>
+                        <property name="contentType" value="text/html;charset=utf-8"/>
+                        <property name="prefix" value="/"/>
+                        <property name="suffix" value=".jsp"/>
+                    </bean>
+                </entry>
+                <entry key="thymeleaf">
+                    <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+                        <property name="templateEngine" ref="templateEngine"/>
+                        <property name="characterEncoding" value="UTF-8"/>
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <!--文件上传配置-->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver ">
+        <property name="maxUploadSize" value="104857600"/>
+    </bean>
+
+</beans>

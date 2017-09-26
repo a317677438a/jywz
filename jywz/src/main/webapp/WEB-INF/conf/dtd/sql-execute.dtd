@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT sqlexecutes (sqlexecute*)>
+<!ELEMENT sqlexecute (exename,sqlids)>
+<!ATTLIST sqlexecute exeid ID #REQUIRED
+                     logexeid CDATA #IMPLIED
+                     datasource CDATA #REQUIRED>
+<!ELEMENT exename (#PCDATA)>
+<!ELEMENT sqlids (#PCDATA)>

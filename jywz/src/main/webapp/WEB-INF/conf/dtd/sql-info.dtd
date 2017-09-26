@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT sqlinfos (sqlinfo*)>
+<!ELEMENT sqlinfo (sqlname,sql+,checks*,querytree?)>
+<!ATTLIST sqlinfo sqlid ID #REQUIRED>
+<!ELEMENT sqlname (#PCDATA)>
+<!ELEMENT sql (#PCDATA)>
+<!ATTLIST sql dialect (oracle|db2|all) "all">
+
+<!ELEMENT checks (check+)>
+<!ELEMENT check (checkname,(checksql+|checkexeid|checkstring),compareval,errtext)>
+<!ATTLIST check comparesign (eql|uneql|gt|gteql|lt|lteql) "eql"
+                exitall (true|false) "true">
+<!ELEMENT checkname (#PCDATA)>
+<!ELEMENT checksql (#PCDATA)>
+<!ATTLIST checksql dialect (oracle|mysql|db2|all) "all">
+<!ELEMENT checkexeid (#PCDATA)>
+<!ELEMENT checkstring (#PCDATA)>
+<!ELEMENT compareval (#PCDATA)>
+<!ELEMENT errtext (#PCDATA)>
+
+<!ELEMENT querytree EMPTY>
+<!ATTLIST querytree idcolumn CDATA #REQUIRED
+                    textcolumn CDATA #REQUIRED
+                    iconClscolumn CDATA #IMPLIED
+                    iconcolumn CDATA #IMPLIED
+                    diffway (upper|pos) "upper"
+                    diffcondition CDATA #REQUIRED
+                    initexpand (one|all|none) "none"
+                    isasync (true|false) "false">
+
+

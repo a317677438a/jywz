@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
+	version="2.5"> -->
+<web-app id="WebApp_ID" version="2.4"
+	xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+ http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>jywz</display-name>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<!-- 实现任何地方读取当前request功能的过滤器，必须放在所有过滤器之前 -->
+	<filter>
+		<filter-name>localRequestFilter</filter-name>
+		<filter-class>com.kayak.web.base.filter.LocalRequestFilter
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>localRequestFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>localRequestFilter</filter-name>
+		<url-pattern>*.html</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>localRequestFilter</filter-name>
+		<url-pattern>*.json</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>localRequestFilter</filter-name>
+		<url-pattern>*.text</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>localRequestFilter</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>localRequestFilter</filter-name>
+		<url-pattern>*.excel</url-pattern>
+	</filter-mapping>
+	<!-- 保证dwr在访问后台时session不会丢失 -->
+	<filter-mapping>
+		<filter-name>localRequestFilter</filter-name>
+		<url-pattern>*.dwr</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- 设置CORS跨域访问 -->
+    <filter>
+	  <filter-name>cors</filter-name>
+	  <filter-class>xft.workbench.backstage.base.filter.SimpleCORSFilter</filter-class>
+	</filter>
+	<filter-mapping>
+	  <filter-name>cors</filter-name>
+	  <url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- 登录验证过滤器 -->
+	<filter>
+		<filter-name>loginCertifyFilter</filter-name>
+		<filter-class>
+			xft.workbench.backstage.base.filter.LoginCertifyFilter</filter-class>
+		<init-param><!-- 配置不需要过滤的页面 -->
+			<param-name>unfilter-page</param-name>
+			<param-value>/abslogin.json,/abslogout.json</param-value>
+		</init-param>
+		<init-param><!-- 指定登录页面 -->
+			<param-name>login-page</param-name>
+			<param-value>/views/login.html</param-value>
+		</init-param>
+		<init-param><!-- 指定登录请求 -->
+			<param-name>loginAction</param-name>
+			<param-value>/abslogin.json</param-value>
+		</init-param>
+		<init-param><!-- 指定验证失败跳转页面 -->
+			<param-name>error-page</param-name>
+			<param-value>/error.jsp</param-value>
+		</init-param>
+		<init-param><!-- 不需要验证的前缀 -->
+			<param-name>no-auth-prefix</param-name>
+			<param-value>/a94a8fe5ccb19</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>loginCertifyFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>loginCertifyFilter</filter-name>
+		<url-pattern>*.html</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>loginCertifyFilter</filter-name>
+		<url-pattern>*.json</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>loginCertifyFilter</filter-name>
+		<url-pattern>*.text</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>loginCertifyFilter</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>loginCertifyFilter</filter-name>
+		<url-pattern>*.excel</url-pattern>
+	</filter-mapping>
+	
+	
+	<!-- 设置用户监控日志-->
+    <filter>
+	  <filter-name>userlogs</filter-name>
+	  <filter-class>xft.workbench.backstage.base.filter.UserLogsFilter</filter-class>
+	</filter>
+	<filter-mapping>
+	  <filter-name>userlogs</filter-name>
+	  <url-pattern>*.json</url-pattern>
+	</filter-mapping>
+	
+	
+	<!-- 配置Spring的多个配置文件位置 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			 /WEB-INF/conf/spring/sys/context*.xml, /WEB-INF/conf/spring/context*.xml 
+		</param-value>
+	</context-param>
+	
+	<!-- Spring 监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<listener>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>springMVC</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/conf/spring/sys/servlet*.xml,/WEB-INF/conf/spring/servlet*.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>springMVC</servlet-name>
+		<url-pattern>*.json</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>springMVC</servlet-name>
+		<url-pattern>*.action</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>springMVC</servlet-name>
+		<url-pattern>*.excel</url-pattern>
+	</servlet-mapping> 
+	<servlet-mapping>
+		<servlet-name>springMVC</servlet-name>
+		<url-pattern>*.pdf</url-pattern>
+	</servlet-mapping>
+
+	<session-config><!-- SESSION超时时间（单位：分钟） -->
+		<session-timeout>30</session-timeout>
+	</session-config>
+	
+	
+  <error-page>
+    <error-code>404</error-code>
+    <location>/WEB-INF/views/error404.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/WEB-INF/views/error.jsp</location>
+  </error-page>	
+  
+  
+</web-app>

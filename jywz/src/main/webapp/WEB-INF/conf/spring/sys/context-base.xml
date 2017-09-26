@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+        http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+	<!-- sys start ************************************************************************* -->
+	<!-- 信息接口配置信息 -->
+	<bean id="mesInterface" class="xft.workbench.backstage.base.system.MesInterface" scope="singleton"
+		init-method="init" destroy-method="destroy" lazy-init="false">
+		<property name="interfaceFiles"><!-- 指定多个信息接口配置文件或目录列表 -->
+			<list>
+				<value>/WEB-INF/conf/interface</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- 定义SQL配置管理器 -->
+	<bean id="sysSql" class="com.kayak.web.base.sql.SysSql" scope="singleton"
+		init-method="init" destroy-method="destroy">
+		<property name="oscache">
+			<ref bean="sysSqlOscache" />
+		</property>
+		<property name="configFiles">
+			<set><!-- 指定SQL配置信息文件，可用路径或文件名称 -->
+				<value>/WEB-INF/conf/sql</value>
+			</set>
+		</property>
+	</bean>
+
+	<!-- 定义用于SQL配置信息缓存管理器sysSql的缓存对象 -->
+	<bean id="sysSqlOscache"
+		class="com.opensymphony.oscache.general.GeneralCacheAdministrator"
+		scope="singleton" destroy-method="destroy">
+		<constructor-arg index="0">
+			<props>
+				<prop key="cache.memory">true</prop>
+				<!--<prop key="cache.capacity">500</prop> 缓存元素个数最大值 -->
+				<!-- 缓存元素超过最大值，采用先进先出(first int first out)算法移除 <prop key="cache.algorithm">com.opensymphony.oscache.base.algorithm.FIFOCache 
+					</prop> -->
+			</props>
+		</constructor-arg>
+	</bean>
+
+
+
+	<!-- 自动更新配置文件加载的线程 -->
+	<bean id="autoReloadConfigThread" class="com.kayak.web.base.system.AutoReloadConfigThread">
+		<!-- 自动更新间隔时间，单位秒。如果设置小于5，则取5；如果设置成0，则不进行自动更新 -->
+		<property name="interval">
+			<value>5</value>
+		</property>
+		<property name="configBeans">
+			<set>
+				<ref bean="global" /><!-- global.properties全局参数配置文件检查更新 -->
+				<ref bean="sysSql" /><!-- 所有SQL配置文件 -->
+			</set>
+		</property>
+	</bean>
+
+	<!-- 定义用于cacheManager的缓存管理器对象 -->
+	<bean id="sysCacheOscache"
+		class="com.opensymphony.oscache.general.GeneralCacheAdministrator"
+		scope="singleton" destroy-method="destroy">
+		<constructor-arg index="0">
+			<props>
+				<prop key="cache.memory">true</prop>
+				<prop key="cache.capacity">600</prop><!-- 缓存元素个数最大值 -->
+				<!-- 缓存元素超过最大值，采用先进先出(first int first out)算法移除 -->
+				<prop key="cache.algorithm">com.opensymphony.oscache.base.algorithm.FIFOCache
+				</prop>
+			</props>
+		</constructor-arg>
+	</bean>
+
+	
+	<!-- 自动处理任务 -->
+	<bean id="relayTaskService" class="com.kayak.web.base.service.RelayTaskService"
+		scope="singleton" init-method="init" destroy-method="destroy">
+	</bean>
+
+	<!-- sys end ******************************************************************************** -->
+<!-- 数据字典、系统参数信息缓存管理器 -->
+	<bean id="sysCacheManager" class="com.kayak.web.base.cache.SysCacheManager"
+		scope="singleton" destroy-method="destroy" init-method="init">
+		<property name="entityOscache">
+			<ref bean="sysCacheOscache" />
+		</property>
+		<property name="cacheFlushFiles"><!-- 指定多个配置文件或目录列表 -->
+			<list>
+				<value>/WEB-INF/conf/sys</value>
+				<value>/WEB-INF/conf/cache</value>
+			</list>
+		</property>
+	</bean>
+		
+	<!-- 工作流扫描 -->
+	<bean id="sysParam" class="com.kayak.web.base.system.SysParam"
+		scope="singleton" init-method="init" destroy-method="destroy">
+		<property name="propertiesFiles"><!-- 指定多个配置文件或目录列表 -->
+			<list>
+				<value>/WEB-INF/conf/sys</value>
+				<value>/WEB-INF/conf/prop</value>
+			</list>
+		</property>
+	</bean>
+		
+	<!-- dao定义end ******************************************************* -->
+	
+</beans>

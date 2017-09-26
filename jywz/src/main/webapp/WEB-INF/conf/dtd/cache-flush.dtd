@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT flushs (flush*)>
+<!ELEMENT flush (sqlid,(dict|cache-key|result*)+)>
+<!ELEMENT sqlid (#PCDATA)>
+<!ELEMENT dict (#PCDATA)>
+<!ATTLIST dict repeat CDATA #IMPLIED>
+<!ELEMENT result (#PCDATA)>
+<!ELEMENT cache-key (#PCDATA)>

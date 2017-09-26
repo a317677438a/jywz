@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlinfos SYSTEM "../../dtd/sql-info.dtd">
+<!-- 平台系统功能的SQL在这里配置 -->
+<sqlinfos>
+
+	<sqlinfo sqlid="SYS_QRY_PARAM">
+		<sqlname>查询系统参数信息</sqlname>
+		<sql><![CDATA[
+		SELECT paraid,paravalue,groupparaid,paraname FROM sys_param 
+				  ORDER BY groupparaid,paraid
+		]]></sql>
+	</sqlinfo>
+
+	<sqlinfo sqlid="SYS_QRY_DICT">
+		<sqlname>查询数据字典数据</sqlname>
+		<sql><![CDATA[
+		SELECT itemKey,itemVal FROM sys_dict_item WHERE dict=$S{dict} ORDER BY itemKey
+		]]></sql>
+	</sqlinfo>
+	
+	<sqlinfo sqlid="SYS100000">
+		<sqlname>查询系统菜单（所有）</sqlname>
+		<sql><![CDATA[
+		SELECT menuid,menuname,upperid,url,iconcls,icon,status,moduleid,pageid,fastcode,functype,menutype 
+		FROM sys_menu 
+		WHERE status='N' 
+		ORDER BY upperid,loadorder,menuid  
+		]]></sql>
+		<querytree idcolumn="menuid" textcolumn="menuname"
+			iconClscolumn="iconcls" iconcolumn="icon" diffcondition="menuid,upperid" initexpand="all" />
+	</sqlinfo>
+
+	<sqlinfo sqlid="SYSWORKDAYQ">
+		<sqlname>查询系统工作日</sqlname>
+		<sql dialect="oracle"><![CDATA[
+			SELECT workday FROM sys_workday_set 
+			WHERE pgmno in (select p.pgmno from sys_workday_pgm p where p.pgmtype = '1')
+			  AND to_date(workday,'yyyymmdd') between (to_date($s{sys_param_50000002},'yyyymmdd') - 360) and (to_date($s{sys_param_50000002},'yyyymmdd') + 360) 
+			ORDER BY workday
+		]]></sql>
+		<sql dialect="db2"><![CDATA[
+			SELECT workday FROM sys_workday_set 
+			WHERE pgmno in (select p.pgmno from sys_workday_pgm p where p.pgmtype = '1')
+			  AND days(to_date(workday,'yyyymmdd')) between (days(to_date($s{sys_param_50000002},'yyyymmdd')) - 360) and (days(to_date($s{sys_param_50000002},'yyyymmdd')) + 360) 
+			ORDER BY workday
+		]]></sql>
+	</sqlinfo>
+
+</sqlinfos>
