@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlinfos SYSTEM "../../../dtd/sql-info.dtd">
+
+<sqlinfos>
+
+	<sqlinfo sqlid="MS0000Q001">
+		<sqlname>查询参数信息信息</sqlname>
+		<sql><![CDATA[
+			SELECT
+				t.param_code,
+				t.param_name
+			FROM
+				jy_params t
+			WHERE
+				t.param_type = $S{param_type};
+		]]></sql>
+	</sqlinfo>
+	
+	
+</sqlinfos>

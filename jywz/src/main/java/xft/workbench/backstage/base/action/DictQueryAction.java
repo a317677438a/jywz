@@ -3,6 +3,8 @@ package xft.workbench.backstage.base.action;
 import java.util.Iterator;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.context.annotation.Scope;
@@ -12,11 +14,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import xft.workbench.backstage.base.util.EnumUtil;
 import com.kayak.web.base.cache.CacheDict;
+import com.kayak.web.base.service.abs.ComnServiceAbstract;
 import com.kayak.web.base.system.Global;
+import com.kayak.web.base.system.KResult;
+import com.kayak.web.base.system.RequestSupport;
 
 @Scope("prototype")
 @Controller
 public class DictQueryAction extends ABSBaseController{
+	
+	@Resource
+	private ComnServiceAbstract comnService;
 	/**
 	 * 获取数据字典JSON结构结果集(业务参数：如，证件类型、国家，用户可以维护)
 	 */
@@ -57,6 +65,26 @@ public class DictQueryAction extends ABSBaseController{
 			if (!"false".equals(Global.getGlobalConf("Global.REQUEST_RESULT_LOG")))
 				log.info("##### dict json result : " + str);
 			return this.updateReturnJson(true, "查询完毕", jsonstrToArraystr(str));
+		} catch (Exception e) {
+			return this.updateReturnJson(true, "查询完毕", "[]");
+		}
+	}
+	
+	
+	/**
+	 * 获取数据字典JSON结构结果集(系统参数：增加将会对系统版本有影响 ，一般不可以用户进行维护)
+	 */
+	@RequestMapping(value = "/base/paramquery.json")
+	public @ResponseBody String paramJson() {
+		String str;
+		try {
+			Map<String, Object> map = this.getRequestParams();
+			//一个param_type参数 一个exeid=MS0000EQ001
+			KResult result = comnService.comnQuery(map);
+			return this.updateReturnJson(true, "查询成功", RequestSupport.result2JsonList(result)
+					.replace("param_code", "key")
+					.replace("param_name", "value"));
+			
 		} catch (Exception e) {
 			return this.updateReturnJson(true, "查询完毕", "[]");
 		}
