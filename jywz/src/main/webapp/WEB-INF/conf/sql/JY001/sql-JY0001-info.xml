@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlinfos SYSTEM "../../dtd/sql-info.dtd">
+
+<sqlinfos>
+
+	<sqlinfo sqlid="JY0001U001">
+		<sqlname>新增物资类型</sqlname>
+		<sql><![CDATA[
+			INSERT INTO jy_material_type (
+				code,
+				name
+			)
+			VALUES
+				(
+					$S{code},
+					$S{name}
+				)
+		]]></sql>
+	</sqlinfo>
+	
+	<sqlinfo sqlid="JY0001Q001">
+		<sqlname>查询全部物资类型</sqlname>
+		<sql><![CDATA[
+			SELECT * FROM jy_material_type
+				WHERE 
+				
+				(
+                $ISNULL{code}
+                OR jy_material_type.CODE like '%$U{code}%'
+            ) or (
+            	$ISNULL{name}
+                OR jy_material_type.name like '%$U{name}%'
+            )
+					order by jy_material_type.id
+		]]></sql>
+	</sqlinfo>
+	
+	<sqlinfo sqlid="JY0001Q002">
+		<sqlname>查询全部物资类型数量</sqlname>
+		<sql><![CDATA[
+			SELECT COUNT(a.id) num FROM jy_material_type a
+				WHERE 
+					(
+                $ISNULL{code}
+                OR jy_material_type.CODE like '%$U{code}%'
+            ) or (
+            	$ISNULL{name}
+                OR jy_material_type.name like '%$U{name}%'
+            )
+		]]></sql>
+	</sqlinfo>
+
+</sqlinfos>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlexecutes SYSTEM "../../dtd/sql-execute.dtd">
+<sqlexecutes>
+	<sqlexecute exeid="JY0001EU001" datasource="dsSys">
+		<exename>新增物资类型</exename>
+		<sqlids>JY0001U001</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY0001EQ001" datasource="dsSys">
+		<exename>查询所有物资类型</exename>
+		<sqlids>JY0001Q001</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY0001EQ002" datasource="dsSys">
+		<exename>查询所有物资类型数量</exename>
+		<sqlids>JY0001Q002</sqlids>
+	</sqlexecute>
+
+</sqlexecutes>

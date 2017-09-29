@@ -14,9 +14,10 @@
 
 	<!-- sys start ************************************************************************* -->
 	<!-- 信息接口配置信息 -->
+	<!-- 指定多个信息接口配置文件或目录列表 -->
 	<bean id="mesInterface" class="xft.workbench.backstage.base.system.MesInterface" scope="singleton"
 		init-method="init" destroy-method="destroy" lazy-init="false">
-		<property name="interfaceFiles"><!-- 指定多个信息接口配置文件或目录列表 -->
+		<property name="interfaceFiles">
 			<list>
 				<value>/WEB-INF/conf/interface</value>
 			</list>
