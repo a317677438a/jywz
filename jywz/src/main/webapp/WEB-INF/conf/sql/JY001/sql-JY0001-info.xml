@@ -42,12 +42,42 @@
 				WHERE 
 					(
                 $ISNULL{code}
-                OR jy_material_type.CODE like '%$U{code}%'
+                OR a.CODE like '%$U{code}%'
             ) or (
             	$ISNULL{name}
-                OR jy_material_type.name like '%$U{name}%'
+                OR a.name like '%$U{name}%'
             )
 		]]></sql>
 	</sqlinfo>
 
+
+	<sqlinfo sqlid="JY0001Q003">
+		<sqlname>获取物资类型最大编码</sqlname>
+		<sql><![CDATA[
+			select max(id) num from jy_material_type where $ISNULL{code}
+		]]></sql>
+	</sqlinfo>
+	
+	<sqlinfo sqlid="JY0001Q004">
+		<sqlname>判断物资类型编码是否被使用</sqlname>
+		<sql><![CDATA[
+				SELECT
+			COUNT(1) counts
+		FROM
+			jy_material_type type
+		JOIN jy_material ma ON type.id = ma.jy_material_type_id
+		WHERE
+			type.id = $N{id}
+		]]></sql>
+	</sqlinfo>
+	
+	<sqlinfo sqlid="JY0001U002">
+		<sqlname>修改物资类型</sqlname>
+		<sql><![CDATA[
+			UPDATE jy_material_type SET
+			name=$S{name}
+			WHERE id=$N{id}
+		]]></sql>
+	</sqlinfo>
+	
 </sqlinfos>

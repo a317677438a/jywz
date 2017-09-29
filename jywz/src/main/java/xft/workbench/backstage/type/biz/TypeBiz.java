@@ -4,11 +4,13 @@ package xft.workbench.backstage.type.biz;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kayak.web.base.exception.KPromptException;
 import com.kayak.web.base.sql.SqlRow;
 
 import xft.workbench.backstage.type.dao.TypeDao;
@@ -22,6 +24,9 @@ public class TypeBiz {
 	@Autowired
 	private TypeDao typeDao;
 	
+	@Autowired
+	private CheckTypeService checkTypeService;
+	
 	@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
 	public void addtype(Type type) throws Exception {
 		// 添加机构
@@ -30,5 +35,21 @@ public class TypeBiz {
 	
 	public List<SqlRow> getAllType(String code,String name) throws Exception{
 		return typeDao.getAllType(code, name);
+	}
+	
+	public Integer getMaterialType() throws Exception{
+		return typeDao.getMaterialType();
+	}
+	
+	@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
+	public void modifytype(Type type) throws Exception {
+		//判断物资类型状态：如果物资类型被使用，则不能进行此操作
+		//false表示没有被使用，true表示被使用
+		boolean flag = checkTypeService.checkCodeStatus(type.getId());
+		
+		if(!flag)
+			throw new KPromptException("物资类型被使用了，不允许此操作！");
+		// 修改物资类型
+		typeDao.modifyCode(type);
 	}
 }

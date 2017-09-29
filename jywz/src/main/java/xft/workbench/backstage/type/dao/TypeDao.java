@@ -1,5 +1,6 @@
 package xft.workbench.backstage.type.dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,12 +12,15 @@ import xft.workbench.backstage.base.util.ObjectMapUtil;
 import xft.workbench.backstage.type.model.Type;
 
 import com.kayak.web.base.dao.ComnDao;
+import com.kayak.web.base.exception.KPromptException;
+import com.kayak.web.base.exception.KSqlException;
+import com.kayak.web.base.exception.KSystemException;
 import com.kayak.web.base.sql.SqlResult;
 import com.kayak.web.base.sql.SqlRow;
 
 @Repository
 public class TypeDao extends ComnDao{
-	/*
+	/**
 	 * 新增物资类型
 	 */
 	public void add(Type type) throws Exception {
@@ -37,5 +41,48 @@ public class TypeDao extends ComnDao{
 			allType.add(sResult.getRow());
 		}
 		return allType;
+	}
+	/**
+	 * 
+	 * 获取物资类型编码
+	 */
+	public Integer getMaterialType() throws Exception{
+		Map<String, Object> params = new HashMap<String, Object>(); 
+		params.put("code",null);
+		SqlResult sResult = this.exeQuery("JY0001EQ003", params);
+		Integer num = null;
+		if(sResult.next()) {
+			num = sResult.getInteger("num");
+		}
+		return num;
+	}
+	/**
+	 * 
+	 * 检查物资类型是否被使用
+	 * 
+	 */
+	public Integer checkTypeStatus(Integer id) throws KSqlException, KPromptException, KSystemException, SQLException {
+		
+		Integer counts = null;
+		Map<String,Object> params = new HashMap<String, Object>();
+		
+		params.put("id", id);
+		
+		SqlResult rs = exeQuery("JY0001EQ004", params);
+		
+		while(rs.next())
+			counts = rs.getInteger("counts");
+			
+		return counts;
+	}
+	/**
+	 * 修改物资类型
+	 * @param code
+	 */
+	public void modifyCode(Type type) throws Exception {
+		Map<String, Object> param = ObjectMapUtil.getFieldVlaue2(type);
+		
+		exeUpdate("JY0001EU002", param);
+		
 	}
 }

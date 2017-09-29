@@ -1,10 +1,8 @@
 package xft.workbench.backstage.type.action;
 
 
-import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -15,11 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kayak.web.base.dao.ComnDao;
 import com.kayak.web.base.sql.SqlResult;
-import com.kayak.web.base.sql.SqlRow;
 
 import xft.workbench.backstage.base.action.ABSBaseController;
-import xft.workbench.backstage.base.enumeration.IsValid;
-import xft.workbench.backstage.base.enumeration.OrgTypeEnum;
 import xft.workbench.backstage.base.util.GlobalMessage;
 import xft.workbench.backstage.base.util.ObjectMapUtil;
 import xft.workbench.backstage.type.biz.TypeBiz;
@@ -37,10 +32,23 @@ import xft.workbench.backstage.type.model.Type;
 public class MaterialsTypeAction extends ABSBaseController{
 	
 	@Autowired
-	private TypeBiz typerBiz;
+	private TypeBiz typeBiz;
 	
 	@Autowired
 	private ComnDao comnDao;
+	/**
+	 * 
+	 * 新增物资类型时生成物资编号
+	 */
+	@RequestMapping(value="/materialsType/getMaterialType.json")
+	public @ResponseBody String getMaterialType(){
+		try {
+			Integer num = typeBiz.getMaterialType();
+			return updateReturnJson(true, "查询成功", num);
+		} catch (Exception e) {
+			return this.updateErrorJson(e);
+		}
+	}
 	/**
 	 * 
 	 * 新增物资类型
@@ -51,7 +59,7 @@ public class MaterialsTypeAction extends ABSBaseController{
 			Map<String, Object> params = this.getRequestParams();
 			Type type = new Type();
 			ObjectMapUtil.setObjectFileValue(type,params);
-			typerBiz.addtype(type);
+			typeBiz.addtype(type);
 			return updateReturnJson(true, "新增物资类型成功", null);
 		} catch (Exception e) {
 			return this.updateErrorJson(e);
@@ -62,20 +70,6 @@ public class MaterialsTypeAction extends ABSBaseController{
 	 * 查询所有物资类型
 	 * 
 	 */
-//	@RequestMapping(value="/materialsType/getAllType.json")
-//	public @ResponseBody String getAllType(){
-//		try {
-//			Map<String, Object> params = this.getRequestParams();
-//			String code = params.get("code").toString();
-//			String name = params.get("name").toString();
-//			List<SqlRow> allType = typerBiz.getAllType(code,name);
-//			JSONObject returndata = new JSONObject();
-//			returndata.put("allType", new JSONArray(allType));
-//			return updateReturnJson(true, "查询物资类型成功", returndata);
-//		} catch (Exception e) {
-//			return this.updateErrorJson(e);
-//		}
-//	}
 	@RequestMapping(value="/materialsType/getAllType.json")
 	public @ResponseBody String getAllType(){
 		/*
@@ -115,6 +109,22 @@ public class MaterialsTypeAction extends ABSBaseController{
 			obj.put("rows", arr);
 			
 			return this.updateReturnJson(true, "查询成功", obj);
+		} catch (Exception e) {
+			return this.updateErrorJson(e);
+		}
+	}
+	/**
+	 * 修改物资类型
+	 * 
+	 */
+	@RequestMapping(value="/materialsType/modifyType.json")
+	public @ResponseBody String modifytype(){
+		try {
+			Map<String, Object> param = this.getRequestParams();//获取请求参数
+			Type type = new Type();
+			ObjectMapUtil.setObjectFileValue(type, param);
+			typeBiz.modifytype(type);
+			return updateReturnJson(true, "修改物资类型成功", null);
 		} catch (Exception e) {
 			return this.updateErrorJson(e);
 		}

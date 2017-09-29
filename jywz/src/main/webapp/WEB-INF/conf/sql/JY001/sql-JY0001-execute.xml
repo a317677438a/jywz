@@ -15,5 +15,20 @@
 		<exename>查询所有物资类型数量</exename>
 		<sqlids>JY0001Q002</sqlids>
 	</sqlexecute>
+	
+	<sqlexecute exeid="JY0001EQ003" datasource="dsSys">
+		<exename>获取物资类型最大编码</exename>
+		<sqlids>JY0001Q003</sqlids>
+	</sqlexecute>
 
+	<sqlexecute exeid="JY0001EQ004" datasource="dsSys">
+		<exename>判断物资类型编码是否被使用</exename>
+		<sqlids>JY0001Q004</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY0001EU002" datasource="dsSys">
+		<exename>修改物资类型</exename>
+		<sqlids>JY0001U002</sqlids>
+	</sqlexecute>
+	
 </sqlexecutes>
