@@ -17,7 +17,8 @@ drop table if exists jy_params;
 CREATE TABLE jy_params (
   param_type varchar(50)  comment '参数类型:organize:组织、storehouse：仓库',
   param_code varchar(50)  comment '编码',
-  param_name varchar(50)  comment '名称'
+  param_name varchar(50)  comment '名称',
+  PRIMARY KEY (param_code)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='参数表';
 
 
