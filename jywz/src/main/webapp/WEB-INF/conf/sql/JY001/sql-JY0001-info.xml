@@ -27,7 +27,7 @@
 				(
                 $ISNULL{code}
                 OR jy_material_type.CODE like '%$U{code}%'
-            ) or (
+            ) and (
             	$ISNULL{name}
                 OR jy_material_type.name like '%$U{name}%'
             )
