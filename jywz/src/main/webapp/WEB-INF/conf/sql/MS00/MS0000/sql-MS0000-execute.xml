@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlexecutes SYSTEM "../../../dtd/sql-execute.dtd">
+
+<sqlexecutes>
+
+	<sqlexecute exeid="MS0000EQ001" datasource="dsSys">
+		<exename>查询参数信息信息</exename>
+		<sqlids>MS0000Q001</sqlids>
+	</sqlexecute>
+	
+	
+	
+</sqlexecutes>
