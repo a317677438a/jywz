@@ -52,4 +52,15 @@ public class TypeBiz {
 		// 修改物资类型
 		typeDao.modifyCode(type);
 	}
+	
+	@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
+	public void deletetype(Integer id) throws Exception {
+		
+		boolean flag = checkTypeService.checkCodeStatus(id);
+		
+		if(!flag)
+			throw new KPromptException("物资类型被使用了，不允许此操作！");
+		// 删除物资类型
+		typeDao.deleteCode(id);
+	}
 }

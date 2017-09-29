@@ -129,4 +129,19 @@ public class MaterialsTypeAction extends ABSBaseController{
 			return this.updateErrorJson(e);
 		}
 	}
+	/**
+	 * 删除物资类型
+	 * 
+	 */
+	@RequestMapping(value="/materialsType/deleteType.json")
+	public @ResponseBody String deleteType(){
+		try {
+			Map<String, Object> param = this.getRequestParams();//获取请求参数
+			Integer id = Integer.parseInt(param.get("id").toString());
+			typeBiz.deletetype(id);
+			return updateReturnJson(true, "删除物资类型成功", null);
+		} catch (Exception e) {
+			return this.updateErrorJson(e);
+		}
+	}
 }

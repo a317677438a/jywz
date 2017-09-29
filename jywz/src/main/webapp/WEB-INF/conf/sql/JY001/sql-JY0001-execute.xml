@@ -31,4 +31,9 @@
 		<sqlids>JY0001U002</sqlids>
 	</sqlexecute>
 	
+	<sqlexecute exeid="JY0001ED001" datasource="dsSys">
+		<exename>删除物资类型</exename>
+		<sqlids>JY0001D001</sqlids>
+	</sqlexecute>
+	
 </sqlexecutes>

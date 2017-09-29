@@ -80,4 +80,11 @@
 		]]></sql>
 	</sqlinfo>
 	
+	<sqlinfo sqlid="JY0001D001">
+		<sqlname>删除物资类型</sqlname>
+		<sql><![CDATA[
+			DELETE FROM jy_material_type where id = $N{id}
+		]]></sql>
+	</sqlinfo>
+	
 </sqlinfos>

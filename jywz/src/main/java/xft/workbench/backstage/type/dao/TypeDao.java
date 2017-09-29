@@ -77,12 +77,25 @@ public class TypeDao extends ComnDao{
 	}
 	/**
 	 * 修改物资类型
-	 * @param code
+	 * @param id
 	 */
 	public void modifyCode(Type type) throws Exception {
 		Map<String, Object> param = ObjectMapUtil.getFieldVlaue2(type);
 		
 		exeUpdate("JY0001EU002", param);
+		
+	}
+	/**
+	 * 删除物资类型
+	 * @param id
+	 */
+	public void deleteCode(Integer id) throws Exception {
+		Map<String,Object> params = new HashMap<String, Object>();
+		
+		params.put("id", id);
+		
+		exeUpdate("JY0001ED001", params);
+		
 		
 	}
 }
