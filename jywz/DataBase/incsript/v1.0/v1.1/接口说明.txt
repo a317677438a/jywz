@@ -1,18 +1,18 @@
-1¡¢¹«¹²²ÎÊı½Ó¿Ú¡£
-²éÑ¯²Ö¿â
-ÇëÇó£º
+1ã€å…¬å…±å‚æ•°æ¥å£ã€‚
+æŸ¥è¯¢ä»“åº“
+è¯·æ±‚ï¼š
 http://localhost:8081/jywz/base/paramquery.json
 {exeid:'MS0000EQ001',param_type:'storehouse'}
 
-ÏìÓ¦£º
-{"success":"true","returnmsg":"²éÑ¯³É¹¦","returndata":{"results":"7","rows":[{"key":"storehouse01","value":"²Ö¿â01"},{"key":"storehouse02","value":"²Ö¿â02"},{"key":"storehouse03","value":"²Ö¿â03"},{"key":"storehouse04","value":"²Ö¿â04"},
-{"key":"storehouse05","value":"²Ö¿â05"},{"key":"storehouse06","value":"²Ö¿â06"},{"key":"storehouse07","value":"²Ö¿â07"}]}}
+å“åº”ï¼š
+{"success":"true","returnmsg":"æŸ¥è¯¢æˆåŠŸ","returndata":{"results":"7","rows":[{"key":"storehouse01","value":"ä»“åº“01"},{"key":"storehouse02","value":"ä»“åº“02"},{"key":"storehouse03","value":"ä»“åº“03"},{"key":"storehouse04","value":"ä»“åº“04"},
+{"key":"storehouse05","value":"ä»“åº“05"},{"key":"storehouse06","value":"ä»“åº“06"},{"key":"storehouse07","value":"ä»“åº“07"}]}}
 
-²éÑ¯ÓÃ»§×éÖ¯
-ÇëÇó£º
+æŸ¥è¯¢ç”¨æˆ·ç»„ç»‡
+è¯·æ±‚ï¼š
 http://localhost:8081/jywz/base/paramquery.json
 {exeid:'MS0000EQ001',param_type:'organize'}
 
-ÏìÓ¦£º
-{"success":"true","returnmsg":"²éÑ¯³É¹¦","returndata":{"results":"9","rows":[{"key":"organize01","value":"¼ÆÁ¿ÖĞĞÄ"},{"key":"organize02","value":"µçÍø¼ÆËã°à"},{"key":"organize03","value":"ÖÊ¼ì°à"},{"key":"organize04","value":"¼ÆÁ¿×Ô¶¯»¯°à"},{"key":"organize05","value":"ÓÃ»§¼ÆÁ¿Ò»°à"},{"key":"organize06","value":"ÓÃ»§¼ÆÁ¿¶ş°à"},
-{"key":"organize07","value":"ÓÃ»§¼ÆÁ¿Èı°à"},{"key":"organize08","value":"ÊÒÄÚ¼ì¶¨°à"},{"key":"organize09","value":"µçÄÜÁ¿Êı¾İ°à"}]}}
+å“åº”ï¼š
+{"success":"true","returnmsg":"æŸ¥è¯¢æˆåŠŸ","returndata":{"results":"9","rows":[{"key":"organize01","value":"è®¡é‡ä¸­å¿ƒ"},{"key":"organize02","value":"ç”µç½‘è®¡ç®—ç­"},{"key":"organize03","value":"è´¨æ£€ç­"},{"key":"organize04","value":"è®¡é‡è‡ªåŠ¨åŒ–ç­"},{"key":"organize05","value":"ç”¨æˆ·è®¡é‡ä¸€ç­"},{"key":"organize06","value":"ç”¨æˆ·è®¡é‡äºŒç­"},
+{"key":"organize07","value":"ç”¨æˆ·è®¡é‡ä¸‰ç­"},{"key":"organize08","value":"å®¤å†…æ£€å®šç­"},{"key":"organize09","value":"ç”µèƒ½é‡æ•°æ®ç­"}]}}
