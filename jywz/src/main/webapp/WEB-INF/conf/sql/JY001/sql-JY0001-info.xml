@@ -87,4 +87,73 @@
 		]]></sql>
 	</sqlinfo>
 	
+	<sqlinfo sqlid="JY0002Q001">
+		<sqlname>查询所有的物资</sqlname>
+		<sql><![CDATA[
+			SELECT
+			m.id,
+			m.jy_material_type_id,
+			m.CODE,
+			m.NAME,
+			m.model,
+			m.supplier,
+		  	n.code as type_code,
+			n.NAME as codeName
+		FROM
+			jy_material m
+		JOIN jy_material_type n ON m.jy_material_type_id = n.id
+		WHERE 
+			(
+                $ISNULL{code}
+                OR m.code like '%$U{code}%'
+            ) and (
+            	$ISNULL{name}
+                OR m.name like '%$U{name}%'
+            )
+					order by m.id
+		]]></sql>
+	</sqlinfo>
+	
+	<sqlinfo sqlid="JY0002Q002">
+		<sqlname>查询全部物资数量</sqlname>
+		<sql><![CDATA[
+			SELECT COUNT(a.id) num FROM jy_material a
+				WHERE 
+					(
+                $ISNULL{code}
+                OR a.CODE like '%$U{code}%'
+            ) or (
+            	$ISNULL{name}
+                OR a.name like '%$U{name}%'
+            )
+		]]></sql>
+	</sqlinfo>
+	
+	<sqlinfo sqlid="JY0002Q003">
+		<sqlname>获取物资最大编码</sqlname>
+		<sql><![CDATA[
+			select max(id) num from jy_material where $ISNULL{code}
+		]]></sql>
+	</sqlinfo>
+	
+	<sqlinfo sqlid="JY0002U001">
+		<sqlname>新增物资</sqlname>
+		<sql><![CDATA[
+			INSERT INTO jy_material(
+				jy_material_type_id,
+				code,
+				name,
+				model,
+				supplier,
+			)
+			VALUES
+				(
+					$N{codeName},
+					$S{code},
+					$S{name},
+					$S{supplier}
+				)
+		]]></sql>
+	</sqlinfo>
+	
 </sqlinfos>

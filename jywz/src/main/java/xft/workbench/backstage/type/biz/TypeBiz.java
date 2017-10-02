@@ -14,6 +14,7 @@ import com.kayak.web.base.exception.KPromptException;
 import com.kayak.web.base.sql.SqlRow;
 
 import xft.workbench.backstage.type.dao.TypeDao;
+import xft.workbench.backstage.type.model.Material;
 import xft.workbench.backstage.type.model.Type;
 
 
@@ -29,8 +30,14 @@ public class TypeBiz {
 	
 	@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
 	public void addtype(Type type) throws Exception {
-		// 添加机构
+		// 添加物资类型
 		typeDao.add(type);
+	}
+	
+	@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
+	public void addmaterial(Material material) throws Exception {
+		// 添加物资
+		typeDao.addMaterial(material);
 	}
 	
 	public List<SqlRow> getAllType(String code,String name) throws Exception{
@@ -39,6 +46,13 @@ public class TypeBiz {
 	
 	public Integer getMaterialType() throws Exception{
 		return typeDao.getMaterialType();
+	}
+	/**
+	 * 
+	 * 新增物资类型时生成物资编号
+	 */
+	public Integer getMaterialNum() throws Exception{
+		return typeDao.getMaterialNum();
 	}
 	
 	@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)

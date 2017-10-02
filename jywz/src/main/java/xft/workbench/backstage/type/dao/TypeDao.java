@@ -9,6 +9,7 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 import xft.workbench.backstage.base.util.ObjectMapUtil;
+import xft.workbench.backstage.type.model.Material;
 import xft.workbench.backstage.type.model.Type;
 
 import com.kayak.web.base.dao.ComnDao;
@@ -58,6 +59,20 @@ public class TypeDao extends ComnDao{
 	}
 	/**
 	 * 
+	 * 获取物资编码
+	 */
+	public Integer getMaterialNum() throws Exception{
+		Map<String, Object> params = new HashMap<String, Object>(); 
+		params.put("code",null);
+		SqlResult sResult = this.exeQuery("JY0002EQ003", params);
+		Integer num = null;
+		if(sResult.next()) {
+			num = sResult.getInteger("num");
+		}
+		return num;
+	}
+	/**
+	 * 
 	 * 检查物资类型是否被使用
 	 * 
 	 */
@@ -97,5 +112,19 @@ public class TypeDao extends ComnDao{
 		exeUpdate("JY0001ED001", params);
 		
 		
+	}
+	/**
+	 * 新增物资
+	 */
+	public void addMaterial(Material material) throws Exception {
+		Map<String,Object> params  = ObjectMapUtil.getFieldVlaue2(material);
+		this.exeUpdate("JY0002EU001", params);
+	}
+	/**
+	 * 查询物资类型编号与物资类型名称
+	 */
+	public void getAddMaterialType(Material material) throws Exception {
+		Map<String,Object> params  = ObjectMapUtil.getFieldVlaue2(material);
+		this.exeUpdate("JY0002EU001", params);
 	}
 }

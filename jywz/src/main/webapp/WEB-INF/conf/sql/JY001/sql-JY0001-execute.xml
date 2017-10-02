@@ -36,4 +36,24 @@
 		<sqlids>JY0001D001</sqlids>
 	</sqlexecute>
 	
+	<sqlexecute exeid="JY0002EQ001" datasource="dsSys">
+		<exename>查询所有的物资</exename>
+		<sqlids>JY0002Q001</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY0002EQ002" datasource="dsSys">
+		<exename>查询所有物资数量</exename>
+		<sqlids>JY0002Q002</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY0002EQ003" datasource="dsSys">
+		<exename>获取物资最大编码</exename>
+		<sqlids>JY0002Q003</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY0002EU001" datasource="dsSys">
+		<exename>新增物资</exename>
+		<sqlids>JY0002U001</sqlids>
+	</sqlexecute>
+	
 </sqlexecutes>
