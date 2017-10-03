@@ -1,4 +1,7 @@
 eclipse.preferences.version=1
 encoding//src/main/java/xft/workbench/backstage/base/util/ObjectMapUtil.java=UTF-8
+encoding//src/main/java/xft/workbench/backstage/type/action/MaterialsTypeAction.java=UTF-8
+encoding//src/main/java/xft/workbench/backstage/type/biz/TypeBiz.java=UTF-8
+encoding//src/main/java/xft/workbench/backstage/type/dao/TypeDao.java=UTF-8
 encoding//src/main/webapp/WEB-INF/conf/interface/interface-user.properties=UTF-8
 encoding//src/main/webapp/WEB-INF/conf/sys/jdbc_dev.properties=UTF-8

@@ -3,6 +3,7 @@ package xft.workbench.backstage.type.biz;
 
 
 import java.util.List;
+import java.util.Map;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,5 +77,12 @@ public class TypeBiz {
 			throw new KPromptException("物资类型被使用了，不允许此操作！");
 		// 删除物资类型
 		typeDao.deleteCode(id);
+	}
+	/**
+	 * 新增物资时获取物资类型与物资类型名称
+	 * 
+	 */
+	public List<Map<String, Object>> getMaterialTypeAndName() throws Exception{
+		return typeDao.getMaterialTypeAndName();
 	}
 }

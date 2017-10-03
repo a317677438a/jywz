@@ -33,6 +33,7 @@ public class CheckTypeService {
 		return true;
 		
 	}
+	
 	private boolean isNull(Object arg) {
 		if (arg == null || "".equals(arg.toString()))
 			return true;

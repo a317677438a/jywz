@@ -144,15 +144,27 @@
 				code,
 				name,
 				model,
-				supplier,
+				supplier
 			)
 			VALUES
 				(
-					$N{codeName},
+					$N{jy_material_type_id},
 					$S{code},
 					$S{name},
+					$S{model},
 					$S{supplier}
 				)
+		]]></sql>
+	</sqlinfo>
+	
+	<sqlinfo sqlid="JY0002Q004">
+		<sqlname>新增物资时获取物资类型与物资类型名称</sqlname>
+		<sql><![CDATA[
+			SELECT
+				id 'key',
+				name 'value'
+			FROM
+				jy_material_type
 		]]></sql>
 	</sqlinfo>
 	

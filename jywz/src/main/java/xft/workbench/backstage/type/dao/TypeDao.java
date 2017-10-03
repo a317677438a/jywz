@@ -123,8 +123,17 @@ public class TypeDao extends ComnDao{
 	/**
 	 * 查询物资类型编号与物资类型名称
 	 */
-	public void getAddMaterialType(Material material) throws Exception {
-		Map<String,Object> params  = ObjectMapUtil.getFieldVlaue2(material);
-		this.exeUpdate("JY0002EU001", params);
+	public List<Map<String, Object>> getMaterialTypeAndName() throws Exception {
+		Map<String,Object> params = new HashMap<String, Object>();
+		params.put("orgtype","");
+		List<Map<String, Object>>  list = new ArrayList<Map<String, Object>>();
+		SqlResult rs = exeQuery("JY0002EQ004",params);
+		while(rs.next()){
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("key", rs.getString("key"));
+			map.put("value", rs.getString("value"));
+			list.add(map);
+		}
+		return list;
 	}
 }

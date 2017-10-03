@@ -56,4 +56,9 @@
 		<sqlids>JY0002U001</sqlids>
 	</sqlexecute>
 	
+	<sqlexecute exeid="JY0002EQ004" datasource="dsSys">
+		<exename>新增物资时获取物资类型与物资类型名称</exename>
+		<sqlids>JY0002Q004</sqlids>
+	</sqlexecute>
+	
 </sqlexecutes>

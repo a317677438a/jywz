@@ -215,6 +215,8 @@ public class MaterialsTypeAction extends ABSBaseController{
 	public @ResponseBody String addMaterial(){
 		try {
 			Map<String, Object> params = this.getRequestParams();
+			Integer.parseInt(params.get("jy_material_type_id").toString());
+			System.out.println(params);
 			Material material = new Material();
 			ObjectMapUtil.setObjectFileValue(material,params);
 			typeBiz.addmaterial(material);
@@ -227,14 +229,13 @@ public class MaterialsTypeAction extends ABSBaseController{
 	 * 查询物资类型编号与物资类型名称
 	 * 
 	 */
-	/*@RequestMapping(value="/materialsType/getMaterialTypeAndName.json")
-	public @ResponseBody String getAddMaterialType(){
+	@RequestMapping(value="/materialsType/getMaterialTypeAndName.json")
+	public @ResponseBody String getMaterialTypeAndName(){
 		try {
-			Map<String, Object> map = this.getRequestParams();
-			List<Map<String, Object>> list = typeBiz.getAddMaterialType();
+			List<Map<String, Object>> list = typeBiz.getMaterialTypeAndName();
 			return this.updateReturnJson(true, "查询成功", new JSONArray(list));
 		} catch (Exception e) {
 			return this.updateErrorJson(e);
 		}
-	}*/
+	}
 }
