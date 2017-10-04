@@ -238,4 +238,35 @@ public class MaterialsTypeAction extends ABSBaseController{
 			return this.updateErrorJson(e);
 		}
 	}
+	/**
+	 * 修改物资信息
+	 * 
+	 */
+	@RequestMapping(value="/materialsType/modifyMaterial.json")
+	public @ResponseBody String modifyMaterial(){
+		try {
+			Map<String, Object> param = this.getRequestParams();//获取请求参数
+			Material material = new Material();
+			ObjectMapUtil.setObjectFileValue(material, param);
+			typeBiz.modifyMaterial(material);
+			return updateReturnJson(true, "修改物资信息成功", null);
+		} catch (Exception e) {
+			return this.updateErrorJson(e);
+		}
+	}
+	/**
+	 * 删除物资
+	 * 
+	 */
+	@RequestMapping(value="/materialsType/deleteMaterial.json")
+	public @ResponseBody String deleteMaterial(){
+		try {
+			Map<String, Object> param = this.getRequestParams();//获取请求参数
+			Integer id = Integer.parseInt(param.get("id").toString());
+			typeBiz.deleteMaterial(id);
+			return updateReturnJson(true, "删除物资成功", null);
+		} catch (Exception e) {
+			return this.updateErrorJson(e);
+		}
+	}
 }

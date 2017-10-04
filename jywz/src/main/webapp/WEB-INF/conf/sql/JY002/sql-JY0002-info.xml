@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlinfos SYSTEM "../../dtd/sql-info.dtd">
+
+<sqlinfos>
+
+	<sqlinfo sqlid="JY2001U001">
+		<sqlname>新增入库基本信息</sqlname>
+		<sql><![CDATA[
+			INSERT INTO jy_storehouse_in (
+				putin_type,
+				putin_user,
+				putin_date,
+				putin_storehouse_code,
+				contract_no,
+				STATUS,
+				remark,
+				inputuser,
+				crt_date,
+				crt_time
+			)
+			VALUES
+			(
+				$N{putin_type},
+				$N{putin_user},
+				$S{putin_date},
+				$S{putin_storehouse_code},
+				$S{contract_no},
+				$N{status},
+				$S{remark},
+				$S{inputuser},
+				$S{crt_date},
+				$S{crt_time}
+			)
+		]]></sql>
+	</sqlinfo>
+	
+	<sqlinfo sqlid="JY2001U002">
+		<sqlname>新增入库明细</sqlname>
+		<sql><![CDATA[
+		INSERT INTO jy_storehouse_in_detail (
+			jy_storehouse_in_id,
+			jy_material_id,
+			putin_number
+		)
+		VALUES
+		(
+			$N{jy_storehouse_in_id},
+			$N{jy_material_id},
+			$N{putin_number}
+		)
+		]]></sql>
+	</sqlinfo>
+	
+	<sqlinfo sqlid="JY2001Q001">
+		<sqlname>查询新增入库基本信息的id</sqlname>
+		<sql><![CDATA[
+		SELECT
+				id
+			FROM
+				jy_storehouse_in
+			WHERE
+				crt_date =$S{crt_date}
+				and
+				crt_time =$S{crt_time}
+		]]></sql>
+	</sqlinfo>
+	
+	<sqlinfo sqlid="JY2001Q002">
+		<sqlname>查询物资已经对应的物资id</sqlname>
+		<sql><![CDATA[
+			SELECT
+				id 'key',
+				name 'value'
+			FROM
+				jy_material
+		]]></sql>
+	</sqlinfo>
+	
+	<sqlinfo sqlid="JY2001Q003">
+		<sqlname>查询所有入库记录</sqlname>
+		<sql><![CDATA[
+			SELECT * FROM jy_storehouse_in a
+				WHERE 
+					(
+                $ISNULL{contract_no}
+                OR a.contract_no like '%$U{contract_no}%'
+            ) 
+     			or
+            (
+               (
+               $ISNULL{putin_date_start}
+               or 
+               a.putin_date > $S{putin_date_start}
+               )
+               or
+               (
+                $ISNULL{putin_date_end}
+                or
+                a.putin_date < $S{putin_date_end}
+                )
+            )
+		]]></sql>
+	</sqlinfo>
+	
+	<sqlinfo sqlid="JY2001Q004">
+		<sqlname>查询所有入库记录的数量</sqlname>
+		<sql><![CDATA[
+			SELECT COUNT(a.id) num FROM jy_storehouse_in a
+				WHERE 
+					(
+                $ISNULL{contract_no}
+                OR a.contract_no like '%$U{contract_no}%'
+            ) 
+            or
+            (
+               (
+               $ISNULL{putin_date_start}
+               or 
+               a.putin_date > $S{putin_date_start}
+               )
+               or
+               (
+                $ISNULL{putin_date_end}
+                or
+                a.putin_date < $S{putin_date_end}
+                )
+            )
+      
+		]]></sql>
+	</sqlinfo>
+	
+</sqlinfos>

@@ -61,4 +61,14 @@
 		<sqlids>JY0002Q004</sqlids>
 	</sqlexecute>
 	
+	<sqlexecute exeid="JY0002EU002" datasource="dsSys">
+		<exename>修改物资</exename>
+		<sqlids>JY0002U002</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY0002ED001" datasource="dsSys">
+		<exename>删除物资</exename>
+		<sqlids>JY0002D001</sqlids>
+	</sqlexecute>
+	
 </sqlexecutes>

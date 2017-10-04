@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlexecutes SYSTEM "../../dtd/sql-execute.dtd">
+<sqlexecutes>
+
+	<sqlexecute exeid="JY2001EU001" datasource="dsSys">
+		<exename>新增入库基本信息</exename>
+		<sqlids>JY2001U001</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY2001EU002" datasource="dsSys">
+		<exename>新增入库基本信息</exename>
+		<sqlids>JY2001U002</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY2001EQ001" datasource="dsSys">
+		<exename>查询新增入库基本信息的id</exename>
+		<sqlids>JY2001Q001</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY2001EQ002" datasource="dsSys">
+		<exename>查询物资已经对应的物资id</exename>
+		<sqlids>JY2001Q002</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY2001EQ003" datasource="dsSys">
+		<exename>查询所有入库记录</exename>
+		<sqlids>JY2001Q003</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY2001EQ004" datasource="dsSys">
+		<exename>查询所有入库记录的数量</exename>
+		<sqlids>JY2001Q004</sqlids>
+	</sqlexecute>
+	
+</sqlexecutes>

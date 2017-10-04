@@ -136,4 +136,27 @@ public class TypeDao extends ComnDao{
 		}
 		return list;
 	}
+	/**
+	 * 修改物资信息
+	 *
+	 */
+	public void modifyMaterial(Material material) throws Exception {
+		Map<String, Object> param = ObjectMapUtil.getFieldVlaue2(material);
+		
+		exeUpdate("JY0002EU002", param);
+		
+	}
+	/**
+	 * 删除物资
+	 * @param id
+	 */
+	public void deleteMaterial(Integer id) throws Exception {
+		Map<String,Object> params = new HashMap<String, Object>();
+		
+		params.put("id", id);
+		
+		exeUpdate("JY0002ED001", params);
+		
+		
+	}
 }

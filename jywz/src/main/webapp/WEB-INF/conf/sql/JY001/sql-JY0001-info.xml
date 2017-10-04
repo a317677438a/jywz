@@ -168,4 +168,24 @@
 		]]></sql>
 	</sqlinfo>
 	
+	<sqlinfo sqlid="JY0002U002">
+		<sqlname>修改物资</sqlname>
+		<sql><![CDATA[
+			UPDATE jy_material SET
+			jy_material_type_id = $N{jy_material_type_id},
+			code=$S{code},
+			name=$S{name},
+			model=$S{model},
+			supplier=$S{supplier}
+			WHERE id=$N{id}
+		]]></sql>
+	</sqlinfo>
+	
+	<sqlinfo sqlid="JY0002D001">
+		<sqlname>删除物资</sqlname>
+		<sql><![CDATA[
+			DELETE FROM jy_material where id = $N{id}
+		]]></sql>
+	</sqlinfo>
+	
 </sqlinfos>
