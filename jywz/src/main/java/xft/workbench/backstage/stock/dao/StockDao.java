@@ -14,6 +14,7 @@ import xft.workbench.backstage.stock.model.StockDetails;
 
 import com.kayak.web.base.dao.ComnDao;
 import com.kayak.web.base.sql.SqlResult;
+import com.kayak.web.base.sql.SqlRow;
 
 @Repository
 public class StockDao extends ComnDao{
@@ -64,6 +65,25 @@ public class StockDao extends ComnDao{
 			map.put("key", rs.getString("key"));
 			map.put("value", rs.getString("value"));
 			list.add(map);
+		}
+		return list;
+	}
+	/**
+	 * 获取入库单对应的入库明细
+	 * 
+	 */
+	public List<SqlRow> fromStockGetMaterial(Integer id) throws Exception {
+		Map<String,Object> params = new HashMap<String, Object>();
+		params.put("id",id);
+		List<SqlRow> list = new ArrayList<SqlRow>();
+//		List<Map<String, Object>>  list = new ArrayList<Map<String, Object>>();
+		SqlResult rs = exeQuery("JY2001EQ005",params);
+		while(rs.next()){
+//			Map<String,Object> map = new HashMap<String,Object>();
+//			map.put("key", rs.getString("key"));
+//			map.put("value", rs.getString("value"));
+//			list.add(map);
+			list.add(rs.getRow());
 		}
 		return list;
 	}

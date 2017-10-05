@@ -32,4 +32,9 @@
 		<sqlids>JY2001Q004</sqlids>
 	</sqlexecute>
 	
+	<sqlexecute exeid="JY2001EQ005" datasource="dsSys">
+		<exename>获取入库单对应的入库明细</exename>
+		<sqlids>JY2001Q005</sqlids>
+	</sqlexecute>
+	
 </sqlexecutes>

@@ -129,4 +129,16 @@
 		]]></sql>
 	</sqlinfo>
 	
+	<sqlinfo sqlid="JY2001Q005">
+		<sqlname>获取入库单对应的入库明细</sqlname>
+		<sql><![CDATA[
+			SELECT
+				*
+			FROM
+				jy_storehouse_in_detail
+			WHERE
+				jy_storehouse_in_id = $N{id};
+		]]></sql>
+	</sqlinfo>
+	
 </sqlinfos>

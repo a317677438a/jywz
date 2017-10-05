@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kayak.web.base.dao.ComnDao;
 import com.kayak.web.base.sql.SqlResult;
+import com.kayak.web.base.sql.SqlRow;
 
 import xft.workbench.backstage.base.action.ABSBaseController;
 import xft.workbench.backstage.base.util.GlobalMessage;
@@ -126,6 +127,21 @@ public class StockManagement extends ABSBaseController{
 			obj.put("rows", arr);
 			
 			return this.updateReturnJson(true, "查询成功", obj);
+		} catch (Exception e) {
+			return this.updateErrorJson(e);
+		}
+	}
+	/**
+	 * 查询入库单对应的入库明细
+	 * 
+	 */
+	@RequestMapping(value="/stockManagement/fromStockGetMaterial.json")
+	public @ResponseBody String fromStockGetMaterial(){
+		try {
+			Map<String, Object> param = this.getRequestParams();//获取请求参数
+			Integer id = Integer.parseInt(param.get("id").toString());
+			List<SqlRow> list = stockBiz.fromStockGetMaterial(id);
+			return this.updateReturnJson(true, "查询成功", new JSONArray(list));
 		} catch (Exception e) {
 			return this.updateErrorJson(e);
 		}

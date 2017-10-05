@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kayak.web.base.sql.SqlRow;
+
 import xft.workbench.backstage.stock.dao.StockDao;
 import xft.workbench.backstage.stock.model.Stock;
 import xft.workbench.backstage.stock.model.StockDetails;
@@ -43,5 +45,12 @@ public class StockBiz {
 	 */
 	public List<Map<String, Object>> getMaterialAndId() throws Exception{
 		return stockDao.getMaterialAndId();
+	}
+	/**
+	 * 查询入库单对应的入库明细
+	 * 
+	 */
+	public List<SqlRow> fromStockGetMaterial(Integer id) throws Exception{
+		return stockDao.fromStockGetMaterial(id);
 	}
 }
