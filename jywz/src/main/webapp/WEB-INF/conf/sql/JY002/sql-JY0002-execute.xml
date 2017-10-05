@@ -37,4 +37,14 @@
 		<sqlids>JY2001Q005</sqlids>
 	</sqlexecute>
 	
+	<sqlexecute exeid="JY2001ED001" datasource="dsSys">
+		<exename>删除入库单</exename>
+		<sqlids>JY2001D001</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY2001ED002" datasource="dsSys">
+		<exename>删除入库单详细信息</exename>
+		<sqlids>JY2001D002</sqlids>
+	</sqlexecute>
+	
 </sqlexecutes>

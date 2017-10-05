@@ -146,4 +146,19 @@ public class StockManagement extends ABSBaseController{
 			return this.updateErrorJson(e);
 		}
 	}
+	/**
+	 * 删除入库单
+	 * 
+	 */
+	@RequestMapping(value="/stockManagement/deleteOneStock.json")
+	public @ResponseBody String deleteOneStock(){
+		try {
+			Map<String, Object> param = this.getRequestParams();//获取请求参数
+			Integer id = Integer.parseInt(param.get("id").toString());
+			stockBiz.deleteOneStock(id);
+			return updateReturnJson(true, "删除入库单成功", null);
+		} catch (Exception e) {
+			return this.updateErrorJson(e);
+		}
+	}
 }

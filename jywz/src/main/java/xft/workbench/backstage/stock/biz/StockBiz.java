@@ -53,4 +53,14 @@ public class StockBiz {
 	public List<SqlRow> fromStockGetMaterial(Integer id) throws Exception{
 		return stockDao.fromStockGetMaterial(id);
 	}
+	/**
+	 * 删除入库单
+	 * 
+	 */
+	@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
+	public void deleteOneStock(Integer id) throws Exception {
+		
+		// 删除入库单
+		stockDao.deleteOneStock(id);
+	}
 }

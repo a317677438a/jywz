@@ -87,4 +87,17 @@ public class StockDao extends ComnDao{
 		}
 		return list;
 	}
+	/**
+	 * 删除入库单
+	 * 
+	 */
+	public void deleteOneStock(Integer id) throws Exception {
+		Map<String,Object> params = new HashMap<String, Object>();
+		
+		params.put("id", id);
+		
+		exeUpdate("JY2001ED001", params);
+		
+		exeUpdate("JY2001ED002", params);
+	}
 }

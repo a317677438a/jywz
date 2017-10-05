@@ -141,4 +141,18 @@
 		]]></sql>
 	</sqlinfo>
 	
+	<sqlinfo sqlid="JY2001D001">
+		<sqlname>删除入库单</sqlname>
+		<sql><![CDATA[
+			DELETE FROM jy_storehouse_in where id = $N{id}
+		]]></sql>
+	</sqlinfo>
+	
+	<sqlinfo sqlid="JY2001D002">
+		<sqlname>删除入库单详细信息</sqlname>
+		<sql><![CDATA[
+			DELETE FROM jy_storehouse_in_detail where jy_storehouse_in_id = $N{id}
+		]]></sql>
+	</sqlinfo>
+	
 </sqlinfos>
