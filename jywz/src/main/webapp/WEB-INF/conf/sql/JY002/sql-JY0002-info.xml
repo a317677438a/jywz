@@ -155,4 +155,18 @@
 		]]></sql>
 	</sqlinfo>
 	
+	<sqlinfo sqlid="JY2001U003">
+		<sqlname>修改入库单信息</sqlname>
+		<sql><![CDATA[
+		UPDATE jy_storehouse_in SET
+			putin_user=$N{putin_user},
+			putin_date=$S{putin_date},
+			putin_storehouse_code=$S{putin_storehouse_code},
+			contract_no=$S{contract_no},
+			remark=$S{remark},
+			inputuser=$S{inputuser}
+			WHERE id=$N{id}
+		]]></sql>
+	</sqlinfo>
+	
 </sqlinfos>

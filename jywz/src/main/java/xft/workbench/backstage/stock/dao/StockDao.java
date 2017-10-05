@@ -88,7 +88,7 @@ public class StockDao extends ComnDao{
 		return list;
 	}
 	/**
-	 * 删除入库单
+	 * 删除入库单主信息
 	 * 
 	 */
 	public void deleteOneStock(Integer id) throws Exception {
@@ -98,6 +98,36 @@ public class StockDao extends ComnDao{
 		
 		exeUpdate("JY2001ED001", params);
 		
+	}
+	/**
+	 * 删除入库单主详细信息
+	 * 
+	 */
+	public void deleteOneStockDetails(Integer id) throws Exception {
+		Map<String,Object> params = new HashMap<String, Object>();
+		
+		params.put("id", id);
+		
+		
 		exeUpdate("JY2001ED002", params);
+	}
+	/**
+	 * 修改入库单信息
+	 * 
+	 */
+	public void modifyOneStock(Stock stock) throws Exception {
+		Map<String, Object> params = ObjectMapUtil.getFieldVlaue2(stock);
+		GlobalMessage.addMapSessionInfo(params);
+		this.exeUpdate("JY2001EU003", params);
+	}
+	/**
+	 * 修改入库明细
+	 * 
+	 */
+	public void modifyStockDetail(StockDetails stockDetails) throws Exception{
+		Map<String, Object> params = ObjectMapUtil.getFieldVlaue2(stockDetails);
+		GlobalMessage.addMapSessionInfo(params);
+		
+		exeUpdate("JY2001EU002", params);
 	}
 }

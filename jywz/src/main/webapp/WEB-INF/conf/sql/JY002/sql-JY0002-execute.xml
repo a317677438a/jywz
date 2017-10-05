@@ -47,4 +47,10 @@
 		<sqlids>JY2001D002</sqlids>
 	</sqlexecute>
 	
+	<sqlexecute exeid="JY2001EU003" datasource="dsSys">
+		<exename>修改入库信息</exename>
+		<sqlids>JY2001U003</sqlids>
+	</sqlexecute>
+	
+	
 </sqlexecutes>

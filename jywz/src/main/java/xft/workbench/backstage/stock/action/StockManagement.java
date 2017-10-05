@@ -161,4 +161,29 @@ public class StockManagement extends ABSBaseController{
 			return this.updateErrorJson(e);
 		}
 	}
+	/**
+	 * 修改入库单信息
+	 * 
+	 */
+	@RequestMapping(value="/stockManagement/modifyOneStock.json")
+	public @ResponseBody String modifyOneStock(){
+		try {
+			Map<String, Object> params = this.getRequestParams();
+			Map<String, Object> stockInfo = (Map<String, Object>) params.get("stockInfo");
+			Stock stock = new Stock();
+			ObjectMapUtil.setObjectFileValue(stock, stockInfo);
+			
+			List<Map<String, Object>> stockDetailsList = (List<Map<String, Object>>) params.get("stockDetailsList");
+			List<StockDetails> stockDetails = new ArrayList<StockDetails>();
+			for (Map<String, Object> map : stockDetailsList) {
+				StockDetails stockDetail = new StockDetails();
+				ObjectMapUtil.setObjectFileValue(stockDetail, map);
+				stockDetails.add(stockDetail);
+			}
+			stockBiz.modifyOneStock(stock,stockDetails);
+			return updateReturnJson(true, "修改物资信息成功", null);
+		} catch (Exception e) {
+			return this.updateErrorJson(e);
+		}
+	}
 }

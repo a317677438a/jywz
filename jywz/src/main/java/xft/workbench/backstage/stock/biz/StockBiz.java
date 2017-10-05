@@ -13,6 +13,7 @@ import com.kayak.web.base.sql.SqlRow;
 import xft.workbench.backstage.stock.dao.StockDao;
 import xft.workbench.backstage.stock.model.Stock;
 import xft.workbench.backstage.stock.model.StockDetails;
+import xft.workbench.backstage.type.model.Material;
 
 @Service
 public class StockBiz {
@@ -60,7 +61,30 @@ public class StockBiz {
 	@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
 	public void deleteOneStock(Integer id) throws Exception {
 		
-		// 删除入库单
+		// 删除入库单主信息
 		stockDao.deleteOneStock(id);
+		
+		// 删除入库单详细信息
+		stockDao.deleteOneStockDetails(id);
+	}
+	/**
+	 * 修改入库单信息
+	 * 
+	 */
+	@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
+	public void modifyOneStock(Stock stock,List<StockDetails> stockDetails) throws Exception {
+		
+		// 修改入库信息
+		stockDao.modifyOneStock(stock);
+		
+		Integer id = Integer.parseInt(stock.getId().toString());
+		// 删除入库单详细信息
+		stockDao.deleteOneStockDetails(id);
+		
+		//修改入库详细信息
+		for (StockDetails stockDetail : stockDetails) {
+			stockDetail.setJy_storehouse_in_id(stock.getId());
+			stockDao.modifyStockDetail(stockDetail);
+		}
 	}
 }
