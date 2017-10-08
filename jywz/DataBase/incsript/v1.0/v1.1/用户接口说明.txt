@@ -69,3 +69,15 @@ http://localhost:8081/jywz/user/otherHaveStorehouseCode.json
 {'id':1}或者{}
 响应：
 {"success":"true","returnmsg":"查询成功","returndata":["storehose02","storehose04"]}
+
+
+9、设置仓库员仓库编码
+请求：
+http://localhost:8081/jywz/user/setStorehouseCode.json
+{id:'1',storehouseCodes:["storehouse07","storehouse08"]}
+
+响应：
+{"success":"true","returnmsg":"设置成功","returndata":{}}
+
+
+

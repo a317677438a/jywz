@@ -26,7 +26,20 @@
 	<sqlexecute exeid="MS0002EU08" datasource="dsSys">
 		<exename>删除用户信息</exename>
 		<sqlids>MS0002U06,MS0002U08</sqlids>
-	</sqlexecute>		
+	</sqlexecute>	
+	
+	
+	<sqlexecute exeid="MS0002EU09" datasource="dsSys">
+		<exename>删除用户仓库信息信息</exename>
+		<sqlids>MS0002U09</sqlids>
+	</sqlexecute>	
+	
+	<sqlexecute exeid="MS0002EU10" datasource="dsSys">
+		<exename>新增用户仓库信息信息</exename>
+		<sqlids>MS0002U10</sqlids>
+	</sqlexecute>	
+	
+		
 	
 	<sqlexecute exeid="MS0002EQ01" datasource="dsSys">
 		<exename>用户信息列表查询</exename>

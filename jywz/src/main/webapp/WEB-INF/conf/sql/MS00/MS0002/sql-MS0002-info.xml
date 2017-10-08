@@ -55,6 +55,25 @@
 		]]></sql>
 	</sqlinfo>	
 	
+	
+	<sqlinfo sqlid="MS0002U09">
+		<sqlname>删除用户仓库信息信息</sqlname>
+		<sql><![CDATA[
+			DELETE FROM jy_user_storehouse WHERE jy_user_id=$N{jy_user_id};
+		]]></sql>
+	</sqlinfo>	
+	
+	<sqlinfo sqlid="MS0002U10">
+		<sqlname>新增用户仓库信息信息</sqlname>
+		<sql><![CDATA[
+			INSERT INTO jy_user_storehouse 
+			(jy_user_id,storehouse_code) 
+			VALUES 
+			($N{jy_user_id},$S{storehouse_code});
+		]]></sql>
+	</sqlinfo>	
+	
+	
 	<sqlinfo sqlid="MS0002Q01">
 		<sqlname>用户信息列表查询</sqlname>
 		<sql><![CDATA[

@@ -227,6 +227,31 @@ public class UserInfoManagerAction extends ABSBaseController {
 		}
 	}
 	
+	/**
+	 * 设置仓库员的仓库编码
+	 * @return
+	 */
 	
 	
+	@RequestMapping(value="/user/setStorehouseCode.json")
+	public @ResponseBody String setStorehouseCode(){
+		try {
+			Map<String, Object> param = this.getRequestParams();//获取请求参数
+			
+			List<String> storehouseCodes = (List<String>)param.get("storehouseCodes");
+			Integer sys_user_id = null;
+			if(param.containsKey("id")){
+				 sys_user_id = Integer.parseInt(param.get("id").toString());
+			}else {
+				UserLoginInfo userLoginInfo = GlobalMessage.getSessionInfo();
+				sys_user_id = userLoginInfo.getId();
+			}
+			
+			userInfoManagerBiz.setStorehouseCode(sys_user_id, storehouseCodes);
+			
+			return this.updateReturnJson(true, "设置成功", null);
+		} catch (Exception e) {
+			return this.updateErrorJson(e);
+		}
+	}
 }

@@ -238,5 +238,26 @@ public class UserInfoManagerDao extends ComnDao{
 		
 	}
 	
+	public void delUserStroehouse(int sys_user_id) throws KPromptException, KSqlException, SQLException, KSystemException {
+		
+		Map<String,Object> param = new HashMap<String, Object>();
+		
+		param.put("jy_user_id", sys_user_id);
+		
+		exeUpdate("MS0002EU09", param);
+	}
+	
+	
+	public void addUserStroehouse(int sys_user_id,String stroehouseCode) throws KPromptException, KSqlException, SQLException, KSystemException {
+		
+		Map<String,Object> param = new HashMap<String, Object>();
+		
+		param.put("jy_user_id", sys_user_id);
+		param.put("storehouse_code", stroehouseCode);
+		
+		exeUpdate("MS0002EU10", param);
+	}
+	
+	
 	
 }

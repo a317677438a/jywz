@@ -222,4 +222,18 @@ public class UserInfoManagerBiz {
 		
 	}
 	
+	
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void setStorehouseCode(Integer sys_user_id,List<String> storehouseCodes) throws KPromptException, KSqlException, SQLException, KSystemException {
+		
+		//先删除已经有的仓库。
+		userInfoManagerDao.delUserStroehouse(sys_user_id);
+		
+		//再新增用户仓库信息。
+		for(String storehouseCode:storehouseCodes){
+			userInfoManagerDao.addUserStroehouse(sys_user_id, storehouseCode);
+		}
+		
+	}
+	
 }
