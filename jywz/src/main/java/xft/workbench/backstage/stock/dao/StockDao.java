@@ -112,6 +112,18 @@ public class StockDao extends ComnDao{
 		exeUpdate("JY2001ED002", params);
 	}
 	/**
+	 * 确认入库
+	 * 
+	 */
+	public void inboundGoodsConfirmation(Integer id) throws Exception {
+		Map<String,Object> params = new HashMap<String, Object>();
+		
+		params.put("id", id);
+		
+		
+		exeUpdate("JY2001EU004", params);
+	}
+	/**
 	 * 修改入库单信息
 	 * 
 	 */

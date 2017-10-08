@@ -26,6 +26,11 @@
 		<sqlids>JY0001Q004</sqlids>
 	</sqlexecute>
 	
+	<sqlexecute exeid="JY0001EQ005" datasource="dsSys">
+		<exename>判断物资是否被使用</exename>
+		<sqlids>JY0001Q005</sqlids>
+	</sqlexecute>
+	
 	<sqlexecute exeid="JY0001EU002" datasource="dsSys">
 		<exename>修改物资类型</exename>
 		<sqlids>JY0001U002</sqlids>

@@ -91,6 +91,25 @@ public class TypeDao extends ComnDao{
 		return counts;
 	}
 	/**
+	 * 
+	 * 检查物资是否被使用
+	 * 
+	 */
+	public Integer checkMaterialStatus(Integer id) throws KSqlException, KPromptException, KSystemException, SQLException {
+		
+		Integer counts = null;
+		Map<String,Object> params = new HashMap<String, Object>();
+		
+		params.put("id", id);
+		
+		SqlResult rs = exeQuery("JY0001EQ005", params);
+		
+		while(rs.next())
+			counts = rs.getInteger("counts");
+			
+		return counts;
+	}
+	/**
 	 * 修改物资类型
 	 * @param id
 	 */

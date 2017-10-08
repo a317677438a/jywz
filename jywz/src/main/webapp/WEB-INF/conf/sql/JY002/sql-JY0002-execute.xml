@@ -62,4 +62,14 @@
 		<sqlids>JY2001Q007</sqlids>
 	</sqlexecute>
 	
+	<sqlexecute exeid="JY2001EU004" datasource="dsSys">
+		<exename>确认入库</exename>
+		<sqlids>JY2001U004</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY2001EQ008" datasource="dsSys">
+		<exename>查询入库单对应的物资详情</exename>
+		<sqlids>JY2001Q008</sqlids>
+	</sqlexecute>
+	
 </sqlexecutes>

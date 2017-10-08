@@ -71,6 +71,18 @@
 		]]></sql>
 	</sqlinfo>
 	
+	<sqlinfo sqlid="JY0001Q005">
+		<sqlname>判断物资是否被使用</sqlname>
+		<sql><![CDATA[
+		SELECT
+			COUNT(1) counts
+		FROM
+			jy_storehouse_in_detail type
+		WHERE
+			type.jy_material_id = $N{id}
+		]]></sql>
+	</sqlinfo>
+	
 	<sqlinfo sqlid="JY0001U002">
 		<sqlname>修改物资类型</sqlname>
 		<sql><![CDATA[
@@ -101,7 +113,7 @@
 			n.NAME as codeName
 		FROM
 			jy_material m
-		JOIN jy_material_type n ON m.jy_material_type_id = n.id
+		left JOIN  jy_material_type n ON m.jy_material_type_id = n.id
 		WHERE 
 			(
                 $ISNULL{code}
@@ -109,7 +121,11 @@
             ) and (
             	$ISNULL{name}
                 OR m.name like '%$U{name}%'
+            ) and (
+            	$ISNULL{id}
+                OR m.id = $N{id}
             )
+            
 					order by m.id
 		]]></sql>
 	</sqlinfo>

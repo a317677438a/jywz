@@ -196,6 +196,32 @@ public class MaterialsTypeAction extends ABSBaseController{
 	}
 	/**
 	 * 
+	 * 根据id查询物资
+	 * 
+	 */
+	@RequestMapping(value="/materialsType/getMaterialById.json")
+	public @ResponseBody String getMaterialById(){
+		/*
+		 * 性能优化处理：后台每次只查询10条数据，
+		 * 需要再单独查询一次总数据量返回给前台用于分页
+		*/ 
+		try {
+			Map<String, Object> map = this.getRequestParams();
+			
+			JSONObject jo = new JSONObject();
+			SqlResult result = comnDao.exeQuery("JY0002EQ001", map);
+			
+			if(result.next()){
+				 jo = new JSONObject(result.getRow());
+			}
+			
+			return this.updateReturnJson(true, "查询成功", jo);
+		} catch (Exception e) {
+			return this.updateErrorJson(e);
+		}
+	}
+	/**
+	 * 
 	 * 新增物资时生成物资编号
 	 */
 	@RequestMapping(value="/materialsType/getMaterialNum.json")

@@ -16,7 +16,8 @@
 				remark,
 				inputuser,
 				crt_date,
-				crt_time
+				crt_time,
+				putin_code
 			)
 			VALUES
 			(
@@ -29,7 +30,8 @@
 				$S{remark},
 				$S{inputuser},
 				$S{crt_date},
-				$S{crt_time}
+				$S{crt_time},
+				$S{putin_code}
 			)
 		]]></sql>
 	</sqlinfo>
@@ -81,6 +83,21 @@
 		<sql><![CDATA[
 			SELECT * FROM jy_storehouse_in a
 				WHERE 
+				(
+                $ISNULL{id}
+                OR a.id = $N{id}
+            ) 
+     			and
+			(
+                $ISNULL{putin_type}
+                OR a.putin_type = $N{putin_type}
+            ) 
+     			and
+				(
+                $ISNULL{putin_user}
+                OR a.putin_user = $N{putin_user}
+            ) 
+     			and
 					(
                 $ISNULL{contract_no}
                 OR a.contract_no like '%$U{contract_no}%'
@@ -99,6 +116,7 @@
                 a.putin_date < $S{putin_date_end}
                 )
             )
+            
 		]]></sql>
 	</sqlinfo>
 	
@@ -107,7 +125,13 @@
 		<sql><![CDATA[
 			SELECT COUNT(a.id) num FROM jy_storehouse_in a
 				WHERE 
-					(
+				
+			(
+                $ISNULL{contract_no}
+                OR a.contract_no like '%$U{contract_no}%'
+            ) 
+            and
+				(
                 $ISNULL{contract_no}
                 OR a.contract_no like '%$U{contract_no}%'
             ) 
@@ -169,6 +193,15 @@
 		]]></sql>
 	</sqlinfo>
 	
+	<sqlinfo sqlid="JY2001U004">
+		<sqlname>确认入库</sqlname>
+		<sql><![CDATA[
+		UPDATE jy_storehouse_in SET
+			status=2
+			WHERE id=$N{id}
+		]]></sql>
+	</sqlinfo>
+	
 	<sqlinfo sqlid="JY2001Q006">
 		<sqlname>入库记录查询</sqlname>
 		<sql><![CDATA[
@@ -221,6 +254,29 @@
 				($ISNULL{contract_no} or c.NAME LIKE '%$U{contract_no}%')
 				OR ($ISNULL{contract_no} or c.supplier LIKE '%$U{contract_no}%')
 			)k,jy_material_type p where k.jy_material_type_id = p.id
+		]]>
+		</sql>
+	</sqlinfo>
+	
+	<sqlinfo sqlid="JY2001Q008">
+		<sqlname>查询入库单对应的物资详情</sqlname>
+		<sql><![CDATA[
+			SELECT
+				t2.id jy_material_id,
+				t2.`code` code,
+				t2.`name` name,
+				t2.model,
+				t2.supplier,
+				t3.`code` material_type_code,
+				t3.`name` codename,
+				t1.putin_number
+			FROM
+				jy_storehouse_in_detail t1
+			LEFT JOIN jy_material t2 ON t1.jy_material_id = t2.id
+			LEFT JOIN jy_material_type t3 ON t2.jy_material_type_id = t3.id
+			WHERE
+				t2.id IS NOT NULL
+			AND t1.jy_storehouse_in_id = $U{id}
 		]]>
 		</sql>
 	</sqlinfo>

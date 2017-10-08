@@ -34,6 +34,25 @@ public class CheckTypeService {
 		
 	}
 	
+	/**
+	 * 
+	 * 检查物资是否被使用
+	 * @param code
+	 */
+	public boolean checkMaterialStatus(Integer id) throws Exception{
+		//非空判断
+		if(isNull(id))
+			throw new KPromptException("物资id获取失败");
+		
+		Integer counts = typeDao.checkMaterialStatus(id);
+		
+		if(counts>0)
+			return false;//已被使用
+		
+		return true;
+		
+	}
+	
 	private boolean isNull(Object arg) {
 		if (arg == null || "".equals(arg.toString()))
 			return true;

@@ -46,6 +46,19 @@ public class Stock {
 	
 	//创建时间
 	private String crt_time;
+	
+	//入库单号
+	private String putin_code;
+
+	
+
+	public String getPutin_code() {
+		return putin_code;
+	}
+
+	public void setPutin_code(String putin_code) {
+		this.putin_code = putin_code;
+	}
 
 	public Stock(Integer id, Integer putin_type, Integer putin_user,
 			String putin_date, String putin_storehouse_code,

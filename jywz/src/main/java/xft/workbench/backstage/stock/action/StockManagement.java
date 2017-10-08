@@ -23,6 +23,7 @@ import xft.workbench.backstage.stock.dao.StockDao;
 import xft.workbench.backstage.stock.model.Stock;
 import xft.workbench.backstage.stock.model.StockDetails;
 import xft.workbench.backstage.type.model.Material;
+import xft.workbench.backstage.user.model.UserLoginInfo;
 
 
 /**
@@ -56,6 +57,10 @@ public class StockManagement extends ABSBaseController{
 			Map<String, Object> stockInfo = (Map<String, Object>) params.get("stockInfo");
 			Stock stock = new Stock();
 			ObjectMapUtil.setObjectFileValue(stock, stockInfo);
+			
+			UserLoginInfo userLoginInfo = GlobalMessage.getSessionInfo();
+			stock.setPutin_user(userLoginInfo.getId());
+			stock.setInputuser(String.valueOf(userLoginInfo.getId()));
 			
 			List<Map<String, Object>> stockDetailsList = (List<Map<String, Object>>) params.get("stockDetailsList");
 			List<StockDetails> stockDetails = new ArrayList<StockDetails>();
@@ -105,7 +110,8 @@ public class StockManagement extends ABSBaseController{
 				//map.remove("limit");
 			}
 			
-			GlobalMessage.addMapSessionInfo(map);//用户id
+			UserLoginInfo userLoginInfo = GlobalMessage.getSessionInfo();
+			map.put("putin_user", userLoginInfo.getId());
 			
 			JSONArray arr = new JSONArray();
 			SqlResult result = comnDao.exeQuery("JY2001EQ003", map);
@@ -229,6 +235,21 @@ public class StockManagement extends ABSBaseController{
 			obj.put("rows", arr);
 			
 			return this.updateReturnJson(true, "查询成功", obj);
+		} catch (Exception e) {
+			return this.updateErrorJson(e);
+		}
+	}
+	/**
+	 * 确认入库
+	 * 
+	 */
+	@RequestMapping(value="/stockManagement/inboundGoodsConfirmation.json")
+	public @ResponseBody String inboundGoodsConfirmation(){
+		try {
+			Map<String, Object> params = this.getRequestParams();
+			Integer id = Integer.valueOf((String)(params.get("id")));
+			stockBiz.inboundGoodsConfirmation(id);
+			return updateReturnJson(true, "确认入库成功", null);
 		} catch (Exception e) {
 			return this.updateErrorJson(e);
 		}

@@ -87,4 +87,15 @@ public class StockBiz {
 			stockDao.modifyStockDetail(stockDetail);
 		}
 	}
+	/**
+	 * 确认入库
+	 * 
+	 */
+	@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
+	public void inboundGoodsConfirmation(Integer id) throws Exception {
+		
+	
+		stockDao.inboundGoodsConfirmation(id);
+		
+	}
 }
