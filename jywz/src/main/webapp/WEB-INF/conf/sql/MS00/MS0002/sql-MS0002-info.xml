@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlinfos SYSTEM "../../../dtd/sql-info.dtd">
+<sqlinfos>
+	<sqlinfo sqlid="MS0002U01">
+		<sqlname>新增用户信息</sqlname>
+		<sql><![CDATA[
+			INSERT INTO jy_user 
+			(loginname,passwd,role,organize_code,code,name,ophone,mphone,status) 
+			VALUES 
+			($S{loginname},$S{passwd},$N{role},$S{organize_code},$S{code},$S{name},
+			$S{ophone},$S{mphone},$S{status})
+		]]></sql>
+		<checks>
+			<check comparesign="gt" exitall="true">
+				<checkname>新增用户信息时检查登录名称</checkname>
+				<checksql>SELECT COUNT(1) FROM jy_user t WHERE t.loginname=$S{loginname}</checksql>
+				<compareval>0</compareval>
+				<errtext>登录名称已存在</errtext>
+			</check>
+		</checks>
+	</sqlinfo>	
+	
+	<sqlinfo sqlid="MS0002U02">
+		<sqlname>修改用户信息</sqlname>
+		<sql><![CDATA[
+			UPDATE jy_user t SET
+			t.role=$N{role},
+			t.organize_code=$S{organize_code},
+			t.code=$S{code},
+			t.name=$S{name},
+			t.ophone=$S{ophone},
+			t.mphone=$S{mphone}
+			WHERE t.id=$N{id}
+		]]></sql>
+	</sqlinfo>
+
+	<sqlinfo sqlid="MS0002U03">
+		<sqlname>重置密码</sqlname>
+		<sql><![CDATA[
+			UPDATE jy_user  SET passwd=$S{passwd} WHERE id=$N{id}
+		]]></sql>
+	</sqlinfo>
+	
+	<sqlinfo sqlid="MS0002U04">
+		<sqlname>用户状态修改</sqlname>
+		<sql><![CDATA[
+			UPDATE jy_user t SET t.status=$S{status} WHERE t.id=$N{id}
+		]]></sql>
+	</sqlinfo>	
+	
+	<sqlinfo sqlid="MS0002U08">
+		<sqlname>删除用户信息</sqlname>
+		<sql><![CDATA[
+			DELETE FROM jy_user WHERE id=$N{jy_user_id}
+		]]></sql>
+	</sqlinfo>	
+	
+	<sqlinfo sqlid="MS0002Q01">
+		<sqlname>用户信息列表查询</sqlname>
+		<sql><![CDATA[
+			SELECT t.loginname,t.passwd,t.role,t.organize_code,t.code,t.name,t.ophone,t.mphone,t.status
+			FROM jy_user t  
+			WHERE ($isnull{id} or t.id=$n{id}) 
+			AND ($isnull{loginname} OR t.loginname LIKE  '%$U{loginname}%')
+			AND ($isnull{role} OR t.id=$S{role})
+			AND ($isnull{organize_code} OR t.id=$S{organize_code})
+			AND ($isnull{code} OR t.code LIKE  '%$U{code}%')
+			AND ($isnull{name} OR t.name LIKE  '%$U{name}%')
+			AND ($isnull{status} OR t.status =$S{status})
+			ORDER BY t.id DESC
+		]]></sql>
+	</sqlinfo>	
+	
+	
+	
+	<sqlinfo sqlid="MS0002Q04">
+		<sqlname>查询机构信息</sqlname>
+		<sql><![CDATA[
+			SELECT t.id  id, CONCAT(t.code,'-',t.name) orgname FROM jy_user t ORDER BY t.id
+		]]></sql>
+	</sqlinfo>	
+	
+	<sqlinfo sqlid="MS0002Q05">
+		<sqlname>查询用户id</sqlname>
+		<sql><![CDATA[
+			SELECT id   FROM jy_user WHERE loginname=$S{loginname}
+		]]></sql>
+	</sqlinfo>	
+	
+	<sqlinfo sqlid="MS0002Q06">
+		<sqlname>查询用户登录账号及密码</sqlname>
+		<sql><![CDATA[
+			SELECT  id,passwd FROM jy_user WHERE loginname=$S{loginname}
+		]]></sql>
+	</sqlinfo>					
+</sqlinfos>

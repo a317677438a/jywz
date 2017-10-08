@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlexecutes SYSTEM "../../../dtd/sql-execute.dtd">
+
+<sqlexecutes>
+	<sqlexecute exeid="MS0002EU01" datasource="dsSys">
+		<exename>新增用户信息</exename>
+		<sqlids>MS0002U01</sqlids>
+	</sqlexecute>	
+
+	<sqlexecute exeid="MS0002EU02" datasource="dsSys">
+		<exename>修改用户信息</exename>
+		<sqlids>MS0002U02</sqlids>
+	</sqlexecute>	
+
+	<sqlexecute exeid="MS0002EU03" datasource="dsSys">
+		<exename>密码重置</exename>
+		<sqlids>MS0002U03</sqlids>
+	</sqlexecute>		
+	
+	<sqlexecute exeid="MS0002EU04" datasource="dsSys">
+		<exename>用户状态修改</exename>
+		<sqlids>MS0002U04</sqlids>
+	</sqlexecute>	
+	
+			
+	<sqlexecute exeid="MS0002EU08" datasource="dsSys">
+		<exename>删除用户信息</exename>
+		<sqlids>MS0002U06,MS0002U08</sqlids>
+	</sqlexecute>		
+	
+	<sqlexecute exeid="MS0002EQ01" datasource="dsSys">
+		<exename>用户信息列表查询</exename>
+		<sqlids>MS0002Q01</sqlids>
+	</sqlexecute>	
+	
+		
+	
+	<sqlexecute exeid="MS0002EQ04" datasource="dsSys">
+		<exename>查询用户信息</exename>
+		<sqlids>MS0002Q04</sqlids>
+	</sqlexecute>	
+	
+	<sqlexecute exeid="MS0002EQ05" datasource="dsSys">
+		<exename>查询用户id</exename>
+		<sqlids>MS0002Q05</sqlids>
+	</sqlexecute>			
+	
+	<sqlexecute exeid="MS0002EQ06" datasource="dsSys">
+		<exename>查询用户登录账号及密码</exename>
+		<sqlids>MS0002Q06</sqlids>
+	</sqlexecute>							
+</sqlexecutes>
