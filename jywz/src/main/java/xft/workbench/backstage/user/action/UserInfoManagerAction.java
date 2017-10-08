@@ -254,4 +254,34 @@ public class UserInfoManagerAction extends ABSBaseController {
 			return this.updateErrorJson(e);
 		}
 	}
+	
+	
+	
+	/**
+	 * 查询仓库员存在的仓库编码的下拉列表。
+	 * @return
+	 */
+	
+	@RequestMapping(value="/user/haveStorehouseCodeList.json")
+	public @ResponseBody String haveStorehouseCodeList(){
+		try {
+			Map<String, Object> param = this.getRequestParams();//获取请求参数
+
+			Integer sys_user_id = null;
+			if(param.containsKey("id")){
+				 sys_user_id = Integer.parseInt(param.get("id").toString());
+			}else {
+				UserLoginInfo userLoginInfo = GlobalMessage.getSessionInfo();
+				sys_user_id = userLoginInfo.getId();
+			}
+			
+			JSONArray resultsList=userInfoManagerBiz.haveStorehouseCodeJSON(sys_user_id);
+			
+			return this.updateReturnJson(true, "查询成功", resultsList);
+		} catch (Exception e) {
+			return this.updateErrorJson(e);
+		}
+	}
+	
+	
 }

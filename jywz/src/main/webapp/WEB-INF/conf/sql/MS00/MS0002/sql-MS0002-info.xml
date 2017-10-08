@@ -128,4 +128,20 @@
 		]]></sql>
 	</sqlinfo>	
 			
+			
+	<sqlinfo sqlid="MS0002Q09">
+		<sqlname>查询用户有的仓库编码</sqlname>
+		<sql><![CDATA[
+			SELECT
+				t1.storehouse_code storehouse_code,
+				t2.param_name storehouse_name
+			FROM
+				jy_user_storehouse t1
+			LEFT JOIN jy_params t2 ON t1.storehouse_code = t2.param_code
+			WHERE
+				t2.param_code IS NOT NULL
+				AND jy_user_id=$S{sys_user_id}
+		]]></sql>
+	</sqlinfo>		
+			
 </sqlinfos>

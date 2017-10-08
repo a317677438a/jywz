@@ -9,6 +9,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -221,6 +223,25 @@ public class UserInfoManagerDao extends ComnDao{
 			results.add(rs.getString("storehouse_code"));
 		}
 		return results;
+		
+	}
+	
+	public JSONArray haveStorehouseCodeJson(Integer sys_user_id) throws Exception {
+		Map<String,Object> params = new HashMap<String,Object>();
+		List<String>  results = new ArrayList<String>();
+		params.put("sys_user_id", sys_user_id);
+		
+		SqlResult rs = this.exeQuery("MS0002EQ09", params);
+		
+		JSONArray resultsArray = new JSONArray();
+		while(rs.next()){
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("key", rs.getString("storehouse_code"));
+			jsonObject.put("value", rs.getString("storehouse_name"));
+			resultsArray.put(jsonObject);
+			
+		}
+		return resultsArray;
 		
 	}
 	

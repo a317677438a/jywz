@@ -73,5 +73,11 @@
 		<exename>查询其他仓库员有的仓库编码（不包括自己）</exename>
 		<sqlids>MS0002Q08</sqlids>
 	</sqlexecute>			
+					
+					
+	<sqlexecute exeid="MS0002EQ09" datasource="dsSys">
+		<exename>查询用户有的仓库编码与名称</exename>
+		<sqlids>MS0002Q09</sqlids>
+	</sqlexecute>					
 						
 </sqlexecutes>

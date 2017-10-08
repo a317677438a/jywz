@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.json.JSONArray;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -233,6 +234,14 @@ public class UserInfoManagerBiz {
 		for(String storehouseCode:storehouseCodes){
 			userInfoManagerDao.addUserStroehouse(sys_user_id, storehouseCode);
 		}
+		
+	}
+	
+	
+	public JSONArray haveStorehouseCodeJSON(Integer sys_user_id) throws Exception {
+		
+		
+		return userInfoManagerDao.haveStorehouseCodeJson(sys_user_id);
 		
 	}
 	
