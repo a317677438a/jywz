@@ -88,6 +88,17 @@
 	</sqlinfo>
 	
 	
+	<sqlinfo sqlid="MS0000Q006">
+		<sqlname>查询所有物资信息</sqlname>
+		<sql><![CDATA[
+			SELECT t.id,
+			       CONCAT(t.code,'-',t.name) codeName
+			FROM jy_material t;
+		
+		]]></sql>
+	</sqlinfo>
+	
+	
 	<sqlinfo sqlid="MS0000M002">
 		<sqlname>根据用户id注销会话</sqlname>
 		<sql><![CDATA[

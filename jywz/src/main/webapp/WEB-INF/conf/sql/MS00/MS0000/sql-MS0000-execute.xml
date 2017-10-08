@@ -28,6 +28,10 @@
 		<sqlids>MS0000Q005</sqlids>
 	</sqlexecute>
 	
+	<sqlexecute exeid="MS0000EQ006" datasource="dsSys">
+		<exename>查询所有物资信息</exename>
+		<sqlids>MS0000Q006</sqlids>
+	</sqlexecute>
 	
 	<sqlexecute exeid="MS0000EM002" datasource="dsSys">
 		<exename>根据用户id注销会话</exename>

@@ -281,4 +281,22 @@ public class UserInfoManagerDao extends ComnDao{
 	
 	
 	
+	public JSONArray getALLMaterialList() throws Exception {
+		Map<String,Object> params = new HashMap<String,Object>();
+		
+		SqlResult rs = this.exeQuery("MS0000EQ006", params);
+		
+		JSONArray resultsArray = new JSONArray();
+		while(rs.next()){
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("key", rs.getString("id"));
+			jsonObject.put("value", rs.getString("codeName"));
+			resultsArray.put(jsonObject);
+			
+		}
+		return resultsArray;
+		
+	}
+	
+	
 }

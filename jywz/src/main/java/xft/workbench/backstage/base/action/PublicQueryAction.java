@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 
 import org.apache.bcel.generic.NEW;
 import org.apache.commons.lang3.StringUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -98,6 +99,33 @@ public class PublicQueryAction extends ABSBaseController {
 			resultCode.put("code", codeType+dFormat.format(new Date()));
 			
 			return this.updateReturnJson(true, "查询成功", resultCode);
+		} catch (Exception e) {
+			return this.updateReturnJson(false, e.getMessage(), null);
+		}
+
+	}
+	
+	
+	
+	/**
+	 * 查询所有物资列表信息
+	 * @return
+	 */
+	@RequestMapping(value = "/base/getALLMaterialList.json")
+	public @ResponseBody String getALLMaterialList() {
+		try {
+			//得到查询后结果集
+			Map<String, Object> map = this.getRequestParams();
+			
+			SqlResult sr=comnService.getComnDao().query(map);
+			JSONArray resultsArray = new JSONArray();
+			while(sr.next()){
+				JSONObject jsonObject = new JSONObject();
+				jsonObject.put("key", sr.getString("id"));
+				jsonObject.put("value", sr.getString("codeName"));
+				resultsArray.put(jsonObject);
+			}
+			return this.updateReturnJson(true, "查询成功", resultsArray);
 		} catch (Exception e) {
 			return this.updateReturnJson(false, e.getMessage(), null);
 		}

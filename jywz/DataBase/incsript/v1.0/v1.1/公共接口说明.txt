@@ -63,3 +63,13 @@ http://localhost:8081/jywz/base/getCode.json
 
 响应：
 {"success":"true","returnmsg":"查询成功","returndata":{"code":"CG20171008071049"}}
+
+
+6、所有物资下拉列表
+请求：
+http://localhost:8081/jywz/base/getALLMaterialList.json
+{exeid:'MS0000EQ006'}
+
+响应：
+{"success":"true","returnmsg":"查询成功","returndata":[{"key":"2","value":"WZ0-大米"},{"key":"3","value":"WZ2-大米"},{"key":"8","value":"WZ3-fdsf"}]}
+
