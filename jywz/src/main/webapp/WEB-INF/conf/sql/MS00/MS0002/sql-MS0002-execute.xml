@@ -48,5 +48,17 @@
 	<sqlexecute exeid="MS0002EQ06" datasource="dsSys">
 		<exename>查询用户登录账号及密码</exename>
 		<sqlids>MS0002Q06</sqlids>
-	</sqlexecute>							
+	</sqlexecute>		
+	
+	
+	<sqlexecute exeid="MS0002EQ07" datasource="dsSys">
+		<exename>查询用户有的仓库编码</exename>
+		<sqlids>MS0002Q07</sqlids>
+	</sqlexecute>	
+			
+	<sqlexecute exeid="MS0002EQ08" datasource="dsSys">
+		<exename>查询其他仓库员有的仓库编码（不包括自己）</exename>
+		<sqlids>MS0002Q08</sqlids>
+	</sqlexecute>			
+						
 </sqlexecutes>

@@ -211,12 +211,30 @@ public class UserInfoManagerDao extends ComnDao{
 	
 	
 	
-	public void haveStorehouseCode(Integer sys_user_id) throws KPromptException, KSqlException, SQLException, KSystemException {
+	public List<String> haveStorehouseCode(Integer sys_user_id) throws KPromptException, KSqlException, SQLException, KSystemException {
 		Map<String,Object> params = new HashMap<String,Object>();
-		
+		List<String>  results = new ArrayList<String>();
 		params.put("sys_user_id", sys_user_id);
 		
-		this.exeUpdate("MS0002EU08", params);
+		SqlResult rs = this.exeQuery("MS0002EQ07", params);
+		while(rs.next()){
+			results.add(rs.getString("storehouse_code"));
+		}
+		return results;
+		
+	}
+	
+	
+	public List<String> otherHaveStorehouseCode(Integer sys_user_id) throws KPromptException, KSqlException, SQLException, KSystemException {
+		Map<String,Object> params = new HashMap<String,Object>();
+		List<String>  results = new ArrayList<String>();
+		params.put("sys_user_id", sys_user_id);
+		
+		SqlResult rs = this.exeQuery("MS0002EQ08", params);
+		while(rs.next()){
+			results.add(rs.getString("storehouse_code"));
+		}
+		return results;
 		
 	}
 	
