@@ -16,7 +16,7 @@ CREATE TABLE jy_material_type (
 drop table if exists jy_params;
 CREATE TABLE jy_params (
   param_type varchar(50)  comment '参数类型:organize:组织、storehouse：仓库',
-  param_code varchar(50)  comment '编码',
+  param_code varchar(50) unique comment '编码',
   param_name varchar(50)  comment '名称',
   PRIMARY KEY (param_code)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='参数表';
@@ -47,7 +47,7 @@ CREATE TABLE jy_user (
   loginname            varchar(30) not null unique comment '登录账号',
   passwd               varchar(32) not null comment '登录密码，md加密',
   role               int(2) not null comment '1、系统管理员2、仓管员3、领导、4、物资申请人',
-  organize_code			 int(2) not null comment '1、计量中心 2、电网计算班3、质检班4、计量自动化班5、
+  organize_code			 varchar(32) not null comment '1、计量中心 2、电网计算班3、质检班4、计量自动化班5、
   用户计量一班6、用户计量二班7、用户计量三班8、室内检定班9、电能量数据班',
   code               varchar(100) not null unique comment '人员编号',
   name               varchar(100) not null comment '人员名称',
@@ -64,7 +64,7 @@ CREATE TABLE jy_user (
 drop table if exists jy_user_storehouse;
 CREATE TABLE jy_user_storehouse (
   jy_user_id int(11) NOT NULL  COMMENT '用户信息表系统id',
-  storehouse_code  varchar(10) NOT NULL unique comment '仓库编码',
+  storehouse_code  varchar(50) NOT NULL unique comment '仓库编码',
   PRIMARY KEY (jy_user_id,storehouse_code)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户管理仓库对应关系表';
 
@@ -76,13 +76,14 @@ CREATE TABLE jy_user_storehouse (
 drop table if exists jy_storehouse_in;
 CREATE TABLE jy_storehouse_in (
   id int(11) NOT NULL AUTO_INCREMENT COMMENT '系统id',
+  putin_code   varchar(50) NOT NULL unique comment '入库单号',
   putin_type   int(2) not null comment '入库类型：1、采购入库，2、退库入库，3、移库入库',
   putin_user   int(11) comment '入库人（入库确认的人）',
   putin_date  char(8) comment '入库日期',
-  putin_storehouse_code  varchar(10) comment '入库仓库编码',
+  putin_storehouse_code  varchar(50) comment '入库仓库编码',
   cancel_user int(11) comment '退库人（退库入库为物资退库的人，移库为移出库人）',
   contract_no	varchar(50) comment '合同号（采购入库时）',
-  putout_storehouse_code  varchar(10) comment '出库仓库编码（移库入库时）',
+  putout_storehouse_code  varchar(50) comment '出库仓库编码（移库入库时）',
   status               int(2) not null comment '1、待确认。2、合格在库（确认）',
   remark        varchar(500)  comment '备注',
   inputuser		  	varchar(30) comment '操作人',
@@ -117,12 +118,13 @@ CREATE TABLE jy_storehouse_in_detail (
 drop table if exists jy_storehouse_out;
 CREATE TABLE jy_storehouse_out (
   id int(11) NOT NULL AUTO_INCREMENT COMMENT '系统id',
+  putout_code   varchar(50) NOT NULL unique comment '出库单号',
   putout_type   int(2) not null comment '出库类型：1、申领出库，3、移库出库',
   putout_user   int(11) comment '出库人（出库确认的人）',
   putout_date  char(8) comment '出库日期',
-  putout_storehouse_code  varchar(10) comment '出库仓库编码',
+  putout_storehouse_code  varchar(50) comment '出库仓库编码',
   apply_user  int(11) comment '申请人（申领出库为申领人，移库为出库方）',
-  putin_storehouse_code  varchar(10) comment '入库仓库编码（移库出库时）',
+  putin_storehouse_code  varchar(50) comment '入库仓库编码（移库出库时）',
   status          int(2) not null comment '1、待确认。2、确认出库',
   remark        varchar(500)  comment '备注',
   inputuser		  	varchar(30) comment '操作人',
@@ -152,13 +154,14 @@ CREATE TABLE jy_storehouse_out_detail (
 drop table if exists jy_apply;
 CREATE TABLE jy_apply (
   id int(11) NOT NULL AUTO_INCREMENT COMMENT '系统id',
+  apply_code   varchar(50) NOT NULL unique comment '申领单号',
   apply_user  int(11) comment '申请人',
   apply_date  char(8) comment '申请日期',
   review_user  int(11) comment '审核人',
   review_date  char(8) comment '审核日期',
   review_remark   varchar(500)  comment '审核意见',
   storehouse_user int(11) comment '出库人',
-  apply_storehouse_code varchar(10) comment '申请物资的仓库编码',
+  apply_storehouse_code varchar(50) comment '申请物资的仓库编码',
   status          int(2) not null comment '1、待审核。2、审批拒绝 3、待领用（审批通过）4、已领用',
   remark        varchar(500)  comment '备注',
   inputuser		  	varchar(30) comment '操作人',
@@ -209,7 +212,7 @@ drop table if exists jy_material_warn;
 CREATE TABLE jy_material_warn (
   id int(11) NOT NULL AUTO_INCREMENT COMMENT '系统id',	
   jy_material_id int(11) NOT NULL  COMMENT '物资表系统id',
-  warn_storehouse_code varchar(10) comment '预警物资的仓库编码',
+  warn_storehouse_code varchar(50) comment '预警物资的仓库编码',
   warn_number int(11) COMMENT '预警数量',
   remark        varchar(500)  comment '备注',
   inputuser		  	varchar(30) comment '操作人',
@@ -226,13 +229,13 @@ CREATE TABLE jy_material_warn (
 drop table if exists jy_transfer;
 CREATE TABLE jy_transfer (
   id int(11) NOT NULL AUTO_INCREMENT COMMENT '系统id',	
-  jy_material_id int(11) NOT NULL  COMMENT '物资表系统id',
+  transfer_code   varchar(50) NOT NULL unique comment '调拨单号',
   transfer_date  char(8) comment '调拨日期',
   transfer_type  int(2) comment '调拨类型：1、转库、2、退库、3、调拨',
   putin_user   int(11) comment '入库人',
-  putin_storehouse_code  varchar(10) comment '入库仓库编码',
+  putin_storehouse_code  varchar(50) comment '入库仓库编码',
   putout_user   int(11) comment '出库人',
-  putout_storehouse_code  varchar(10) comment '出库仓库编码',
+  putout_storehouse_code  varchar(50) comment '出库仓库编码',
   status        int(2) not null comment '1、待调拨 2、调拨完成（确认）', 
   remark        varchar(500)  comment '备注',
   inputuser		  	varchar(30) comment '操作人',
@@ -254,6 +257,8 @@ CREATE TABLE jy_transfer_detail (
   transfer_number int(11) COMMENT '调拨数量',
   PRIMARY KEY (jy_transfer_id,jy_material_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='物资仓储调拨明细表';
+
+
 
 
 
