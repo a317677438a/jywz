@@ -46,7 +46,17 @@ public class MaterialsTypeAction extends ABSBaseController{
 	public @ResponseBody String getMaterialType(){
 		try {
 			Integer num = typeBiz.getMaterialType();
-			return updateReturnJson(true, "查询成功", num);
+			
+			String numS = String.valueOf(num);
+			if(numS.length()<4){
+				for(int i =0;i<4-numS.length();i++){
+					numS ="0"+numS;
+				}
+			}
+			
+			numS = "WZLX"+numS;
+			
+			return updateReturnJson(true, "查询成功", numS);
 		} catch (Exception e) {
 			return this.updateErrorJson(e);
 		}
@@ -202,6 +212,16 @@ public class MaterialsTypeAction extends ABSBaseController{
 	public @ResponseBody String getMaterialNum(){
 		try {
 			Integer num = typeBiz.getMaterialNum();
+			
+			String numS = String.valueOf(num);
+			if(numS.length()<6){
+				for(int i =0;i<6-numS.length();i++){
+					numS ="0"+numS;
+				}
+			}
+			
+			numS = "WZ"+numS;
+			
 			return updateReturnJson(true, "查询成功", num);
 		} catch (Exception e) {
 			return this.updateErrorJson(e);
