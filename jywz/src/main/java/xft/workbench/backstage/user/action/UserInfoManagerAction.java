@@ -20,6 +20,7 @@ import xft.workbench.backstage.base.util.GlobalMessage;
 import xft.workbench.backstage.base.util.ObjectMapUtil;
 import xft.workbench.backstage.user.biz.UserInfoManagerBiz;
 import xft.workbench.backstage.user.model.UserInfo;
+import xft.workbench.backstage.user.model.UserLoginInfo;
 
 import com.kayak.web.base.service.abs.ComnServiceAbstract;
 import com.kayak.web.base.system.Global;
@@ -184,7 +185,13 @@ public class UserInfoManagerAction extends ABSBaseController {
 		try {
 			Map<String, Object> param = this.getRequestParams();//获取请求参数
 
-			Integer sys_user_id = Integer.parseInt(param.get("id").toString());
+			Integer sys_user_id = null;
+			if(param.containsKey("id")){
+				 sys_user_id = Integer.parseInt(param.get("id").toString());
+			}else {
+				UserLoginInfo userLoginInfo = GlobalMessage.getSessionInfo();
+				sys_user_id = userLoginInfo.getId();
+			}
 			
 			List<String> resultsList=userInfoManagerBiz.haveStorehouseCode(sys_user_id);
 			
@@ -203,8 +210,14 @@ public class UserInfoManagerAction extends ABSBaseController {
 	public @ResponseBody String otherHaveStorehouseCode(){
 		try {
 			Map<String, Object> param = this.getRequestParams();//获取请求参数
-
-			Integer sys_user_id = Integer.parseInt(param.get("id").toString());
+			Integer sys_user_id = null;
+			if(param.containsKey("id")){
+				 sys_user_id = Integer.parseInt(param.get("id").toString());
+			}else {
+				UserLoginInfo userLoginInfo = GlobalMessage.getSessionInfo();
+				sys_user_id = userLoginInfo.getId();
+			}
+			
 			
 			List<String> resultsList=userInfoManagerBiz.otherHaveStorehouseCode(sys_user_id);
 			
