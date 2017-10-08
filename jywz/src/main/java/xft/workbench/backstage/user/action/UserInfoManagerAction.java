@@ -186,9 +186,29 @@ public class UserInfoManagerAction extends ABSBaseController {
 
 			Integer sys_user_id = Integer.parseInt(param.get("id").toString());
 			
-			userInfoManagerBiz.haveStorehouseCode(sys_user_id);
+			List<String> resultsList=userInfoManagerBiz.haveStorehouseCode(sys_user_id);
 			
-			return this.updateReturnJson(true, "删除成功", null);
+			return this.updateReturnJson(true, "查询成功", resultsList);
+		} catch (Exception e) {
+			return this.updateErrorJson(e);
+		}
+	}
+	
+	/**
+	 * 查询其他仓库员有的仓库编码。
+	 * @return
+	 */
+	
+	@RequestMapping(value="/user/otherHaveStorehouseCode.json")
+	public @ResponseBody String otherHaveStorehouseCode(){
+		try {
+			Map<String, Object> param = this.getRequestParams();//获取请求参数
+
+			Integer sys_user_id = Integer.parseInt(param.get("id").toString());
+			
+			List<String> resultsList=userInfoManagerBiz.otherHaveStorehouseCode(sys_user_id);
+			
+			return this.updateReturnJson(true, "查询成功", resultsList);
 		} catch (Exception e) {
 			return this.updateErrorJson(e);
 		}

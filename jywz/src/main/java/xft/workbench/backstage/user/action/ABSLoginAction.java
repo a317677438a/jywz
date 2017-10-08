@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import xft.workbench.backstage.base.action.ABSBaseController;
+import xft.workbench.backstage.base.util.GlobalMessage;
 import xft.workbench.backstage.base.util.MD5Util;
 import xft.workbench.backstage.user.biz.LoginManangerBiz;
 import xft.workbench.backstage.user.biz.UserInfoManagerBiz;
-import xft.workbench.backstage.user.model.UserInfo;
 import xft.workbench.backstage.user.model.UserLoginInfo;
 
 import com.kayak.web.base.service.abs.ComnServiceAbstract;
@@ -52,6 +52,28 @@ public class ABSLoginAction extends ABSBaseController {
 			userMap.put("loginname", userLoginInfo2.getLoginname());//登录名
 			userMap.put("role", userLoginInfo2.getRole());//角色
 			userMap.put("name", userLoginInfo2.getName());//用户名称
+		} catch (Exception e) {// 获取返回提示的错误
+			return this.updateErrorJson(e);
+		}
+		return this.updateReturnJson(true, "登录成功", userMap);
+	}
+	
+	
+	@RequestMapping(value = "/queryUserLoginInfo.json")
+	public  @ResponseBody String  queryUserLoginInfo(){
+		Map<String, Object> map = null; 
+		Map<String, Object> userMap = new HashMap<String, Object>();
+		try {
+			map = this.getRequestParams();
+			
+			UserLoginInfo userLoginInfo = GlobalMessage.getSessionInfo();
+			if(userLoginInfo!=null){
+				userMap.put("id", userLoginInfo.getId());//用户ID
+				userMap.put("loginname", userLoginInfo.getLoginname());//登录名
+				userMap.put("role", userLoginInfo.getRole());//角色
+				userMap.put("name", userLoginInfo.getName());//用户名称
+			}
+			
 		} catch (Exception e) {// 获取返回提示的错误
 			return this.updateErrorJson(e);
 		}

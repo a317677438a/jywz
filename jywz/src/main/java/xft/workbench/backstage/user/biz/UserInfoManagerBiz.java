@@ -207,10 +207,18 @@ public class UserInfoManagerBiz {
 
 	
 	
-	public void haveStorehouseCode(Integer sys_user_id) throws KPromptException, KSqlException, SQLException, KSystemException {
+	public List<String> haveStorehouseCode(Integer sys_user_id) throws KPromptException, KSqlException, SQLException, KSystemException {
 		
 		
-		userInfoManagerDao.userDelete(sys_user_id);
+		return userInfoManagerDao.haveStorehouseCode(sys_user_id);
+		
+	}
+	
+	
+	public List<String> otherHaveStorehouseCode(Integer sys_user_id) throws KPromptException, KSqlException, SQLException, KSystemException {
+		
+		
+		return userInfoManagerDao.otherHaveStorehouseCode(sys_user_id);
 		
 	}
 	

@@ -92,5 +92,21 @@
 		<sql><![CDATA[
 			SELECT  id,passwd FROM jy_user WHERE loginname=$S{loginname}
 		]]></sql>
-	</sqlinfo>					
+	</sqlinfo>		
+	
+	
+	<sqlinfo sqlid="MS0002Q07">
+		<sqlname>查询用户有的仓库编码</sqlname>
+		<sql><![CDATA[
+			SELECT storehouse_code FROM jy_user_storehouse WHERE jy_user_id=$S{sys_user_id}
+		]]></sql>
+	</sqlinfo>		
+	
+	<sqlinfo sqlid="MS0002Q08">
+		<sqlname>查询其他仓库员有的仓库编码（不包括自己）</sqlname>
+		<sql><![CDATA[
+			SELECT storehouse_code FROM jy_user_storehouse WHERE jy_user_id!=$S{sys_user_id}
+		]]></sql>
+	</sqlinfo>	
+			
 </sqlinfos>
