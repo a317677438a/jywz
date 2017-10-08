@@ -55,3 +55,11 @@ http://localhost:8081/jywz/abslogout.json
 响应：
 {"success":true,"returnmsg":"退出成功","returndata":{}}
 
+
+5、自动生成编码 CG：采购
+请求：
+http://localhost:8081/jywz/base/getCode.json
+{codeType:'CG'}
+
+响应：
+{"success":"true","returnmsg":"查询成功","returndata":{"code":"CG20171008071049"}}

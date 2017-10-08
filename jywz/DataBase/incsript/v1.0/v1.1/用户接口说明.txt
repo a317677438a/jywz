@@ -58,7 +58,7 @@ http://localhost:8081/jywz/user/userListQuery.json
 7、用户仓库编码列表查询
 请求：
 http://localhost:8081/jywz/user/haveStorehouseCode.json
-{'id':1}或者{}
+{'id':1}
 响应：
 {"success":"true","returnmsg":"查询成功","returndata":["storehose01","storehose03"]}
 
@@ -66,7 +66,7 @@ http://localhost:8081/jywz/user/haveStorehouseCode.json
 8、除登录用户之外的仓库编码列表查询
 请求：
 http://localhost:8081/jywz/user/otherHaveStorehouseCode.json
-{'id':1}或者{}
+{'id':1}
 响应：
 {"success":"true","returnmsg":"查询成功","returndata":["storehose02","storehose04"]}
 
@@ -80,4 +80,10 @@ http://localhost:8081/jywz/user/setStorehouseCode.json
 {"success":"true","returnmsg":"设置成功","returndata":{}}
 
 
+10、用户仓库编码列表查询不转取当前登录用户的
+请求：
+http://localhost:8081/jywz/user/haveStorehouseCodeList.json
+{'id':1}或者{}
+响应：
+{"success":"true","returnmsg":"查询成功","returndata":[{"key":"storehouse07","value":"仓库07"}]}
 

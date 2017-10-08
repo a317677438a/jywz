@@ -1,9 +1,14 @@
 package xft.workbench.backstage.base.action;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.bcel.generic.NEW;
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,5 +76,32 @@ public class PublicQueryAction extends ABSBaseController {
 
 	}
 	
+	
+	/**
+	 * 查询一条结果集信息请求
+	 * 通过exeID,与其他条件参数共
+	 * @return
+	 */
+	@RequestMapping(value = "/base/getCode.json")
+	public @ResponseBody String getCode() {
+		try {
+			//得到查询后结果集
+			Map<String, Object> map = this.getRequestParams();
+			
+			String codeType=(String)map.get("codeType");
+			if(StringUtils.isEmpty(codeType)){
+				codeType="SS";
+			}
+			DateFormat dFormat =new  SimpleDateFormat("yyyyMMddhhMMss");
+			
+			JSONObject resultCode = new JSONObject();
+			resultCode.put("code", codeType+dFormat.format(new Date()));
+			
+			return this.updateReturnJson(true, "查询成功", resultCode);
+		} catch (Exception e) {
+			return this.updateReturnJson(false, e.getMessage(), null);
+		}
+
+	}
 
 }
