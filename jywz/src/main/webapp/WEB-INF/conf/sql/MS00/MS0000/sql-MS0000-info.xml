@@ -16,5 +16,109 @@
 		]]></sql>
 	</sqlinfo>
 	
+	<sqlinfo sqlid="MS0000Q002">
+		<sqlname>查询用户的的登录名和密码等信息</sqlname>
+		<sql><![CDATA[
+			SELECT t.id,
+					t.loginname,
+					t.passwd,
+					t.role,
+					t.organize_code,
+					t.code,
+					t.name,
+					t.ophone,
+					t.mphone,
+					t.status
+			FROM jy_user t
+			WHERE t.loginname=$S{loginname};
+		
+		]]></sql>
+	</sqlinfo>
+	
+	
+	<sqlinfo sqlid="MS0000Q003">
+		<sqlname>查询用户的的有效性</sqlname>
+		<sql><![CDATA[
+			SELECT t1.status
+			FROM jy_user t1
+			WHERE t1.id=$S{sys_user_id};
+		
+		]]></sql>  
+	</sqlinfo>
+	
+	
+	
+	<sqlinfo sqlid="MS0000Q004">
+		<sqlname>查询会话的用户登录信息</sqlname>
+		<sql><![CDATA[
+			SELECT t.sessionid,
+			       t.sys_user_id,
+			       t.loginip,
+			       t.logindate,
+			       t.logintime
+			FROM jy_user_online t
+			WHERE t.sessionid= $S{sessionid}
+			AND   t.jsstatus=$S{jsstatus};
+		
+		]]></sql>
+	</sqlinfo>
+	
+	
+	
+	<sqlinfo sqlid="MS0000Q005">
+		<sqlname>使用用户ID查询用户信息</sqlname>
+		<sql><![CDATA[
+			SELECT
+				t.id,
+				t.loginname,
+				t.passwd,
+				t.role,
+				t.organize_code,
+				t.code,
+				t.name,
+				t.ophone,
+				t.mphone,
+				t.status
+			FROM
+				jy_user t
+			WHERE
+				t.id = $S { sys_user_id }
+			AND t.status = $S { userstatus };
+		]]></sql>
+	</sqlinfo>
+	
+	
+	<sqlinfo sqlid="MS0000M002">
+		<sqlname>根据用户id注销会话</sqlname>
+		<sql><![CDATA[
+			UPDATE jy_user_online
+			SET jsstatus=$S{jsstatus}
+			WHERE sys_user_id=$S{sys_user_id}
+			AND jsstatus=0;
+		]]></sql>
+	</sqlinfo>
+	
+	
+	<sqlinfo sqlid="MS0000A011">
+		<sqlname>记录登录会话信息</sqlname>
+		<sql><![CDATA[
+			INSERT INTO jy_user_online (sessionid,sys_user_id,loginip,logindate,logintime)
+			VALUES ($S{sessionid},
+			        $N{sys_user_id},
+			        $S{loginip},
+			        $S{SYSDATE},
+			        $S{SYSTIME});
+		]]></sql>
+	</sqlinfo>
+	
+	
+	<sqlinfo sqlid="MS0000M001">
+		<sqlname>根据会话id注销会话</sqlname>
+		<sql><![CDATA[
+			UPDATE jy_user_online t
+			SET t.jsstatus=$S{jsstatus}
+			WHERE t.sessionid=$S{sessionid};
+		]]></sql>
+	</sqlinfo>
 	
 </sqlinfos>

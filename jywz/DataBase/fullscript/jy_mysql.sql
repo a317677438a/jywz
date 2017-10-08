@@ -257,6 +257,35 @@ CREATE TABLE jy_transfer_detail (
 
 
 
+/*==============================================================*/
+/* table: jy_user_online                                         */
+/*==============================================================*/
+drop table if exists jy_user_online;
+create table jy_user_online 
+(
+   sessionid            varchar(32)  not null  comment '会话id',
+   sys_user_id          int(11)   	 not null  comment '用户id',
+   loginip              varchar(32)  comment '登录ip',
+   logindate            char(8)  comment '登录日期',
+   logintime            char(6)  comment '登录时间',
+   jsstatus             char(1) default '0' comment '会话状态：0:正常，1：停用',
+   constraint pk_sys_user_online primary key (sessionid)
+)engine=innodb default charset=utf8;
+alter table sys_user_online comment '用户登录会话信息';
 
 
 
+create table sys_param
+(
+   moduleid             varchar(32) not null comment '模块id',
+   paraid               varchar(32) not null comment '参数id',
+   paravalue            varchar(1024) comment '参数值',
+   paraname             varchar(100) comment '参数名称，平台自动添加的参数名称会使用统一约定的前缀，正常业务的参数不添加任何前缀',
+   groupparaid          varchar(32) comment '分组id，如果分组id为root则表示该记录为分组信息',
+   dict                 varchar(32) comment '字典标识',
+   functype             varchar(32) comment '输入类型：‘text’-文本输入，‘int’-整数，‘number’-数字，‘select’-下拉单选，‘mselect''-下拉多选，‘date’-日期，‘time''-时间',
+   confoption           varchar(1024) comment '控件配置',
+   isdisplay            int comment '是否显示：1-显示  其他-隐藏',
+   primary key (paraid, moduleid)
+)engine=innodb default charset=utf8;
+alter table sys_param comment '系统参数表';

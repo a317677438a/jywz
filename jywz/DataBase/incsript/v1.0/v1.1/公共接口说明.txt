@@ -38,3 +38,20 @@ insert into jy_params(param_type,param_code,param_name) values('storehouse','sto
 insert into jy_params(param_type,param_code,param_name) values('storehouse','storehouse07','仓库07');
 
 
+
+3、用户登录
+请求：
+http://localhost:8081/jywz/abslogin.json
+{'loginname':'test01',passwd:'123456'}
+
+响应：
+{"success":"true","returnmsg":"登录成功","returndata":{"id":"1","loginname":"test01","name":"cc","role":"1"}}
+
+4、用户退出
+请求：
+http://localhost:8081/jywz/abslogout.json
+{}
+
+响应：
+{"success":true,"returnmsg":"退出成功","returndata":{}}
+

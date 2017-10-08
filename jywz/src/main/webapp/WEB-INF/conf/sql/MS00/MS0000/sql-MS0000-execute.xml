@@ -8,6 +8,41 @@
 		<sqlids>MS0000Q001</sqlids>
 	</sqlexecute>
 	
+	<sqlexecute exeid="MS0000EQ002" datasource="dsSys">
+		<exename>查询用户的的登录名和密码等信息</exename>
+		<sqlids>MS0000Q002</sqlids>
+	</sqlexecute>
 	
+	<sqlexecute exeid="MS0000EQ003" datasource="dsSys">
+		<exename>查询用户的的有效性</exename>
+		<sqlids>MS0000Q003</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="MS0000EQ004" datasource="dsSys">
+		<exename>查询会话的用户登录信息</exename>
+		<sqlids>MS0000Q004</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="MS0000EQ005" datasource="dsSys">
+		<exename>使用用户ID查询用户信息</exename>
+		<sqlids>MS0000Q005</sqlids>
+	</sqlexecute>
+	
+	
+	<sqlexecute exeid="MS0000EM002" datasource="dsSys">
+		<exename>根据用户id注销会话</exename>
+		<sqlids>MS0000M002</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="MS0000EA011" datasource="dsSys">
+		<exename>记录登录会话信息</exename>
+		<sqlids>MS0000A011</sqlids>
+	</sqlexecute>
+	
+	
+	<sqlexecute exeid="MS0000EM001" datasource="dsSys">
+		<exename>根据会话id注销会话</exename>
+		<sqlids>MS0000M001</sqlids>
+	</sqlexecute>
 	
 </sqlexecutes>

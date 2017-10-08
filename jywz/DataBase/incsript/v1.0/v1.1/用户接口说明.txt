@@ -55,3 +55,6 @@ http://localhost:8081/jywz/user/userListQuery.json
 {"success":"true","returnmsg":"查询成功","returndata":{"results":"1","rows":[{"loginname":"test01","passwd":"C5A2262097C1F283F6D659DA7CF6923C","role":"1","organize_code":"organize02","code":"abc","name":"cc","ophone":"123456789","mphone":"15112457844","status":"1"}]}}
 
 
+
+
+
