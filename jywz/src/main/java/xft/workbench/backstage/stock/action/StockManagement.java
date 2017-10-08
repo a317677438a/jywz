@@ -186,4 +186,51 @@ public class StockManagement extends ABSBaseController{
 			return this.updateErrorJson(e);
 		}
 	}
+	/**
+	 * 入库查询统计
+	 * 
+	 */
+	@RequestMapping(value="/stockManagement/procurementStorage.json")
+	public @ResponseBody String procurementStorage(){
+		/*
+		 * 性能优化处理：后台每次只查询10条数据，
+		 * 需要再单独查询一次总数据量返回给前台用于分页
+		*/ 
+		try {
+			Map<String, Object> map = this.getRequestParams();
+			//传入参数可以start，limit可能不是字符串而是整形时，导致生成map后变成DOUBLE类型。
+			if(map.containsKey("start") && map.containsKey("limit") ){
+				map.put("start", Double.valueOf(map.get("start").toString()).intValue());
+				map.put("limit", Double.valueOf(map.get("limit").toString()).intValue());
+				//当检测params中含有"limit" 和"start"参数时，自动进行分页
+				//map.remove("start");
+				//map.remove("limit");
+			}
+			
+			GlobalMessage.addMapSessionInfo(map);//用户id
+			
+			JSONArray arr = new JSONArray();
+			SqlResult result = comnDao.exeQuery("JY2001EQ006", map);
+			
+			while(result.next()){
+				JSONObject jo = new JSONObject(result.getRow());
+				arr.put(jo);
+			}
+			
+			//查询总的数量
+			Integer totalNum = null;
+			SqlResult rs = comnDao.exeQuery("JY2001EQ007", map);
+			while(rs.next()){
+				totalNum = rs.getInteger("num");
+			}
+			JSONObject obj = new JSONObject();
+			
+			obj.put("results", totalNum);
+			obj.put("rows", arr);
+			
+			return this.updateReturnJson(true, "查询成功", obj);
+		} catch (Exception e) {
+			return this.updateErrorJson(e);
+		}
+	}
 }

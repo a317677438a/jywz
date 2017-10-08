@@ -85,14 +85,14 @@
                 $ISNULL{contract_no}
                 OR a.contract_no like '%$U{contract_no}%'
             ) 
-     			or
+     			and
             (
                (
                $ISNULL{putin_date_start}
                or 
                a.putin_date > $S{putin_date_start}
                )
-               or
+               and
                (
                 $ISNULL{putin_date_end}
                 or
@@ -111,14 +111,14 @@
                 $ISNULL{contract_no}
                 OR a.contract_no like '%$U{contract_no}%'
             ) 
-            or
+            and
             (
                (
                $ISNULL{putin_date_start}
                or 
                a.putin_date > $S{putin_date_start}
                )
-               or
+               and
                (
                 $ISNULL{putin_date_end}
                 or
@@ -167,6 +167,62 @@
 			inputuser=$S{inputuser}
 			WHERE id=$N{id}
 		]]></sql>
+	</sqlinfo>
+	
+	<sqlinfo sqlid="JY2001Q006">
+		<sqlname>入库记录查询</sqlname>
+		<sql><![CDATA[
+			SELECT * FROM
+			(SELECT
+				m.putin_type,c.name,c.jy_material_type_id,m.putin_number,c.supplier,c.model,m.putin_date,m.contract_no,m.putin_storehouse_code
+			FROM
+				(
+					SELECT
+						*
+					FROM
+						jy_storehouse_in a,
+						jy_storehouse_in_detail b
+					WHERE
+						a.id = b.jy_storehouse_in_id
+					or ($ISNULL{contract_no} or a.putin_storehouse_code LIKE '%$U{contract_no}%')
+					or ($ISNULL{contract_no} or a.contract_no LIKE '%$U{contract_no}%')
+					or ($ISNULL{putin_date_start} or a.putin_date >= $S{putin_date_start}) and ($ISNULL{putin_date_end} or a.putin_date <= $S{putin_date_end})
+				) m
+			INNER JOIN jy_material c ON c.id = m.jy_material_id
+			WHERE
+				($ISNULL{contract_no} or c.NAME LIKE '%$U{contract_no}%')
+				OR ($ISNULL{contract_no} or c.supplier LIKE '%$U{contract_no}%')
+			)k,jy_material_type p where k.jy_material_type_id = p.id
+		]]>
+		</sql>
+	</sqlinfo>
+	
+	<sqlinfo sqlid="JY2001Q007">
+		<sqlname>入库记录查询数量</sqlname>
+		<sql><![CDATA[
+			SELECT count(jy_material_type_id) num FROM
+			(SELECT
+				*
+			FROM
+				(
+					SELECT
+						*
+					FROM
+						jy_storehouse_in a,
+						jy_storehouse_in_detail b
+					WHERE
+						a.id = b.jy_storehouse_in_id
+					or ($ISNULL{contract_no} or a.putin_storehouse_code LIKE '%$U{contract_no}%')
+					or ($ISNULL{contract_no} or a.contract_no LIKE '%$U{contract_no}%')
+					or ($ISNULL{putin_date_start} or a.putin_date >= $S{putin_date_start})and($ISNULL{putin_date_end} or a.putin_date <= $S{putin_date_end})
+				) m
+			INNER JOIN jy_material c ON c.id = m.jy_material_id
+			WHERE
+				($ISNULL{contract_no} or c.NAME LIKE '%$U{contract_no}%')
+				OR ($ISNULL{contract_no} or c.supplier LIKE '%$U{contract_no}%')
+			)k,jy_material_type p where k.jy_material_type_id = p.id
+		]]>
+		</sql>
 	</sqlinfo>
 	
 </sqlinfos>

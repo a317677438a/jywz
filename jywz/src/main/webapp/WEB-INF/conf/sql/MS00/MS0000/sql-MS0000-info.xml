@@ -82,8 +82,8 @@
 			FROM
 				jy_user t
 			WHERE
-				t.id = $S { sys_user_id }
-			AND t.status = $S { userstatus };
+				t.id = $S{sys_user_id}
+			AND t.status = $S{userstatus};
 		]]></sql>
 	</sqlinfo>
 	

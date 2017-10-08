@@ -52,5 +52,14 @@
 		<sqlids>JY2001U003</sqlids>
 	</sqlexecute>
 	
+	<sqlexecute exeid="JY2001EQ006" datasource="dsSys">
+		<exename>入库查询统计</exename>
+		<sqlids>JY2001Q006</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY2001EQ007" datasource="dsSys">
+		<exename>入库查询统计数量</exename>
+		<sqlids>JY2001Q007</sqlids>
+	</sqlexecute>
 	
 </sqlexecutes>

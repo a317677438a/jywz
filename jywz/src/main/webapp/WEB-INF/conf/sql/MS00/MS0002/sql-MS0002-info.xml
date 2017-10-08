@@ -58,12 +58,12 @@
 	<sqlinfo sqlid="MS0002Q01">
 		<sqlname>用户信息列表查询</sqlname>
 		<sql><![CDATA[
-			SELECT t.loginname,t.passwd,t.role,t.organize_code,t.code,t.name,t.ophone,t.mphone,t.status
+			SELECT t.id,t.loginname,t.passwd,t.role,t.organize_code,t.code,t.name,t.ophone,t.mphone,t.status
 			FROM jy_user t  
 			WHERE ($isnull{id} or t.id=$n{id}) 
 			AND ($isnull{loginname} OR t.loginname LIKE  '%$U{loginname}%')
 			AND ($isnull{role} OR t.id=$S{role})
-			AND ($isnull{organize_code} OR t.id=$S{organize_code})
+			AND ($isnull{organize_code} OR t.organize_code=$S{organize_code})
 			AND ($isnull{code} OR t.code LIKE  '%$U{code}%')
 			AND ($isnull{name} OR t.name LIKE  '%$U{name}%')
 			AND ($isnull{status} OR t.status =$S{status})
