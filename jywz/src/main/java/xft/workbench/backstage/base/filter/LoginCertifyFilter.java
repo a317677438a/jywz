@@ -121,15 +121,7 @@ public class LoginCertifyFilter implements Filter {
 
 
         if (dofilter && (targetURL.contains(".json") || targetURL.contains("index.html"))) {
-        	
-        	 UserLoginInfo userLoginInfo = new UserLoginInfo();
-        	 userLoginInfo.setId(-1);
-        	 userLoginInfo.setUsername("admin");
-        	
-        	
-        	 httpRequest.setAttribute(GlobalMessage.REQUEST_INFO_KEY, userLoginInfo);
-        	
-           /* //判断此会话有没有进行登录。没有登录则返回登录页面。sessionid
+        	//判断此会话有没有进行登录。没有登录则返回登录页面。sessionid
             LoginManangerDao loginManangerDao = SysBeans.getBean("loginManangerDao");
             Integer sys_user_id = null;
             //有权限访问则用request保存用户常用信息。
@@ -165,7 +157,7 @@ public class LoginCertifyFilter implements Filter {
 
                 }
 
-            }*/
+            }
         }
 
 

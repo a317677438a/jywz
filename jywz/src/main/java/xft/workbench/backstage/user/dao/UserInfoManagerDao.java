@@ -208,4 +208,17 @@ public class UserInfoManagerDao extends ComnDao{
 		
 		return requestmapping;
 	}
+	
+	
+	
+	public void haveStorehouseCode(Integer sys_user_id) throws KPromptException, KSqlException, SQLException, KSystemException {
+		Map<String,Object> params = new HashMap<String,Object>();
+		
+		params.put("sys_user_id", sys_user_id);
+		
+		this.exeUpdate("MS0002EU08", params);
+		
+	}
+	
+	
 }

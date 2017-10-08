@@ -15,19 +15,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
-
-import xft.workbench.backstage.base.util.CookieUtil;
-import xft.workbench.backstage.base.util.GlobalMessage;
-import xft.workbench.backstage.user.dao.SysUserLogsDao;
-import xft.workbench.backstage.user.model.SysUserLogs;
-import xft.workbench.backstage.user.model.UserLoginInfo;
-
-import com.kayak.web.base.system.SysBeans;
 
 @Component
 public class UserLogsFilter implements Filter {
@@ -46,60 +35,7 @@ public class UserLogsFilter implements Filter {
 
     public void doFilter(ServletRequest req, ServletResponse res,
                          FilterChain chain) throws IOException, ServletException {
-        HttpServletRequest request = (HttpServletRequest) req;
-        SysUserLogs sysUserLogs = null;
-        try {
-            SysUserLogsDao sysUserLogsDao = SysBeans.getBean("sysUserLogsDao");
-
-            String contentType = request.getContentType();
-
-            if (contentType != null && (contentType.contains("application/json")
-                    || contentType.contains("multipart/form-data"))) {
-                //客户端IP
-                String ipAddr = this.getIpAddr(request);
-                //系统请求参数。
-                String requestParams = null;
-                if (contentType.contains("application/json"))
-                    requestParams = this.getRequestParams(request);
-
-                if (contentType.contains("multipart/form-data"))
-                    requestParams = "{file}";//默认请求参数
-
-
-                requestParamsThreadLocal.set(requestParams);//设置请求参数
-
-                //得到用户信息
-                UserLoginInfo userLoginInfo = (UserLoginInfo) request.getAttribute(GlobalMessage.REQUEST_INFO_KEY);
-
-                //得到用户请求uri  比如: /workbench_bs/abslogin.json
-                String uri = request.getRequestURI();
-                String reqMapping = uri.substring(uri.indexOf("/", 1));
-                if (requestmappingList == null) {
-                    requestmappingList = sysUserLogsDao.queryRequestMapping();
-                }
-                //不需要记录用户日志时则直接跳过
-                if (StringUtils.isNotEmpty(requestParams) && !"{}".equals(requestParams.trim()) &&
-                        userLoginInfo != null &&
-                        requestmappingList != null && requestmappingList.contains(reqMapping)) {
-                    //需要记录用户日志。
-                    //用户会话ID
-                    String sessionid = CookieUtil.getCookie(GlobalMessage.SESSIONID_KEY, request);
-
-                    sysUserLogs = new SysUserLogs(sessionid,
-                            userLoginInfo.getId().toString(), userLoginInfo.getLoginname(),
-                            reqMapping, requestParams, ipAddr, null, null);
-                    sysUserLogsDao.addUserLogs(sysUserLogs);
-
-                } else {
-                    //	chain.doFilter(req, res);
-                }
-            }
-        } catch (Exception e) {
-            //出现系统异常问题，不进行处理。
-            log.error("记录用户操作日志失败：" + (sysUserLogs == null ? "" : sysUserLogs.toString()));
-        }
-
-        chain.doFilter(req, res);
+       chain.doFilter(req, res);
     }
 
     public void init(FilterConfig filterConfig) {

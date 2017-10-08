@@ -206,4 +206,12 @@ public class UserInfoManagerBiz {
 	}
 
 	
+	
+	public void haveStorehouseCode(Integer sys_user_id) throws KPromptException, KSqlException, SQLException, KSystemException {
+		
+		
+		userInfoManagerDao.userDelete(sys_user_id);
+		
+	}
+	
 }

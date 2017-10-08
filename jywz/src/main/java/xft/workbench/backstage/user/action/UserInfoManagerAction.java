@@ -175,32 +175,25 @@ public class UserInfoManagerAction extends ABSBaseController {
 	}
 	
 	/**
-	 * 查询登录名称是否存在
+	 * 查询仓库员存在的仓库编码。
 	 * @return
 	 */
-	/*@RequestMapping(value="/user/queryUserInfo.json")
-	public @ResponseBody String queryUserInfo(){
+	
+	@RequestMapping(value="/user/haveStorehouseCode.json")
+	public @ResponseBody String haveStorehouseCode(){
 		try {
 			Map<String, Object> param = this.getRequestParams();//获取请求参数
 
-			String loginname = "";
-			if(param.containsKey("loginname"))
-				loginname = param.get("loginname").toString();
+			Integer sys_user_id = Integer.parseInt(param.get("id").toString());
 			
-			//平台类型：-1开发、1工厂、2实验室。
-			String systemType= GlobalMessage.getSystemType();
-
-			if(!"1".equals(systemType))
-				return this.updateReturnJson(true, "查询成功", null);
+			userInfoManagerBiz.haveStorehouseCode(sys_user_id);
 			
-			Map<String,Object> userinfo = userInfoManagerBiz.queryUserInfo(loginname);
-			
-			return this.updateReturnJson(true, "查询成功", userinfo);
+			return this.updateReturnJson(true, "删除成功", null);
 		} catch (Exception e) {
 			return this.updateErrorJson(e);
 		}
-		
-	}*/
+	}
+	
 	
 	
 }

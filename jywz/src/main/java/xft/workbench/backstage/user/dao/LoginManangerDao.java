@@ -2,9 +2,7 @@ package xft.workbench.backstage.user.dao;
 
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -13,9 +11,8 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import xft.workbench.backstage.base.enumeration.OpeStatusEnum;
-import xft.workbench.backstage.base.util.GlobalMessage;
+import xft.workbench.backstage.base.enumeration.user.UserStatus;
 import xft.workbench.backstage.base.util.ObjectMapUtil;
-import xft.workbench.backstage.user.model.MenuDao;
 import xft.workbench.backstage.user.model.UserLoginInfo;
 
 import com.kayak.web.base.dao.ComnDao;
@@ -45,26 +42,13 @@ public class LoginManangerDao {
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("jsstatus",OpeStatusEnum.start.getValue());
 		params.put("sessionid", sessionid);
-		SqlResult sr = comnDao.query("MS0000EQ001", params);
+		SqlResult sr = comnDao.query("MS0000EQ004", params);
 		if(sr.next()){
 			return sr.getInteger("sys_user_id");
 		}
 		return null;
 	}
 	
-	public List<MenuDao> getLoginUserRoleMenus() throws Exception{
-		List<MenuDao> menus = new ArrayList<MenuDao>();
-		Map<String,Object> params = new HashMap<String,Object>();
-		GlobalMessage.addMapSessionInfo(params);
-		params.put("status", OpeStatusEnum.start.getValue());
-		SqlResult sr = comnDao.query("MS0000EQ010", params);
-		while(sr.next()){
-			MenuDao  menu = new MenuDao();
-			ObjectMapUtil.sqlResultToObject(sr.getRow(), menu);
-			menus.add(menu);
-		}
-		return menus;
-	}
 	
 	
 	/**
@@ -95,12 +79,10 @@ public class LoginManangerDao {
 			throws KPromptException, Exception {
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("sys_user_id", sys_user_id);
-		SqlResult sr = comnDao.query("MS0000EQ002", params);
+		SqlResult sr = comnDao.query("MS0000EQ003", params);
 		if(sr.next()){
-			int userState= sr.getInteger("userstatus");
-			int orgState= sr.getInteger("org_status");
-			if(OpeStatusEnum.start.getValue()==userState && 
-					OpeStatusEnum.start.getValue()==orgState){
+			int userState= sr.getInteger("status");
+			if(UserStatus.run.getValue()==userState ){
 				return true;
 			}
 		}
@@ -119,21 +101,15 @@ public class LoginManangerDao {
 	 */
 	public UserLoginInfo queryUserByLoginname(String loginname)
 			throws KPromptException, Exception {
-		UserLoginInfo userLoginInfo = null;
+		UserLoginInfo userLoginInfo = new UserLoginInfo();
 		
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("loginname", loginname);
-		SqlResult sr = comnDao.query("MS0000EQ003", params);
+		SqlResult sr = comnDao.query("MS0000EQ002", params);
 		
-		if(sr.next()){
-			userLoginInfo = new UserLoginInfo();
-			userLoginInfo.setId(sr.getInteger("id"));
-			userLoginInfo.setLoginname(sr.getString("loginname"));
-			userLoginInfo.setPasswd(sr.getString("passwd"));
-			userLoginInfo.setPwderrtimes(sr.getInteger("pwderrtimes"));
-			return userLoginInfo;
-		}
-		return null;
+		//将用户信息封装到对象UserLoginInfo中。
+		userLoginInfo=(UserLoginInfo)ObjectMapUtil.sqlResultToObject(sr, userLoginInfo);
+		return userLoginInfo;
 	}
 	
 	
@@ -152,8 +128,8 @@ public class LoginManangerDao {
 		
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("sys_user_id", sys_user_id);
-		params.put("userstatus", OpeStatusEnum.start.getValue());
-		SqlResult sr = comnDao.query("MS0000EQ004", params);
+		params.put("userstatus", UserStatus.run.getValue());
+		SqlResult sr = comnDao.query("MS0000EQ005", params);
 		//将用户信息封装到对象UserLoginInfo中。
 		userLoginInfo=(UserLoginInfo)ObjectMapUtil.sqlResultToObject(sr, userLoginInfo);
 		
@@ -243,7 +219,7 @@ public class LoginManangerDao {
 		params.put("sessionid", userLoginInfo.getSessionid());
 		params.put("sys_user_id", userLoginInfo.getId());
 		params.put("loginip", userLoginInfo.getLoginip());
-		comnDao.exeUpdate("MS0000EA001", params);
+		comnDao.exeUpdate("MS0000EA011", params);
 	}
 	
 	/**
@@ -282,92 +258,8 @@ public class LoginManangerDao {
 	
 	
 	
-	/**
-	 * 查询用户的的有效菜单。
-	 * 
-	 * @param sys_user_id 用户id
-	 * @return
-	 * @throws KPromptException
-	 * @throws Exception
-	 */
-	public List<MenuDao> queryUserMenus()
-			throws KPromptException, Exception {
-		List<MenuDao> menus = new ArrayList<MenuDao>();
-		
-		Map<String,Object> params = new HashMap<String,Object>();
-		GlobalMessage.addMapSessionInfo(params);
-		params.put("status", OpeStatusEnum.start.getValue());
-		SqlResult sr = comnDao.query("MS0000EQ005", params);
-		while(sr.next()){
-			MenuDao  menu = new MenuDao();
-			ObjectMapUtil.sqlResultToObject(sr.getRow(), menu);
-			menus.add(menu);
-		}
-		return menus;
-	}
-	
-	/**
-	 * 根据用户所属机构类型的查询权限
-	 */
-	public List<MenuDao> queryUserMenusByOrgType()
-			throws KPromptException, Exception {
-		List<MenuDao> menus = new ArrayList<MenuDao>();
-		
-		Map<String,Object> params = new HashMap<String,Object>();
-		GlobalMessage.addMapSessionInfo(params);
-		SqlResult sr = comnDao.query("MS0000EQ014", params);
-		while(sr.next()){
-			MenuDao  menu = new MenuDao();
-			ObjectMapUtil.sqlResultToObject(sr.getRow(), menu);
-			menus.add(menu);
-		}
-		return menus;
-	}
-	
-	/**
-	 * 根据用户所占有的角色来查询权限
-	 * 
-	 * @param sys_user_id 用户id
-	 * @return
-	 * @throws KPromptException
-	 * @throws Exception
-	 */
-	public List<MenuDao> queryUserMenusByRole()
-			throws KPromptException, Exception {
-		List<MenuDao> menus = new ArrayList<MenuDao>();
-		
-		Map<String,Object> params = new HashMap<String,Object>();
-		GlobalMessage.addMapSessionInfo(params);
-		SqlResult sr = comnDao.query("MS0000EQ015", params);
-		while(sr.next()){
-			MenuDao  menu = new MenuDao();
-			ObjectMapUtil.sqlResultToObject(sr.getRow(), menu);
-			menus.add(menu);
-		}
-		return menus;
-	}
 	
 	
-	/**
-	 * 查询所有权限
-	 * 
-	 * @param sys_user_id 用户id
-	 * @return
-	 * @throws KPromptException
-	 * @throws Exception
-	 */
-	public List<MenuDao> queryAllMenus()
-			throws KPromptException, Exception {
-		List<MenuDao> menus = new ArrayList<MenuDao>();
-		
-		SqlResult sr = comnDao.query("MS0000EQ016", null);
-		while(sr.next()){
-			MenuDao  menu = new MenuDao();
-			ObjectMapUtil.sqlResultToObject(sr.getRow(), menu);
-			menus.add(menu);
-		}
-		return menus;
-	}
 	
 	
 	/**

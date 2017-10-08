@@ -84,8 +84,6 @@ public class GlobalMessage {
         String admin = Global.getGlobalConf(GlobalMessage.ADMIN_LOGIN, "admin");
         map.put("sys_user_id", userLoginInfo.getId());
         map.put("loginname", userLoginInfo.getLoginname());
-        map.put("sys_org_id", userLoginInfo.getSys_org_id());
-        map.put("orgtype", userLoginInfo.getOrgtype());
         map.put("isadmin", admin.equals(userLoginInfo.getLoginname()));//是否为管理员。
     }
 
