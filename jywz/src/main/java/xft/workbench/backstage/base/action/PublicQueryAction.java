@@ -135,5 +135,32 @@ public class PublicQueryAction extends ABSBaseController {
 		}
 
 	}
+	
+	
+	
+	/**
+	 * 查询所有物资列表信息
+	 * @return
+	 */
+	@RequestMapping(value = "/base/getUserByRole.json")
+	public @ResponseBody String getUserByRole() {
+		try {
+			//得到查询后结果集{role:1,exeid:'MS0002EQ01'}
+			Map<String, Object> map = this.getRequestParams();
+			
+			SqlResult sr=comnService.getComnDao().query(map);
+			JSONArray resultsArray = new JSONArray();
+			while(sr.next()){
+				JSONObject jsonObject = new JSONObject();
+				jsonObject.put("key", sr.getString("id"));
+				jsonObject.put("value", sr.getString("name"));
+				resultsArray.put(jsonObject);
+			}
+			return this.updateReturnJson(true, "查询成功", resultsArray);
+		} catch (Exception e) {
+			return this.updateReturnJson(false, e.getMessage(), null);
+		}
+
+	}
 
 }
