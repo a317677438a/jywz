@@ -97,7 +97,7 @@ http://localhost:8081/jywz/apply/materialOwnNumber.json
 
 8、删除申请
 请求：
-http://localhost:8081/jywz/apply/materialOwnNumber.json
+http://localhost:8081/jywz/apply/deleteApply.json
 { 
 "id":"1"
 }
