@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlexecutes SYSTEM "../../dtd/sql-execute.dtd">
+<sqlexecutes>
+
+	
+	<sqlexecute exeid="JY4001EQ001" datasource="dsSys">
+		<exename>查询物资出库信息主表id，通过出库单号</exename>
+		<sqlids>JY4001Q001</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY4001EU001" datasource="dsSys">
+		<exename>生成出库单主表</exename>
+		<sqlids>JY4001U001</sqlids>
+	</sqlexecute>
+	
+	
+	<sqlexecute exeid="JY4001EU002" datasource="dsSys">
+		<exename>生成出库单明细表</exename>
+		<sqlids>JY4001U002</sqlids>
+	</sqlexecute>
+</sqlexecutes>

@@ -73,3 +73,11 @@ http://localhost:8081/jywz/base/getALLMaterialList.json
 响应：
 {"success":"true","returnmsg":"查询成功","returndata":[{"key":"2","value":"WZ0-大米"},{"key":"3","value":"WZ2-大米"},{"key":"8","value":"WZ3-fdsf"}]}
 
+
+7、查询某个角色下的用户列表。
+请求：
+http://localhost:8081/jywz/base/getUserByRole.json
+{role:2,exeid:'MS0002EQ01'}
+//1、系统管理员2、仓管员3、领导、4、物资申请人',
+响应：
+{"success":"true","returnmsg":"查询成功","returndata":[{"key":"2","value":"huangyao"}]}

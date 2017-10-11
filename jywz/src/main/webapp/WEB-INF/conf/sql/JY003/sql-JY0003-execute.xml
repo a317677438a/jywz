@@ -23,6 +23,21 @@
 		<sqlids>JY3001U004</sqlids>
 	</sqlexecute>
 	
+	<sqlexecute exeid="JY3001EU005" datasource="dsSys">
+		<exename>修改申请单状态信息</exename>
+		<sqlids>JY3001U005</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY3001EU006" datasource="dsSys">
+		<exename>接收申请单状态信息</exename>
+		<sqlids>JY3001U006</sqlids>
+	</sqlexecute>
+	
+	
+	
+	
+	
+	
 	<sqlexecute exeid="JY3001EQ001" datasource="dsSys">
 		<exename>查询新增申请基本信息的id</exename>
 		<sqlids>JY3001Q001</sqlids>

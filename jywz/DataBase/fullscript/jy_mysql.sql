@@ -161,6 +161,7 @@ CREATE TABLE jy_apply (
   review_date  char(8) comment '审核日期',
   review_remark   varchar(500)  comment '审核意见',
   storehouse_user int(11) comment '出库人',
+  out_date char(8) comment '出库时间',
   apply_storehouse_code varchar(50) comment '申请物资的仓库编码',
   status          int(2) not null comment '1、待审核。2、审批拒绝 3、待领用（审批通过）4、已领用',
   remark        varchar(500)  comment '备注',

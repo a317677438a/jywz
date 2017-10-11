@@ -15,11 +15,18 @@ import xft.workbench.backstage.apply.model.ApplyDetail;
 import xft.workbench.backstage.base.enumeration.apply.ApplyStatus;
 import xft.workbench.backstage.base.enumeration.apply.PutinStatus;
 import xft.workbench.backstage.base.enumeration.apply.PutoutStatus;
+import xft.workbench.backstage.base.enumeration.apply.PutoutType;
+import xft.workbench.backstage.storehouseout.dao.StorehoseoutDao;
+import xft.workbench.backstage.storehouseout.model.Storehoseout;
+import xft.workbench.backstage.storehouseout.model.StorehoseoutDetail;
 
 @Service
 public class ApplyBiz {
 	@Autowired
 	private ApplyDao applyDao;
+	
+	@Autowired
+	private StorehoseoutDao storehoseoutDao;
 	
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void addApply(Apply apply,List<ApplyDetail> details ) throws Exception{
@@ -92,6 +99,68 @@ public class ApplyBiz {
 		applyDao.deleteApply(applyId);
 		//删除明细表
 		applyDao.deleteApplyDetail(applyId);
+	}
+	
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void receiveApplyMaterial(Integer applyId,
+			Integer applyStatus,Integer checkUserId) throws Exception{
+		//接收申请物资；
+		
+		if(ApplyStatus.receive.getValue()==applyStatus){//接收
+			
+			//新增出库单
+			Apply apply = applyDao.queryApplyByid(applyId);
+			
+			if(apply == null){
+				throw new KPromptException("申请单无记录！");
+			}
+			
+			if(apply.getApply_user() != checkUserId){
+				throw new KPromptException("认证用户不为申请人，请申请人进行身份认证！");
+			}
+			
+			//修改申请单状态。
+			applyDao.modifyApplyReceive(applyId, ApplyStatus.receive.getValue());
+			
+			Storehoseout storehoseout = new Storehoseout(
+					null, 
+					apply.getApply_code(), 
+					PutoutType.apply.getValue(), 
+					apply.getStorehouse_user(), 
+					null, 
+					apply.getApply_storehouse_code(), 
+					apply.getApply_user(), 
+					null, 
+					PutoutStatus.ok.getValue(), 
+					apply.getRemark(), 
+					null, 
+					null, 
+					null);
+			
+			storehoseoutDao.addStorehoseout(storehoseout);
+			
+			//新增出库明细
+			Integer putout_id = storehoseoutDao.queryStorehouseOutIdByCode(storehoseout.getPutout_code());
+			
+			List<ApplyDetail> details= applyDao.queryApplyDetailByid(applyId);
+			
+			for(int i=0; i< details.size();i++){
+				ApplyDetail detail = (ApplyDetail)details.get(i);
+				
+				StorehoseoutDetail storehoseoutDetail = new StorehoseoutDetail(
+						putout_id, 
+						detail.getJy_material_id(), 
+						detail.getApply_number());
+				storehoseoutDao.addStorehoseoutDetail(storehoseoutDetail);
+			}
+			
+			
+		}else if(ApplyStatus.reject.getValue()==applyStatus){//拒绝
+			applyDao.modifyApplyStatus(applyId, ApplyStatus.reject.getValue());
+		}else{
+			throw new KPromptException("接收状态异常！");
+		}
+		
 	}
 	
 }
