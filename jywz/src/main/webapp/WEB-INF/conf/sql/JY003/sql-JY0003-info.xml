@@ -285,14 +285,23 @@
 			LEFT JOIN jy_params p1 ON t0.apply_storehouse_code = p1.param_code
 			WHERE
 				(
+	                t0.apply_user = $N{sys_user_id}
+	            ) 
+	            and
+				(
 	                $ISNULL{apply_storehouse_code}
 	                OR t0.apply_storehouse_code = $S{apply_storehouse_code}
-	            ) and
-					(
+	            ) 
+	            and
+				(
 	                $ISNULL{apply_user_name}
 	                OR u1.name like '%$U{apply_user_name}%'
 	            ) 
-	            
+	            and
+				(
+	                $ISNULL{apply_code}
+	                OR t0.apply_code = $S{apply_code}
+	            ) 
             
 		]]></sql>
 	</sqlinfo>
