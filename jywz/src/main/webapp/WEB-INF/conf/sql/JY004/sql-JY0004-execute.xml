@@ -8,6 +8,22 @@
 		<sqlids>JY4001Q001</sqlids>
 	</sqlexecute>
 	
+	<sqlexecute exeid="JY4001EQ002" datasource="dsSys">
+		<exename>查询物资出库信息主表</exename>
+		<sqlids>JY4001Q002</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY4001EQ003" datasource="dsSys">
+		<exename>查询物资出库信息明细</exename>
+		<sqlids>JY4001Q003</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY4001EQ004" datasource="dsSys">
+		<exename>查询物资出库统计查询</exename>
+		<sqlids>JY4001Q004</sqlids>
+	</sqlexecute>
+	
+	
 	<sqlexecute exeid="JY4001EU001" datasource="dsSys">
 		<exename>生成出库单主表</exename>
 		<sqlids>JY4001U001</sqlids>

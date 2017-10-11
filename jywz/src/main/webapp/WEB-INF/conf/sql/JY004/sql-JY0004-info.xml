@@ -16,6 +16,140 @@
 	</sqlinfo>
 	
 	
+	
+	<sqlinfo sqlid="JY4001Q002">
+		<sqlname>查询物资出库信息主表</sqlname>
+		<sql><![CDATA[
+		SELECT
+			t1.id,
+			t1.putout_code,
+			t1.putout_type,
+			t1.putout_user,
+			u2.`name` putout_user_name,
+			t1.putout_date,
+			t1.putout_storehouse_code,
+			p1.param_name putout_storehouse_name,
+			t1.apply_user,
+			u1.`name` apply_user_name,
+			t1.putin_storehouse_code,
+			p2.param_name putin_storehouse_name,
+			t1.`status`,
+			t1.remark,
+			t1.inputuser,
+			t1.crt_date,
+			t1.crt_time
+		FROM
+			jy_storehouse_out t1
+		LEFT JOIN jy_user u1 ON t1.apply_user = u1.id
+		LEFT JOIN jy_user u2 ON t1.putout_user = u2.id
+		LEFT JOIN jy_params p1 ON t1.putout_storehouse_code = p1.param_code
+		LEFT JOIN jy_params p2 ON t1.putin_storehouse_code = p2.param_code
+		WHERE
+			(
+				t1.putout_user = $N{sys_user_id} 
+			)
+			AND
+			(
+				t1.putout_type = $N{putout_type} 
+			)
+			AND
+			(
+                $ISNULL{putout_code}
+                OR t1.putout_code = $S{putout_code}
+            ) 
+            AND
+			(
+                $ISNULL{id}
+                OR t1.id = $N{id}
+            ) 
+		]]></sql>
+	</sqlinfo>
+	
+	
+	<sqlinfo sqlid="JY4001Q003">
+		<sqlname>查询物资出库明细信息</sqlname>
+		<sql><![CDATA[
+		SELECT
+				t1.jy_storehouse_out_id,
+				t1.jy_material_id,
+				t1.putout_number,
+				t2.`code` material_code,
+				t2.`name` material_name,
+				t2.model,
+				t2.supplier,
+				t3.`code` material_type_code,
+				t3.`name` material_type_name
+			FROM
+				jy_storehouse_out_detail t1
+			LEFT JOIN jy_material t2 ON t1.jy_material_id = t2.id
+			LEFT JOIN jy_material_type t3 ON t2.jy_material_type_id = t3.id
+			WHERE
+				t1.jy_storehouse_out_id = $N{id};
+		]]></sql>
+	</sqlinfo>
+	
+	
+	
+	<sqlinfo sqlid="JY4001Q004">
+		<sqlname>查询物资出库统计查询</sqlname>
+		<sql><![CDATA[
+		SELECT
+			t0.id,
+			t0.putout_type,
+			t0.putout_code,
+			t0.putout_user,
+		    u2.`name` putout_user_name,
+			t0.putout_date,
+			t0.apply_user,
+			u1.`name` apply_user_name,
+			t0.putout_storehouse_code,
+			p1.param_name putout_storehouse_name,
+			t0.putin_storehouse_code,
+			p2.param_name putin_storehouse_name,
+			t0.`status` putoutStatus,
+			t1.jy_material_id,
+			t1.putout_number,
+			t2.`code` material_code,
+			t2.`name` material_name,
+			t2.model,
+			t2.supplier,
+			t3.`code` material_type_code,
+			t3.`name` material_type_name
+		FROM
+			jy_storehouse_out t0
+		LEFT JOIN jy_storehouse_out_detail t1 ON t0.id = t1.jy_storehouse_out_id
+		LEFT JOIN jy_material t2 ON t1.jy_material_id = t2.id
+		LEFT JOIN jy_material_type t3 ON t2.jy_material_type_id = t3.id
+		LEFT JOIN jy_user u1 ON t0.apply_user = u1.id
+		LEFT JOIN jy_user u2 ON t0.putout_user = u2.id
+		LEFT JOIN jy_params p1 ON t0.putout_storehouse_code = p1.param_code
+		LEFT JOIN jy_params p2 ON t0.putin_storehouse_code = p2.param_code
+			WHERE
+				(
+	                t0.putout_user = $N{sys_user_id}
+	            ) 
+	            and
+				(
+	                $ISNULL{putout_storehouse_code}
+	                OR t0.putout_storehouse_code = $S{putout_storehouse_code}
+	            ) 
+	            and
+				(
+	                $ISNULL{putout_user_name}
+	                OR u2.name like '%$U{putout_user_name}%'
+	            ) 
+	            and
+				(
+	                $ISNULL{putout_code}
+	                OR t0.putout_code = $S{putout_code}
+	            ) 
+		]]></sql>
+	</sqlinfo>
+	
+	
+	
+	
+	
 	<sqlinfo sqlid="JY4001U001">
 		<sqlname>生成出库单主表</sqlname>
 		<sql><![CDATA[

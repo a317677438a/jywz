@@ -78,6 +78,12 @@
 	</sqlexecute>
 	
 	
+	<sqlexecute exeid="JY3001EQ008" datasource="dsSys">
+		<exename>查询申请物资明细申请信息查询</exename>
+		<sqlids>JY3001Q008</sqlids>
+	</sqlexecute>
+	
+	
 	<sqlexecute exeid="JY3001ED001" datasource="dsSys">
 		<exename>删除申请物资明细</exename>
 		<sqlids>JY3001D001</sqlids>
