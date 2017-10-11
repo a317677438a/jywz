@@ -131,16 +131,35 @@
 				t1.review_user = $N{sys_user_id} or
 				t1.storehouse_user = $N{sys_user_id} 
 			)
-			AND
+			and
 			(
                 $ISNULL{apply_code}
                 OR t1.apply_code = $S{apply_code}
             ) 
-            AND
+            and
 			(
                 $ISNULL{id}
                 OR t1.id = $N{id}
             ) 
+            and
+			(
+                $ISNULL{status}
+                OR t1.status = $N{status}
+            )
+            and
+			 (
+               (
+               $ISNULL{putin_date_start}
+               or 
+               t1.apply_date > $S{putin_date_start}
+               )
+               and
+               (
+                $ISNULL{putin_date_end}
+                or
+                t1.apply_date < $S{putin_date_end}
+                )
+            )
 		]]></sql>
 	</sqlinfo>
 	
