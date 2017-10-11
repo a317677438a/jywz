@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -89,6 +90,44 @@ public class ApplyAction extends ABSBaseController{
 			return this.updateErrorJson(e);
 		}
 		return this.updateReturnJson(true, "审核成功", null);
+	}
+	
+	
+	@RequestMapping(value = "/apply/materialOwnNumber.json")
+	public  @ResponseBody String  materialOwnNumber(){
+		Map<String, Object> params = null; 
+		JSONObject object = new JSONObject();
+		try {
+			params = this.getRequestParams();
+			String storehouse_code = (String)params.get("storehouse_code");
+			Integer material_id = Integer.valueOf((String)params.get("material_id"));
+			
+			Integer storeNumber= applyBiz.queryMaterialStoreNumber(storehouse_code, material_id);
+			Integer ownNumber=applyBiz.queryMaterialOwnNumber( material_id);
+			
+			object.put("storeNumber", storeNumber);
+			object.put("ownNumber", ownNumber);
+		} catch (Exception e) {// 获取返回提示的错误
+			return this.updateErrorJson(e);
+		}
+		return this.updateReturnJson(true, "查询物资库存成功", object);
+	}
+	
+	
+
+	@RequestMapping(value = "/apply/deleteApply.json")
+	public  @ResponseBody String  deleteApply(){
+		Map<String, Object> params = null; 
+		try {
+			params = this.getRequestParams();
+			String apply_id = (String)params.get("id");
+			Integer applyId = Integer.valueOf(apply_id);
+			
+			applyBiz.deleteApply(applyId);
+		} catch (Exception e) {// 获取返回提示的错误
+			return this.updateErrorJson(e);
+		}
+		return this.updateReturnJson(true, "删除成功", null);
 	}
 	
 }

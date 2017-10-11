@@ -40,10 +40,37 @@
 	</sqlexecute>
 	
 	
+	<sqlexecute exeid="JY3001EQ004" datasource="dsSys">
+		<exename>查询某个仓库中一个物资入库的总数</exename>
+		<sqlids>JY3001Q004</sqlids>
+	</sqlexecute>
+	
+	
+	<sqlexecute exeid="JY3001EQ005" datasource="dsSys">
+		<exename>查询某个仓库中一个物资出库的总数</exename>
+		<sqlids>JY3001Q005</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY3001EQ006" datasource="dsSys">
+		<exename>查询某个用户一个物资持有的总数</exename>
+		<sqlids>JY3001Q006</sqlids>
+	</sqlexecute>
+	
+	
+	<sqlexecute exeid="JY3001EQ007" datasource="dsSys">
+		<exename>查询申请主表的状态</exename>
+		<sqlids>JY3001Q007</sqlids>
+	</sqlexecute>
+	
 	
 	<sqlexecute exeid="JY3001ED001" datasource="dsSys">
 		<exename>删除申请物资明细</exename>
 		<sqlids>JY3001D001</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY3001ED002" datasource="dsSys">
+		<exename>删除申请主表</exename>
+		<sqlids>JY3001D002</sqlids>
 	</sqlexecute>
 	
 	

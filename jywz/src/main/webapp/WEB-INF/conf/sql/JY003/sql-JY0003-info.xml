@@ -169,10 +169,78 @@
 	</sqlinfo>
 	
 	
+	<sqlinfo sqlid="JY3001Q004">
+		<sqlname>查询某个仓库中一个物资入库的总数</sqlname>
+		<sql><![CDATA[
+			SELECT
+				SUM(t2.putin_number) putin_number
+			FROM
+				jy_storehouse_in t1
+			LEFT JOIN jy_storehouse_in_detail t2 ON t1.id = t2.jy_storehouse_in_id
+			WHERE
+				t1.putin_storehouse_code = $S{putin_storehouse_code}
+			AND t2.jy_material_id = $N{jy_material_id}
+			AND t1.`status`= $N{status};
+		]]></sql>
+	</sqlinfo>
+	
+	
+	<sqlinfo sqlid="JY3001Q005">
+		<sqlname>查询某个仓库中一个物资出库的总数</sqlname>
+		<sql><![CDATA[
+			SELECT
+				SUM(t2.putout_number) putout_number
+			FROM
+				jy_storehouse_out t1
+			LEFT JOIN jy_storehouse_out_detail t2 ON t1.id = t2.jy_storehouse_out_id
+			WHERE
+				t1.putout_storehouse_code = $S{putout_storehouse_code}
+			AND t2.jy_material_id = $N{jy_material_id}
+			AND t1.`status`= $N{status};
+		]]></sql>
+	</sqlinfo>
+	
+	
+	<sqlinfo sqlid="JY3001Q006">
+		<sqlname>查询某个用户一个物资持有的总数</sqlname>
+		<sql><![CDATA[
+			SELECT
+				SUM(t2.apply_number) apply_number
+			FROM
+				jy_apply t1
+			LEFT JOIN jy_apply_detail t2 ON t1.id = t2.jy_apply_id
+			WHERE
+				t2.jy_material_id = $N{jy_material_id}
+			AND t1.`status` = $N{status}
+			AND t1.apply_user = $N{sys_user_id};
+		]]></sql>
+	</sqlinfo>
+	
+	
+	<sqlinfo sqlid="JY3001Q007">
+		<sqlname>查询申请主表的状态</sqlname>
+		<sql><![CDATA[
+			SELECT
+				t1.`status`
+			FROM
+				jy_apply t1
+			WHERE
+				t1.id =$S{id};
+		]]></sql>
+	</sqlinfo>
+	
+	
 	<sqlinfo sqlid="JY3001D001">
 		<sqlname>删除申请物资明细</sqlname>
 		<sql><![CDATA[
 			DELETE FROM jy_apply_detail where jy_apply_id = $N{id}
+		]]></sql>
+	</sqlinfo>
+	
+	<sqlinfo sqlid="JY3001D002">
+		<sqlname>删除申请主表</sqlname>
+		<sql><![CDATA[
+			DELETE FROM jy_apply where id = $N{id}
 		]]></sql>
 	</sqlinfo>
 	

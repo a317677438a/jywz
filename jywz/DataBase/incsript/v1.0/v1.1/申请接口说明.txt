@@ -82,3 +82,26 @@ http://localhost:8081/jywz/apply/reviewApply.json
 
 响应：
 {"success":"true","returnmsg":"审核成功","returndata":{}}
+
+
+7、查询查询物资在仓库的存量=入库数量-出库数据。以及用户持有物资的数量。
+请求：
+http://localhost:8081/jywz/apply/materialOwnNumber.json
+{ 
+"storehouse_code":"storehouse01",
+"material_id":"3"
+}
+
+响应：
+{"success":"true","returnmsg":"查询物资库存成功","returndata":{"storeNumber":"0","ownNumber":"0"}}
+
+8、删除申请
+请求：
+http://localhost:8081/jywz/apply/materialOwnNumber.json
+{ 
+"id":"1"
+}
+
+响应：
+{"success":"true","returnmsg":"删除成功","returndata":{}}
+

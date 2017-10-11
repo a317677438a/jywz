@@ -26,7 +26,7 @@ public class ApplyDao extends ComnDao{
 	}
 	
 	/**
-	 * 新增申请--基础信息
+	 * 查询申请表ID--基础信息
 	 * 
 	 */
 	public Integer queryApplyIdByCode(String  applyCode) throws Exception{
@@ -39,6 +39,73 @@ public class ApplyDao extends ComnDao{
 		return null;
 	}
 	
+	
+	/**
+	 * 查询物资在某仓库的入库数量。
+	 * 
+	 */
+	public Integer queryPutinNumber(String  putin_storehouse_code,
+			Integer jy_material_id,Integer status) throws Exception{
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("putin_storehouse_code", putin_storehouse_code);
+		params.put("jy_material_id", jy_material_id);
+		params.put("status", status);
+		SqlResult rs =this.exeQuery("JY3001EQ004", params);
+		if(rs.next()){
+			return rs.getInteger("putin_number");
+		}
+		return null;
+	}
+	
+	/**
+	 * 查询物资在某仓库的出库数量。
+	 * 
+	 */
+	public Integer queryPutoutNumber(String  putout_storehouse_code,
+			Integer jy_material_id,Integer status) throws Exception{
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("putout_storehouse_code", putout_storehouse_code);
+		params.put("jy_material_id", jy_material_id);
+		params.put("status", status);
+		SqlResult rs =this.exeQuery("JY3001EQ005", params);
+		if(rs.next()){
+			return rs.getInteger("putout_number");
+		}
+		return null;
+	}
+	
+	
+	/**
+	 * 查询某个用户一个物资持有的总数。
+	 * 
+	 */
+	public Integer queryOwnNumber(
+			Integer jy_material_id,Integer status) throws Exception{
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("jy_material_id", jy_material_id);
+		params.put("status", status);
+		GlobalMessage.addMapSessionInfo(params);
+		SqlResult rs =this.exeQuery("JY3001EQ006", params);
+		if(rs.next()){
+			return rs.getInteger("apply_number");
+		}
+		return null;
+	}
+	
+	/**
+	 * 查询申请主表的状态
+	 * 
+	 */
+	public Integer queryApplyStatus(
+			Integer apply_id) throws Exception{
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", apply_id);
+		SqlResult rs =this.exeQuery("JY3001EQ007", params);
+		if(rs.next()){
+			return rs.getInteger("status");
+		}
+		return null;
+	}
 	
 	
 	/**
@@ -82,5 +149,15 @@ public class ApplyDao extends ComnDao{
 		this.exeUpdate("JY3001ED001", params);
 	}
 	
+	
+	/**
+	 * 删除物资主表
+	 * 
+	 */
+	public void deleteApply(Integer applyId) throws Exception{
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", applyId); 
+		this.exeUpdate("JY3001ED002", params);
+	}
 	
 }
