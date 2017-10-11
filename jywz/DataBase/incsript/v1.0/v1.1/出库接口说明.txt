@@ -1,7 +1,9 @@
-1、查询出库单信息列表。
+1、查询申请出库单信息列表。
 请求：
 http://localhost:8081/jywz/base/listquery.json
-{start:0,limit:10,exeid:'JY4001EQ002',putout_code:'SQ201710111950011'}
+{start:0,limit:10,exeid:'JY4001EQ002',putout_type:1,putout_code:'SQ201710111950011'}
+
+(必须参数)putout_type:1、申领出库，3、移库出库'
 
 响应：
 {"success":"true","returnmsg":"查询成功","returndata":
@@ -20,9 +22,8 @@ http://localhost:8081/jywz/base/infoquery.json
 3、查询一条出库单的物资明细信息。
 请求：
 http://localhost:8081/jywz/base/listquery.json
-{id:1,exeid:'JY3001EQ003'}
+{id:'1',exeid:'JY4001EQ003'}
 
 响应：
-{"success":"true","returnmsg":"查询成功","returndata":{"results":"3","rows":[{"jy_apply_id":"1","jy_material_id":"2","apply_number":"20","material_code":"WZ0","material_name":"大米","model":"101","supplier":"金龙鱼","material_type_code":"","material_type_name":""},{"jy_apply_id":"1","jy_material_id":"3","apply_number":"30","material_code":"WZ2","material_name":"大米","model":"101","supplier":"金龙鱼","material_type_code":"","material_type_name":""},{"jy_apply_id":"1","jy_material_id":"8","apply_number":"40","material_code":"WZ3","material_name":"fdsf","model":"fd","supplier":"fds","material_type_code":"002","material_type_name":"饮料"}]}}
-
-
+{"success":"true","returnmsg":"查询成功","returndata":
+{"results":"3","rows":[{"jy_storehouse_out_id":"1","jy_material_id":"2","putout_number":"20","material_code":"WZ0","material_name":"大米","model":"101","supplier":"金龙鱼","material_type_code":"","material_type_name":""},{"jy_storehouse_out_id":"1","jy_material_id":"3","putout_number":"30","material_code":"WZ2","material_name":"大米","model":"101","supplier":"金龙鱼","material_type_code":"","material_type_name":""},{"jy_storehouse_out_id":"1","jy_material_id":"8","putout_number":"80","material_code":"WZ3","material_name":"fdsf","model":"fd","supplier":"fds","material_type_code":"002","material_type_name":"饮料"}]}}

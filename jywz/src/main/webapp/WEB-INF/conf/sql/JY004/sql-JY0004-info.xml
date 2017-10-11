@@ -50,6 +50,10 @@
 			)
 			AND
 			(
+				t1.putout_type = $N{putout_type} 
+			)
+			AND
+			(
                 $ISNULL{putout_code}
                 OR t1.putout_code = $S{putout_code}
             ) 
