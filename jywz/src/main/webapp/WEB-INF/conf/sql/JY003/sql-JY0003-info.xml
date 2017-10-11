@@ -154,35 +154,16 @@
 				t1.review_user = $N{sys_user_id} or
 				t1.storehouse_user = $N{sys_user_id} 
 			)
-			and
+			AND
 			(
                 $ISNULL{apply_code}
                 OR t1.apply_code = $S{apply_code}
             ) 
-            and
+            AND
 			(
                 $ISNULL{id}
                 OR t1.id = $N{id}
             ) 
-            and
-			(
-                $ISNULL{status}
-                OR t1.status = $N{status}
-            )
-            and
-			 (
-               (
-               $ISNULL{putin_date_start}
-               or 
-               t1.apply_date > $S{putin_date_start}
-               )
-               and
-               (
-                $ISNULL{putin_date_end}
-                or
-                t1.apply_date < $S{putin_date_end}
-                )
-            )
 		]]></sql>
 	</sqlinfo>
 	
@@ -270,6 +251,52 @@
 				t1.id =$S{id};
 		]]></sql>
 	</sqlinfo>
+	
+	
+	
+	
+	
+	<sqlinfo sqlid="JY3001Q008">
+		<sqlname>查询申请物资明细申请信息查询</sqlname>
+		<sql><![CDATA[
+			SELECT
+				t0.id,
+				t0.apply_code,
+				t0.apply_date,
+				t0.apply_user,
+				u1.`name` apply_user_name,
+				t0.apply_storehouse_code,
+				p1.param_name apply_storehouse_name,
+			    t0.`status` applyStatus,
+				t1.jy_material_id,
+				t1.apply_number,
+				t2.`code` material_code,
+				t2.`name` material_name,
+				t2.model,
+				t2.supplier,
+				t3.`code` material_type_code,
+				t3.`name` material_type_name
+			FROM
+				jy_apply t0
+			LEFT JOIN jy_apply_detail t1 ON t0.id = t1.jy_apply_id
+			LEFT JOIN jy_material t2 ON t1.jy_material_id = t2.id
+			LEFT JOIN jy_material_type t3 ON t2.jy_material_type_id = t3.id
+			LEFT JOIN jy_user u1 ON t0.apply_user = u1.id
+			LEFT JOIN jy_params p1 ON t0.apply_storehouse_code = p1.param_code
+			WHERE
+				(
+	                $ISNULL{apply_storehouse_code}
+	                OR t0.apply_storehouse_code = $S{apply_storehouse_code}
+	            ) and
+					(
+	                $ISNULL{apply_user_name}
+	                OR u1.name like '%$U{apply_user_name}%'
+	            ) 
+	            
+            
+		]]></sql>
+	</sqlinfo>
+	
 	
 	
 	
