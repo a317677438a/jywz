@@ -81,7 +81,7 @@
 			FROM jy_user t  
 			WHERE ($isnull{id} or t.id=$n{id}) 
 			AND ($isnull{loginname} OR t.loginname LIKE  '%$U{loginname}%')
-			AND ($isnull{role} OR t.id=$S{role})
+			AND ($isnull{role} OR t.role=$S{role})
 			AND ($isnull{organize_code} OR t.organize_code=$S{organize_code})
 			AND ($isnull{code} OR t.code LIKE  '%$U{code}%')
 			AND ($isnull{name} OR t.name LIKE  '%$U{name}%')
