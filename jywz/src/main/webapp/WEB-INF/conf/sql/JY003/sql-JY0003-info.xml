@@ -86,6 +86,29 @@
 	</sqlinfo>
 	
 	
+	<sqlinfo sqlid="JY3001U005">
+		<sqlname>修改申请单状态信息</sqlname>
+		<sql><![CDATA[
+		UPDATE jy_apply
+		SET 
+		status = $N{status}
+		WHERE
+			id = $N{id};
+		]]></sql>
+	</sqlinfo>
+	
+	<sqlinfo sqlid="JY3001U006">
+		<sqlname>接收申请单状态信息</sqlname>
+		<sql><![CDATA[
+		UPDATE jy_apply
+		SET 
+		status = $N{status},
+		out_date = $S{SYSDATE}
+		WHERE
+			id = $N{id};
+		]]></sql>
+	</sqlinfo>
+	
 	<sqlinfo sqlid="JY3001Q001">
 		<sqlname>查询新增申请基本信息的id</sqlname>
 		<sql><![CDATA[
@@ -97,7 +120,6 @@
 				apply_code =$S{apply_code};
 		]]></sql>
 	</sqlinfo>
-	
 	
 	<sqlinfo sqlid="JY3001Q002">
 		<sqlname>查询当前用户的申请信息</sqlname>
@@ -113,6 +135,7 @@
 			t1.review_date,
 			t1.review_remark,
 			t1.storehouse_user,
+			t1.out_date,
 			t4.`name` storehouse_user_name,
 			t1.apply_storehouse_code,
 			t1. STATUS,
@@ -228,6 +251,7 @@
 				t1.id =$S{id};
 		]]></sql>
 	</sqlinfo>
+	
 	
 	
 	<sqlinfo sqlid="JY3001D001">

@@ -5,6 +5,7 @@ import java.net.UnknownHostException;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.text.StyledEditorKit.BoldAction;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -69,6 +70,22 @@ public class LoginManangerBiz {
 		return userInfo;
 		
 	}
+	
+	public Integer checkUserLoginInfo(UserLoginInfo userLoginInfo )
+			throws KPromptException , Exception {
+		//对用户名和密码验证。
+		UserLoginInfo userInfo = loginManangerDao.queryUserByLoginname(userLoginInfo.getLoginname());
+		if(userInfo==null || userInfo.getId()==null){
+			throw new KPromptException("请输入正确的用户名或密码！");
+		}else{
+			if(!userInfo.getPasswd().equals(userLoginInfo.getPasswd())){
+				//登录密码密码错误
+				throw new KPromptException("密码错误！请输入正确的密码！");
+			}
+		}
+		return userInfo.getId();
+	}
+	
 	
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void logout()

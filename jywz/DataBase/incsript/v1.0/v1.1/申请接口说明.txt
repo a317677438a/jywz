@@ -105,3 +105,18 @@ http://localhost:8081/jywz/apply/materialOwnNumber.json
 响应：
 {"success":"true","returnmsg":"删除成功","returndata":{}}
 
+9、物资接收
+请求：
+http://localhost:8081/jywz/apply/receiveApplyMaterial.json
+{
+"loginname":"test01",
+passwd:'123456',
+id:7,
+status:4
+}
+
+响应：
+{"success":"true","returnmsg":"操作成功","returndata":{}}
+
+
+

@@ -16,14 +16,19 @@ import xft.workbench.backstage.apply.model.Apply;
 import xft.workbench.backstage.apply.model.ApplyDetail;
 import xft.workbench.backstage.base.action.ABSBaseController;
 import xft.workbench.backstage.base.util.GlobalMessage;
+import xft.workbench.backstage.base.util.MD5Util;
 import xft.workbench.backstage.base.util.ObjectMapUtil;
 import xft.workbench.backstage.stock.model.Stock;
+import xft.workbench.backstage.user.biz.LoginManangerBiz;
 import xft.workbench.backstage.user.model.UserLoginInfo;
 @Controller
 public class ApplyAction extends ABSBaseController{
 
 	@Autowired 
 	private ApplyBiz applyBiz;
+	
+	@Autowired 
+	private LoginManangerBiz loginManangerBiz;
 	
 	@RequestMapping(value = "/apply/addApply.json")
 	public  @ResponseBody String  addApply(){
@@ -129,5 +134,29 @@ public class ApplyAction extends ABSBaseController{
 		}
 		return this.updateReturnJson(true, "删除成功", null);
 	}
+	
+	@RequestMapping(value = "/apply/receiveApplyMaterial.json")
+	public  @ResponseBody String  receiveApplyMaterial(){
+		Map<String, Object> params = null; 
+		try {
+			params = this.getRequestParams();
+			
+			UserLoginInfo userLoginInfo = new UserLoginInfo();
+			userLoginInfo.setLoginname(params.get("loginname").toString());
+			userLoginInfo.setPasswd(MD5Util.toMD5(params.get("loginname").toString() + params.get("passwd").toString()));
+			Integer checkUserId= loginManangerBiz.checkUserLoginInfo(userLoginInfo);
+			
+			Integer applyId = Integer.valueOf((String)params.get("id"));
+			Integer applyStatus = Integer.valueOf((String)params.get("status"));//2、审批拒绝,4、已领用
+			applyBiz.receiveApplyMaterial(applyId, applyStatus, checkUserId);
+			
+		} catch (Exception e) {// 获取返回提示的错误
+			return this.updateErrorJson(e);
+		}
+		return this.updateReturnJson(true, "操作成功", null);
+	}
+	
+	
+	
 	
 }

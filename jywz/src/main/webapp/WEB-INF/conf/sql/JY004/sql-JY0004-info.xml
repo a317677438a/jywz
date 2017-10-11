@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlinfos SYSTEM "../../dtd/sql-info.dtd">
+
+<sqlinfos>
+
+	<sqlinfo sqlid="JY4001Q001">
+		<sqlname>查询物资出库信息主表id，通过出库单号</sqlname>
+		<sql><![CDATA[
+		SELECT
+				id
+			FROM
+				jy_storehouse_out
+			WHERE
+				putout_code =$S{putout_code};
+		]]></sql>
+	</sqlinfo>
+	
+	
+	<sqlinfo sqlid="JY4001U001">
+		<sqlname>生成出库单主表</sqlname>
+		<sql><![CDATA[
+		INSERT INTO jy_storehouse_out (
+			putout_code,
+			putout_type,
+			putout_user,
+			putout_date,
+			putout_storehouse_code,
+			apply_user,
+			putin_storehouse_code,
+			status,
+			remark,
+			inputuser,
+			crt_date,
+			crt_time
+		) VALUES
+		(
+			$S{putout_code},
+			$N{putout_type},
+			$N{putout_user},
+			$S{SYSDATE},
+			$S{putout_storehouse_code},
+			$N{apply_user},
+			$S{putin_storehouse_code},
+			$N{status},
+			$S{remark},
+			$N{sys_user_id},
+			$S{SYSDATE},
+			$S{SYSTIME}
+		);
+		
+		]]></sql>
+	</sqlinfo>
+	
+	
+	
+	<sqlinfo sqlid="JY4001U002">
+		<sqlname>生成出库单明细表</sqlname>
+		<sql><![CDATA[
+		INSERT INTO jy_storehouse_out_detail (
+			jy_storehouse_out_id,
+			jy_material_id,
+			putout_number
+		) VALUES
+		(
+			$N{jy_storehouse_out_id},
+			$N{jy_material_id},
+			$N{putout_number}
+		);
+		]]></sql>
+	</sqlinfo>
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+</sqlinfos>

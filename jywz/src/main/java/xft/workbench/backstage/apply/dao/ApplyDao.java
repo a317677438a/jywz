@@ -1,6 +1,8 @@
 package xft.workbench.backstage.apply.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
@@ -15,6 +17,44 @@ import com.kayak.web.base.sql.SqlResult;
 
 @Repository
 public class ApplyDao extends ComnDao{
+	
+	
+	/**
+	 * 查询一条申请信息
+	 * 
+	 */
+	public Apply queryApplyByid(Integer applyId) throws Exception{
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", applyId);
+		GlobalMessage.addMapSessionInfo(params);
+		SqlResult sr =this.exeQuery("JY3001EQ002", params);
+		
+		Apply apply = new Apply();
+		apply=(Apply)ObjectMapUtil.sqlResultToObject(sr, apply);
+		return apply;
+	}
+	
+	
+	/**
+	 * 查询一条申请主表的明细信息
+	 * 
+	 */
+	public List<ApplyDetail> queryApplyDetailByid(Integer applyId) throws Exception{
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", applyId);
+		SqlResult sr =this.exeQuery("JY3001EQ002", params);
+		
+		List<ApplyDetail> results= new ArrayList<ApplyDetail>();
+		while (sr.next()) {
+			ApplyDetail detail = new ApplyDetail();
+			detail=(ApplyDetail)ObjectMapUtil.sqlResultToObject(sr, detail);
+			results.add(detail);
+		}
+		
+		return results;
+	}
+	
+	
 	/**
 	 * 新增申请--基础信息
 	 * 
@@ -136,6 +176,30 @@ public class ApplyDao extends ComnDao{
 	public void reviewApply(Apply apply) throws Exception{
 		Map<String, Object> params = ObjectMapUtil.getFieldVlaue2(apply);
 		this.exeUpdate("JY3001EU004", params);
+	}
+	
+	
+	/**
+	 * 修改申请单状态信息
+	 * 
+	 */
+	public void modifyApplyStatus(Integer applyId,Integer status) throws Exception{
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", applyId); 
+		params.put("status", status); 
+		this.exeUpdate("JY3001EU005", params);
+	}
+	
+	
+	/**
+	 * 修改申请单状态信息
+	 * 
+	 */
+	public void modifyApplyReceive(Integer applyId,Integer status) throws Exception{
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", applyId); 
+		params.put("status", status); 
+		this.exeUpdate("JY3001EU006", params);
 	}
 	
 	

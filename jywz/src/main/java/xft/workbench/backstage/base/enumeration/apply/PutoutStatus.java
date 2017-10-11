@@ -15,7 +15,7 @@ public enum PutoutStatus {
 	wait(1),
 	
 	@EnumValue("2")
-	@EnumDesc("合格在库")
+	@EnumDesc("确认出库")
 	ok(2);
 	
 	private Integer value;

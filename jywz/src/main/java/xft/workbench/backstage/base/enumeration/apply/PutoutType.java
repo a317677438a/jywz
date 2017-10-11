@@ -8,15 +8,15 @@ import xft.workbench.backstage.base.annotation.EnumValue;
  * @author pl
  *
  */
-public enum PutinStatus {
+public enum PutoutType {
 
 	@EnumValue("1")
-	@EnumDesc("待确认")
-	wait(1),
+	@EnumDesc("申领出库")
+	apply(1),
 	
-	@EnumValue("2")
-	@EnumDesc("合格在库")
-	ok(2);
+	@EnumValue("3")
+	@EnumDesc("移库出库")
+	transfer(3);
 	
 	private Integer value;
 	
@@ -24,7 +24,7 @@ public enum PutinStatus {
 		return this.value;
 	}
 	
-	PutinStatus(Integer value){
+	PutoutType(Integer value){
 		this.value = value;
 	}
 }
