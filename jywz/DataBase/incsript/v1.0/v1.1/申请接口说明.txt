@@ -112,7 +112,7 @@ http://localhost:8081/jywz/apply/receiveApplyMaterial.json
 "loginname":"test01",
 passwd:'123456',
 id:7,
-status:4
+status:4 //2、拒绝  4、已领用
 }
 
 响应：
