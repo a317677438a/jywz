@@ -15,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import xft.workbench.backstage.base.util.GlobalMessage;
+
 import com.kayak.web.base.service.abs.ComnServiceAbstract;
 import com.kayak.web.base.sql.SqlResult;
 import com.kayak.web.base.system.KResult;
@@ -40,6 +42,7 @@ public class PublicQueryAction extends ABSBaseController {
 				map.put("start", Double.valueOf(map.get("start").toString()).intValue());
 				map.put("limit", Double.valueOf(map.get("limit").toString()).intValue());
 			}
+			GlobalMessage.addMapSessionInfo(map);
 			KResult result = comnService.comnQuery(map);
 			return this.updateReturnJson(true, "查询成功", RequestSupport.result2JsonList(result));
 		} catch (Exception e) {
@@ -59,6 +62,7 @@ public class PublicQueryAction extends ABSBaseController {
 		try {
 			//得到查询后结果集
 			Map<String, Object> map = this.getRequestParams();
+			GlobalMessage.addMapSessionInfo(map);
 			SqlResult sr=comnService.getComnDao().query(map);
 			
 			//将结果集mapping to HashMap

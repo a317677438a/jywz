@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlinfos SYSTEM "../../dtd/sql-info.dtd">
+
+<sqlinfos>
+
+	<sqlinfo sqlid="JY3001U001">
+		<sqlname>新增申请基本信息</sqlname>
+		<sql><![CDATA[
+			INSERT INTO jy_apply (
+			    apply_code,
+				apply_user,
+				apply_date,
+				review_user,
+				storehouse_user,
+				apply_storehouse_code,
+				status,
+				remark,
+				inputuser,
+				crt_date,
+				crt_time
+			)
+			VALUES
+			(
+				$S{apply_code},
+				$N{sys_user_id},
+				$S{apply_date},
+				$N{review_user},
+				$N{storehouse_user},
+				$S{apply_storehouse_code},
+				$N{status},
+				$S{remark},
+				$N{sys_user_id},
+				$S{SYSDATE},
+				$S{SYSTIME}
+			);
+		]]></sql>
+	</sqlinfo>
+	
+	
+	<sqlinfo sqlid="JY3001U002">
+		<sqlname>新增申请基本信息</sqlname>
+		<sql><![CDATA[
+			INSERT INTO jy_apply_detail (
+			jy_apply_id,
+			jy_material_id,
+			apply_number
+		)
+		VALUES
+		(
+			$N{jy_apply_id},
+			$N{jy_material_id},
+			$N{apply_number}
+		);
+		]]></sql>
+	</sqlinfo>
+	
+	
+	
+	<sqlinfo sqlid="JY3001U003">
+		<sqlname>修改申请单信息</sqlname>
+		<sql><![CDATA[
+		UPDATE jy_apply
+		SET 
+		apply_date = $S{apply_date}, 
+		review_user = $N{review_user}, 
+		storehouse_user = $N{storehouse_user}, 
+		apply_storehouse_code = $S{apply_storehouse_code}, 
+		remark = $S{remark}
+		WHERE
+			id = $N{id};
+		]]></sql>
+	</sqlinfo>
+	
+	
+	<sqlinfo sqlid="JY3001U004">
+		<sqlname>领导审核修改申请单信息</sqlname>
+		<sql><![CDATA[
+		UPDATE jy_apply
+		SET 
+		status = $N{status}, 
+		review_date = $S{review_date}, 
+		review_remark = $S{review_remark}
+		WHERE
+			id = $N{id};
+		]]></sql>
+	</sqlinfo>
+	
+	
+	<sqlinfo sqlid="JY3001Q001">
+		<sqlname>查询新增申请基本信息的id</sqlname>
+		<sql><![CDATA[
+		SELECT
+				id
+			FROM
+				jy_apply
+			WHERE
+				apply_code =$S{apply_code};
+		]]></sql>
+	</sqlinfo>
+	
+	
+	<sqlinfo sqlid="JY3001Q002">
+		<sqlname>查询当前用户的申请信息</sqlname>
+		<sql><![CDATA[
+		SELECT
+			t1.id,
+			t1.apply_code,
+			t1.apply_user,
+			t2.`name` apply_user_name,
+			t1.apply_date,
+			t1.review_user,
+			t3.`name` review_user_namw,
+			t1.review_date,
+			t1.review_remark,
+			t1.storehouse_user,
+			t4.`name` storehouse_user_namw,
+			t1.apply_storehouse_code,
+			t1. STATUS,
+			t1.remark,
+			t1.inputuser,
+			t1.crt_date,
+			t1.crt_time
+		FROM
+			jy_apply t1
+		LEFT JOIN jy_user t2 ON t1.apply_user = t2.id
+		LEFT JOIN jy_user t3 ON t1.review_user = t3.id
+		LEFT JOIN jy_user t4 ON t1.storehouse_user = t4.id
+		WHERE
+			(
+				t1.apply_user = $N{sys_user_id} or
+				t1.review_user = $N{sys_user_id} or
+				t1.storehouse_user = $N{sys_user_id} 
+			)
+			AND
+			(
+                $ISNULL{apply_code}
+                OR t1.apply_code = $S{apply_code}
+            ) 
+            AND
+			(
+                $ISNULL{id}
+                OR t1.id = $N{id}
+            ) 
+		]]></sql>
+	</sqlinfo>
+	
+	
+	
+	<sqlinfo sqlid="JY3001Q003">
+		<sqlname>查询申请物资明细信息通过主表id</sqlname>
+		<sql><![CDATA[
+			SELECT
+				t1.jy_apply_id,
+				t1.jy_material_id,
+				t1.apply_number,
+				t2.`code` material_code,
+				t2.`name` material_name,
+				t2.model,
+				t2.supplier,
+				t3.`code` material_type_code,
+				t3.`name` material_type_name
+			FROM
+				jy_apply_detail t1
+			LEFT JOIN jy_material t2 ON t1.jy_material_id = t2.id
+			LEFT JOIN jy_material_type t3 ON t2.jy_material_type_id = t3.id
+			WHERE
+				jy_apply_id = $N{id};
+		]]></sql>
+	</sqlinfo>
+	
+	
+	<sqlinfo sqlid="JY3001D001">
+		<sqlname>删除申请物资明细</sqlname>
+		<sql><![CDATA[
+			DELETE FROM jy_apply_detail where jy_apply_id = $N{id}
+		]]></sql>
+	</sqlinfo>
+	
+	
+	
+</sqlinfos>

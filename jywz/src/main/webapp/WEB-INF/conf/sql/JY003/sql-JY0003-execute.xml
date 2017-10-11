@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlexecutes SYSTEM "../../dtd/sql-execute.dtd">
+<sqlexecutes>
+
+	<sqlexecute exeid="JY3001EU001" datasource="dsSys">
+		<exename>新增申请基本信息</exename>
+		<sqlids>JY3001U001</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY3001EU002" datasource="dsSys">
+		<exename>新增申请明细信息</exename>
+		<sqlids>JY3001U002</sqlids>
+	</sqlexecute>
+	
+	
+	<sqlexecute exeid="JY3001EU003" datasource="dsSys">
+		<exename>修改申请信息</exename>
+		<sqlids>JY3001U003</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY3001EU004" datasource="dsSys">
+		<exename>领导审核修改申请单信息</exename>
+		<sqlids>JY3001U004</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY3001EQ001" datasource="dsSys">
+		<exename>查询新增申请基本信息的id</exename>
+		<sqlids>JY3001Q001</sqlids>
+	</sqlexecute>
+	
+	
+	<sqlexecute exeid="JY3001EQ002" datasource="dsSys">
+		<exename>查询当前用户的申请信息</exename>
+		<sqlids>JY3001Q002</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY3001EQ003" datasource="dsSys">
+		<exename>查询申请物资明细信息通过主表id</exename>
+		<sqlids>JY3001Q003</sqlids>
+	</sqlexecute>
+	
+	
+	
+	<sqlexecute exeid="JY3001ED001" datasource="dsSys">
+		<exename>删除申请物资明细</exename>
+		<sqlids>JY3001D001</sqlids>
+	</sqlexecute>
+	
+	
+</sqlexecutes>
