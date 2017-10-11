@@ -4,7 +4,8 @@ http://localhost:8081/jywz/base/listquery.json
 {start:0,limit:10,exeid:'JY3001EQ002'}
 
 响应：
-{"success":"true","returnmsg":"查询成功","returndata":{"results":"1","rows":[{"id":"1","apply_code":"SQ20171011195002","apply_user":"1","apply_user_name":"cc","apply_date":"20171011","review_user":"1","review_user_namw":"cc","review_date":"20171011","review_remark":"审核备注","storehouse_user":"1","storehouse_user_namw":"cc","apply_storehouse_code":"storehouse01","status":"1","remark":"申请备注","inputuser":"","crt_date":"","crt_time":""}]}}
+{"success":"true","returnmsg":"查询成功","returndata":{"results":"1","rows":[
+{"id":"1","apply_code":"SQ20171011195002","apply_user":"1","apply_user_name":"cc","apply_date":"20171011","review_user":"1","review_user_name":"cc","review_date":"20171011","review_remark":"审核备注","storehouse_user":"1","storehouse_user_name":"cc","apply_storehouse_code":"storehouse01","status":"1","remark":"申请备注","inputuser":"","crt_date":"","crt_time":""}]}}
 
 
 2、查询一条申请单信息。
