@@ -157,12 +157,31 @@
 			AND
 			(
                 $ISNULL{apply_code}
-                OR t1.apply_code = $S{apply_code}
+                OR t1.apply_code like '%$U{apply_code}%'
             ) 
             AND
 			(
                 $ISNULL{id}
                 OR t1.id = $N{id}
+            ) 
+            AND
+			(
+                $ISNULL{status}
+                OR t1.status = $N{status}
+            ) 
+            AND
+			(
+               (
+               $ISNULL{putin_date_start}
+               or 
+               t1.review_date > $S{putin_date_start}
+               )
+               and
+               (
+                $ISNULL{putin_date_end}
+                or
+                t1.review_date < $S{putin_date_end}
+                )
             ) 
 		]]></sql>
 	</sqlinfo>
@@ -176,12 +195,12 @@
 				t1.jy_apply_id,
 				t1.jy_material_id,
 				t1.apply_number,
-				t2.`code` material_code,
-				t2.`name` material_name,
+				t2.`code` code,
+				t2.`name` name,
 				t2.model,
 				t2.supplier,
 				t3.`code` material_type_code,
-				t3.`name` material_type_name
+				t3.`name` codename
 			FROM
 				jy_apply_detail t1
 			LEFT JOIN jy_material t2 ON t1.jy_material_id = t2.id

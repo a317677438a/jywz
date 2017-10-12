@@ -59,6 +59,25 @@
             ) 
             AND
 			(
+                $ISNULL{status}
+                OR t1.status = $N{status}
+            )
+            AND
+			(
+               (
+               $ISNULL{putin_date_start}
+               or 
+               t1.putout_date > $S{putin_date_start}
+               )
+               and
+               (
+                $ISNULL{putin_date_end}
+                or
+                t1.putout_date < $S{putin_date_end}
+                )
+            )  
+            AND
+			(
                 $ISNULL{id}
                 OR t1.id = $N{id}
             ) 

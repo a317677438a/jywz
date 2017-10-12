@@ -68,7 +68,7 @@ public class ApplyBiz {
 	
 	public void reviewApply(Apply apply) throws Exception{
 		//同意或拒绝
-		applyDao.addApply(apply);
+		applyDao.reviewApply(apply);
 	}
 	
 	
