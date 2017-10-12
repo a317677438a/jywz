@@ -72,4 +72,9 @@
 		<sqlids>JY2001Q008</sqlids>
 	</sqlexecute>
 	
+	<sqlexecute exeid="JY2001EQ009" datasource="dsSys">
+		<exename>查询物资入库统计查询</exename>
+		<sqlids>JY2001Q009</sqlids>
+	</sqlexecute>
+	
 </sqlexecutes>

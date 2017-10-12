@@ -307,6 +307,38 @@
 	</sqlinfo>
 	
 	
+	<sqlinfo sqlid="JY3001Q009">
+		<sqlname>查询某个用户使用的某个物资的总数</sqlname>
+		<sql><![CDATA[
+			SELECT
+				SUM(t1.use_number) use_number
+			FROM
+				jy_material_use t1
+			WHERE
+				t1.jy_material_id = $N{jy_material_id}
+			AND t1.`status` = $N{status}
+			AND t1.use_user = $N{sys_user_id};
+		]]></sql>
+	</sqlinfo>
+	
+	
+	
+	<sqlinfo sqlid="JY3001Q010">
+		<sqlname>查询某个用户退回的某个物资的总数</sqlname>
+		<sql><![CDATA[
+			SELECT
+				SUM(t2.putin_number) putin_number
+			FROM
+				jy_storehouse_in t1
+			LEFT JOIN jy_storehouse_in_detail t2 ON t1.id = t2.jy_storehouse_in_id
+			WHERE
+				t2.jy_material_id = $N{jy_material_id}
+			AND t1.`status` = $N{status}
+			AND t1.cancel_user = $N{sys_user_id};
+		]]></sql>
+	</sqlinfo>
+	
+	
 	
 	
 	<sqlinfo sqlid="JY3001D001">

@@ -116,10 +116,10 @@ public class ApplyDao extends ComnDao{
 	
 	
 	/**
-	 * 查询某个用户一个物资持有的总数。
+	 * 查询某个用户一个物资申请的总数。
 	 * 
 	 */
-	public Integer queryOwnNumber(
+	public Integer queryApplyNumber(
 			Integer jy_material_id,Integer status) throws Exception{
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("jy_material_id", jy_material_id);
@@ -131,6 +131,44 @@ public class ApplyDao extends ComnDao{
 		}
 		return null;
 	}
+	
+	
+	/**
+	 * 查询某个用户使用的某个物资的总数
+	 * 
+	 */
+	public Integer queryUseNumber(
+			Integer jy_material_id,Integer status) throws Exception{
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("jy_material_id", jy_material_id);
+		params.put("status", status);
+		GlobalMessage.addMapSessionInfo(params);
+		SqlResult rs =this.exeQuery("JY3001EQ009", params);
+		if(rs.next()){
+			return rs.getInteger("use_number");
+		}
+		return null;
+	}
+	
+	
+	/**
+	 * 查询某个用户退回的某个物资的总数
+	 * 
+	 */
+	public Integer queryBackNumber(
+			Integer jy_material_id,Integer status) throws Exception{
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("jy_material_id", jy_material_id);
+		params.put("status", status);
+		GlobalMessage.addMapSessionInfo(params);
+		SqlResult rs =this.exeQuery("JY3001EQ010", params);
+		if(rs.next()){
+			return rs.getInteger("putin_number");
+		}
+		return null;
+	}
+	
+	
 	
 	/**
 	 * 查询申请主表的状态

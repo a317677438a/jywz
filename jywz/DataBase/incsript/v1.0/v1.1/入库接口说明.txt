@@ -1,0 +1,13 @@
+1、入库单物资查询统计。
+请求：
+http://localhost:8081/jywz/base/listquery.json
+{start:0,limit:10,exeid:'JY2001EQ009',
+putin_storehouse_code:'storehouse03',
+putin_code:'CG20171008081009',
+putin_user_name:'c'
+}
+
+响应：
+{"success":"true","returnmsg":"查询成功","returndata":
+{"results":"2","rows":[
+{"id":"3","putin_type":"1","putin_code":"CG20171008081009","putin_user":"1","putin_user_name":"cc","putin_date":"20171019","putin_storehouse_code":"storehouse03","putin_storehouse_name":"仓库03","putinstatus":"2","jy_material_id":"2","putin_number":"123","material_code":"WZ0","material_name":"大米","model":"101","supplier":"金龙鱼","material_type_code":"","material_type_name":""},{"id":"3","putin_type":"1","putin_code":"CG20171008081009","putin_user":"1","putin_user_name":"cc","putin_date":"20171019","putin_storehouse_code":"storehouse03","putin_storehouse_name":"仓库03","putinstatus":"2","jy_material_id":"8","putin_number":"342","material_code":"WZ3","material_name":"fdsf","model":"fd","supplier":"fds","material_type_code":"002","material_type_name":"饮料"}]}}

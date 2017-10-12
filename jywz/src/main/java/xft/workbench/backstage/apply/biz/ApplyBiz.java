@@ -16,6 +16,7 @@ import xft.workbench.backstage.base.enumeration.apply.ApplyStatus;
 import xft.workbench.backstage.base.enumeration.apply.PutinStatus;
 import xft.workbench.backstage.base.enumeration.apply.PutoutStatus;
 import xft.workbench.backstage.base.enumeration.apply.PutoutType;
+import xft.workbench.backstage.base.enumeration.apply.UseStatus;
 import xft.workbench.backstage.storehouseout.dao.StorehoseoutDao;
 import xft.workbench.backstage.storehouseout.model.Storehoseout;
 import xft.workbench.backstage.storehouseout.model.StorehoseoutDetail;
@@ -81,12 +82,17 @@ public class ApplyBiz {
 		return putinNumber-putoutNumber;
 	}
 	
+	
 	public Integer queryMaterialOwnNumber(Integer material_id) throws Exception{
-		//查询当前用户一个物资持有的总数。
-		Integer number = applyDao.queryOwnNumber(material_id, ApplyStatus.receive.getValue());
-		if(number==null) number=0;
-		return number;
+		//查询当前用户一个物资持有的总数=申请物资-使用数据-退回数量。
+		Integer applyNumber = applyDao.queryApplyNumber(material_id, ApplyStatus.receive.getValue());
+		if(applyNumber==null) applyNumber=0;
+		Integer useNumber = applyDao.queryUseNumber(material_id, UseStatus.use.getValue());
+		if(useNumber==null) useNumber=0;
+		Integer backNumber = applyDao.queryBackNumber(material_id, PutinStatus.ok.getValue());
+		return applyNumber-useNumber-backNumber;
 	}
+	
 	
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	public void deleteApply(Integer applyId) throws Exception{

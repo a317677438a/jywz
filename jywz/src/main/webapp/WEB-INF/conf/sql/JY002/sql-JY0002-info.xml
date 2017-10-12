@@ -165,6 +165,9 @@
 		]]></sql>
 	</sqlinfo>
 	
+	
+	
+	
 	<sqlinfo sqlid="JY2001D001">
 		<sqlname>删除入库单</sqlname>
 		<sql><![CDATA[
@@ -278,5 +281,70 @@
 		]]>
 		</sql>
 	</sqlinfo>
+	
+	
+	
+	<sqlinfo sqlid="JY2001Q009">
+		<sqlname>查询物资入库统计查询</sqlname>
+		<sql><![CDATA[
+			SELECT
+				t0.id,
+				t0.putin_type,
+				t0.putin_code,
+				t0.putin_user,
+				u1.`name` putin_user_name,
+				t0.putin_date,
+				t0.putin_storehouse_code,
+				p1.param_name putin_storehouse_name,
+				t0.`status` putinStatus,
+				t1.jy_material_id,
+				t1.putin_number,
+				t2.`code` material_code,
+				t2.`name` material_name,
+				t2.model,
+				t2.supplier,
+				t3.`code` material_type_code,
+				t3.`name` material_type_name
+			FROM
+				jy_storehouse_in t0
+			LEFT JOIN jy_storehouse_in_detail t1 ON t0.id = t1.jy_storehouse_in_id
+			LEFT JOIN jy_material t2 ON t1.jy_material_id = t2.id
+			LEFT JOIN jy_material_type t3 ON t2.jy_material_type_id = t3.id
+			LEFT JOIN jy_user u1 ON t0.putin_user = u1.id
+			LEFT JOIN jy_params p1 ON t0.putin_storehouse_code = p1.param_code
+				WHERE
+				(
+	                t0.putin_user = $N{sys_user_id}
+	            ) 
+	            and
+				(
+	                $ISNULL{putin_storehouse_code}
+	                OR t0.putin_storehouse_code = $S{putin_storehouse_code}
+	            ) 
+	            and
+				(
+	                $ISNULL{putin_user_name}
+	                OR u1.name like '%$U{putin_user_name}%'
+	            ) 
+	            and
+				(
+	                $ISNULL{putin_code}
+	                OR t0.putin_code = $S{putin_code}
+	            ) 
+		]]></sql>
+	</sqlinfo>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 </sqlinfos>

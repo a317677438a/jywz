@@ -83,6 +83,16 @@
 		<sqlids>JY3001Q008</sqlids>
 	</sqlexecute>
 	
+	<sqlexecute exeid="JY3001EQ009" datasource="dsSys">
+		<exename>查询某个用户使用的某个物资的总数</exename>
+		<sqlids>JY3001Q009</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY3001EQ010" datasource="dsSys">
+		<exename>查询某个用户退回的某个物资的总数</exename>
+		<sqlids>JY3001Q010</sqlids>
+	</sqlexecute>
+	
 	
 	<sqlexecute exeid="JY3001ED001" datasource="dsSys">
 		<exename>删除申请物资明细</exename>
