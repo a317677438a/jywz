@@ -6,7 +6,6 @@ import org.json.JSONObject;
 
 import xft.workbench.backstage.base.annotation.EnumDesc;
 import xft.workbench.backstage.base.annotation.EnumValue;
-import xft.workbench.backstage.base.enumeration.asset.LoanStatusEnum;
 
 public class EnumUtil {
     public static JSONObject enumToJSON(String enumClassName) {

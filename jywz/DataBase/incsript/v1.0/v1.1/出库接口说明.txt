@@ -41,4 +41,24 @@ putout_user_name:'c'
 
 响应：
 {"success":"true","returnmsg":"查询成功","returndata":
-{"results":"3","rows":[{"id":"1","putout_type":"1","putout_code":"SQ201710111950888","putout_user":"1","putout_user_name":"cc","putout_date":"","apply_user":"1","apply_user_name":"cc","putout_storehouse_code":"storehouse01","putout_storehouse_name":"仓库01","putin_storehouse_code":"","putin_storehouse_name":"","putoutstatus":"2","jy_material_id":"2","putout_number":"20","material_code":"WZ0","material_name":"大米","model":"101","supplier":"金龙鱼","material_type_code":"","material_type_name":""},{"id":"1","putout_type":"1","putout_code":"SQ201710111950888","putout_user":"1","putout_user_name":"cc","putout_date":"","apply_user":"1","apply_user_name":"cc","putout_storehouse_code":"storehouse01","putout_storehouse_name":"仓库01","putin_storehouse_code":"","putin_storehouse_name":"","putoutstatus":"2","jy_material_id":"3","putout_number":"30","material_code":"WZ2","material_name":"大米","model":"101","supplier":"金龙鱼","material_type_code":"","material_type_name":""},{"id":"1","putout_type":"1","putout_code":"SQ201710111950888","putout_user":"1","putout_user_name":"cc","putout_date":"","apply_user":"1","apply_user_name":"cc","putout_storehouse_code":"storehouse01","putout_storehouse_name":"仓库01","putin_storehouse_code":"","putin_storehouse_name":"","putoutstatus":"2","jy_material_id":"8","putout_number":"80","material_code":"WZ3","material_name":"fdsf","model":"fd","supplier":"fds","material_type_code":"002","material_type_name":"饮料"}]}}
+{"results":"3","rows":[
+{"id":"1","putout_type":"1","putout_code":"SQ201710111950888","putout_user":"1",
+"putout_user_name":"cc","putout_date":"","apply_user":"1","apply_user_name":"cc",
+"putout_storehouse_code":"storehouse01","putout_storehouse_name":"仓库01",
+"putin_storehouse_code":"","putin_storehouse_name":"","putoutstatus":"2",
+"jy_material_id":"2","putout_number":"20","material_code":"WZ0","material_name":"大米",
+"model":"101","supplier":"金龙鱼","material_type_code":"","material_type_name":""},
+{"id":"1","putout_type":"1","putout_code":"SQ201710111950888","putout_user":"1","putout_user_name":"cc","putout_date":"","apply_user":"1","apply_user_name":"cc","putout_storehouse_code":"storehouse01","putout_storehouse_name":"仓库01","putin_storehouse_code":"","putin_storehouse_name":"","putoutstatus":"2","jy_material_id":"3","putout_number":"30","material_code":"WZ2","material_name":"大米","model":"101","supplier":"金龙鱼","material_type_code":"","material_type_name":""},{"id":"1","putout_type":"1","putout_code":"SQ201710111950888","putout_user":"1","putout_user_name":"cc","putout_date":"","apply_user":"1","apply_user_name":"cc","putout_storehouse_code":"storehouse01","putout_storehouse_name":"仓库01","putin_storehouse_code":"","putin_storehouse_name":"","putoutstatus":"2","jy_material_id":"8","putout_number":"80","material_code":"WZ3","material_name":"fdsf","model":"fd","supplier":"fds","material_type_code":"002","material_type_name":"饮料"}]}}
+
+
+4、出库单明细下载。
+请求：
+http://localhost:8081/jywz/storehouseout/downloadDetail.json
+{exeid:'JY4001EQ004',
+putout_storehouse_code:'storehouse01',
+putout_code:'SQ201710111950888',
+putout_user_name:'c'
+}
+响应：
+？？？？？？
+
