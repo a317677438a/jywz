@@ -321,6 +321,18 @@
 	                $ISNULL{apply_code}
 	                OR t0.apply_code = $S{apply_code}
 	            ) 
+	             and
+	            (
+	               $ISNULL{apply_date_start}
+	               or 
+	               t0.apply_date >= $S{apply_date_start}
+	            )
+	             and
+                (
+	                $ISNULL{apply_date_end}
+	                or
+	                t0.apply_date <= $S{apply_date_end}
+                )
             
 		]]></sql>
 	</sqlinfo>
