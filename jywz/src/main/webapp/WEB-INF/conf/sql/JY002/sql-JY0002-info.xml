@@ -332,19 +332,18 @@
 	                OR t0.putin_code = $S{putin_code}
 	            ) 
 	            and
-				(
-	               (
+	            (
 	               $ISNULL{putin_date_start}
 	               or 
-	               t0.putin_date > $S{putin_date_start}
-	               )
-	               and
-	               (
+	               t0.putin_date >= $S{putin_date_start}
+	            )
+	             and
+                (
 	                $ISNULL{putin_date_end}
 	                or
-	                t0.putin_date < $S{putin_date_end}
-	                )
-	            )  
+	                t0.putin_date <= $S{putin_date_end}
+                )
+	            
 		]]></sql>
 	</sqlinfo>
 	
