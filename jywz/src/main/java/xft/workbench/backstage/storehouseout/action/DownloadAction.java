@@ -30,7 +30,7 @@ import com.kayak.web.base.sql.SqlResult;
 import com.kayak.web.base.system.KResult;
 
 @Controller
-public class StorehouseoutAction extends ABSBaseController{
+public class DownloadAction extends ABSBaseController{
 
 	
 	@Resource
@@ -213,6 +213,91 @@ public class StorehouseoutAction extends ABSBaseController{
     	
     }
     
+    
+    
+    /**
+     * 描述 : 文档下载、打开
+     * <p>
+     * 樊东新
+     *
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "/apply/downloadDetail.json")
+    public @ResponseBody
+    String downloadDetailApply(HttpServletRequest request, HttpServletResponse response) {
+        BufferedOutputStream bos = null;
+        try {
+            Map<String, Object> params = this.getRequestParams();
+            bos = new BufferedOutputStream(response.getOutputStream());
+           
+            String fileName="物资申请明细-"+new SimpleDateFormat("yyyyMMdd").format(new Date())+".csv";
+            
+            GlobalMessage.addMapSessionInfo(params);
+			KResult result = comnService.comnQuery(params);
+			
+			SqlResult sResult=result.getSResult();
+			
+            response.setCharacterEncoding("UTF-8");
+            // 设置文档打开类型
+            response.setContentType("application/octet-stream;charset=GBK");
+            // 设置报文头为attachment响应类型
+            response.setHeader("Content-disposition",
+                    "attachment;" + FileUtil.encodeFileName(request, fileName));
+
+            byte[] bytes = this.createFileApply(sResult);  // 读取字节流
+
+            if (null == bytes || bytes.length == 0) {
+                throw new KPromptException("文件服务器上不存在此文件！");
+            }
+            response.setHeader("Content-Length", String.valueOf(bytes.length));
+
+            bos.write(bytes, 0, bytes.length);
+            return updateReturnJson(true, "文件下载成功", null);
+        } catch (Exception e) {
+            try {
+                response.setContentType("text/html;charset=UTF-8");
+                byte[] bb = this.updateErrorJson(e).getBytes();
+                bos.write(bb, 0, bb.length);
+            } catch (UnsupportedEncodingException e1) {
+                e1.printStackTrace();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            return null;
+        } finally {
+            try {
+                if (bos != null) {
+                    bos.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+	
+     
+    private byte[] createFileApply(SqlResult sResult) throws Exception{
+    	StringBuffer fileContent = new StringBuffer("申领单号,物资名称,物资类型,申领数量,规格型号,供应商,申领时间,申领仓库,申领状态");
+    	fileContent.append("\r\n");
+    	
+    	while(sResult.next()){
+    		fileContent.append(sResult.getString("apply_code")+",")
+    					.append(sResult.getString("material_name")+",")
+    					.append(sResult.getString("material_type_name")+",")
+    					.append(sResult.getString("apply_number")+",")
+    					.append(sResult.getString("model")+",")
+    					.append(sResult.getString("supplier")+",")
+    					.append(sResult.getString("apply_date")+",")
+    					.append(sResult.getString("apply_storehouse_name")+",")
+    					.append(EnumUtil.getDescValueByEnumValue(PutinStatus.class,sResult.getString("applystatus")))
+    					.append("\r\n");
+    	}
+    	
+    	return fileContent.toString().getBytes();
+    	
+    }
     
     
 	
