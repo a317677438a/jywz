@@ -99,8 +99,8 @@
             ) 
      			and
 					(
-                $ISNULL{contract_no}
-                OR a.contract_no like '%$U{contract_no}%'
+                $ISNULL{putin_code}
+                OR a.putin_code like '%$U{putin_code}%'
             ) 
      			and
             (
