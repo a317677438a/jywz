@@ -59,7 +59,7 @@ public class StorehouseoutAction extends ABSBaseController{
 
             response.setCharacterEncoding("UTF-8");
             // 设置文档打开类型
-            response.setContentType("application/octet-stream;charset=GBK");
+            response.setContentType("application/octet-stream;charset=UTF-8");
             // 设置报文头为attachment响应类型
             response.setHeader("Content-disposition",
                     "attachment;" + FileUtil.encodeFileName(request, fileName));
@@ -117,7 +117,7 @@ public class StorehouseoutAction extends ABSBaseController{
     	
     	
     	
-    	return fileContent.toString().getBytes();
+    	return fileContent.toString().getBytes("UTF-8");
     	
     }
 	
