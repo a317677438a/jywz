@@ -333,6 +333,11 @@
 	                or
 	                t0.apply_date <= $S{apply_date_end}
                 )
+            	and
+				(
+	                $ISNULL{jy_material_id}
+	                OR t1.jy_material_id = $S{jy_material_id}
+	            )
             
 		]]></sql>
 	</sqlinfo>

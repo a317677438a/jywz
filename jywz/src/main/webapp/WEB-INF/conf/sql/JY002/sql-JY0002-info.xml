@@ -343,6 +343,11 @@
 	                or
 	                t0.putin_date <= $S{putin_date_end}
                 )
+                and
+				(
+	                $ISNULL{jy_material_id}
+	                OR t1.jy_material_id = $S{jy_material_id}
+	            )
 	            
 		]]></sql>
 	</sqlinfo>
