@@ -316,6 +316,7 @@
 				u1.`name` putin_user_name,
 				t0.putin_date,
 				t0.putin_storehouse_code,
+				t0.contract_no,
 				p1.param_name putin_storehouse_name,
 				t0.`status` putinStatus,
 				t1.jy_material_id,

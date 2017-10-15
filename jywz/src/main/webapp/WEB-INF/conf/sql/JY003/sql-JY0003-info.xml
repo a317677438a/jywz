@@ -142,12 +142,14 @@
 			t1.remark,
 			t1.inputuser,
 			t1.crt_date,
-			t1.crt_time
+			t1.crt_time,
+			t5.param_name apply_storehouse_name
 		FROM
 			jy_apply t1
 		LEFT JOIN jy_user t2 ON t1.apply_user = t2.id
 		LEFT JOIN jy_user t3 ON t1.review_user = t3.id
 		LEFT JOIN jy_user t4 ON t1.storehouse_user = t4.id
+		LEFT JOIN jy_params t5 ON t1.apply_storehouse_code = t5.param_code
 		WHERE
 			(
 				t1.apply_user = $N{sys_user_id} or
