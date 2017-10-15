@@ -92,7 +92,7 @@
 				p1.param_name putin_storehouse_name,
 				t0.contract_no,
 				t0.cancel_user,
-				u2.`name` putin_user_name,
+				u2.`name` cancel_user_name,
 				t0.putout_storehouse_code,
 				p2.param_name putout_storehouse_name,
 				t0.`status`,
