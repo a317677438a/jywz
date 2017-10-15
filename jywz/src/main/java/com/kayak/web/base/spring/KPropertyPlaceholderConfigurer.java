@@ -57,8 +57,8 @@ public class KPropertyPlaceholderConfigurer extends
 			is = new FileInputStream(resources[1].getFile());
 			GlobalMessage.param_props.load(is);
 		}else if("1".equals(systemType)){
-			this.setLocations((org.springframework.core.io.Resource[]) new Resource[] {resources[4]});
-			is = new FileInputStream(resources[4].getFile());
+			this.setLocations((org.springframework.core.io.Resource[]) new Resource[] {resources[2]});
+			is = new FileInputStream(resources[2].getFile());
 			GlobalMessage.param_props.load(is);
 		}else{
 			logger.error("系统数据源参数加载失败，系统类型："+systemType+"(-1开发、-2测试、1生产)!");
