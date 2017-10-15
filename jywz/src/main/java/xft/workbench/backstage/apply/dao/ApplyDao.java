@@ -42,7 +42,7 @@ public class ApplyDao extends ComnDao{
 	public List<ApplyDetail> queryApplyDetailByid(Integer applyId) throws Exception{
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", applyId);
-		SqlResult sr =this.exeQuery("JY3001EQ002", params);
+		SqlResult sr =this.exeQuery("JY3001EQ003", params);
 		
 		List<ApplyDetail> results= new ArrayList<ApplyDetail>();
 		while (sr.next()) {
