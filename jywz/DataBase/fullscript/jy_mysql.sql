@@ -277,7 +277,7 @@ create table jy_user_online
    jsstatus             char(1) default '0' comment '会话状态：0:正常，1：停用',
    constraint pk_sys_user_online primary key (sessionid)
 )engine=innodb default charset=utf8;
-alter table sys_user_online comment '用户登录会话信息';
+alter table jy_user_online comment '用户登录会话信息';
 
 
 
