@@ -46,7 +46,9 @@ public class MaterialsTypeAction extends ABSBaseController{
 	public @ResponseBody String getMaterialType(){
 		try {
 			Integer num = typeBiz.getMaterialType();
-			
+			if(num==0){
+				num = 1;
+			}
 			String numS = String.valueOf(num);
 			Integer size = numS.length();
 			if(numS.length()<4){
@@ -239,7 +241,9 @@ public class MaterialsTypeAction extends ABSBaseController{
 	public @ResponseBody String getMaterialNum(){
 		try {
 			Integer num = typeBiz.getMaterialNum();
-			
+			if(num==0){
+				num = 1;
+			}
 			String numS = String.valueOf(num);
 			Integer size = numS.length();
 			if(numS.length()<6){
