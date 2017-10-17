@@ -146,7 +146,7 @@ public class ApplyAction extends ABSBaseController{
 			Integer applyStatus = Integer.valueOf((String)params.get("status"));//2、审批拒绝,4、已领用
 			Integer checkUserId =null;
 			
-			if(ApplyStatus.reject.getValue()==applyStatus){//审批拒绝不需要验证用户名。
+			if(ApplyStatus.receive.getValue()==applyStatus){//审批拒绝不需要验证用户名。
 				UserLoginInfo userLoginInfo = new UserLoginInfo();
 				userLoginInfo.setLoginname(params.get("loginname").toString());
 				userLoginInfo.setPasswd(MD5Util.toMD5(params.get("loginname").toString() + params.get("passwd").toString()));
