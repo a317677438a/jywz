@@ -67,13 +67,13 @@
                (
                $ISNULL{putin_date_start}
                or 
-               t1.putout_date > $S{putin_date_start}
+               t1.putout_date >= $S{putin_date_start}
                )
                and
                (
                 $ISNULL{putin_date_end}
                 or
-                t1.putout_date < $S{putin_date_end}
+                t1.putout_date <= $S{putin_date_end}
                 )
             )  
             AND

@@ -128,13 +128,13 @@
                (
                $ISNULL{putin_date_start}
                or 
-               t0.putin_date > $S{putin_date_start}
+               t0.putin_date >= $S{putin_date_start}
                )
                and
                (
                 $ISNULL{putin_date_end}
                 or
-                t0.putin_date < $S{putin_date_end}
+                t0.putin_date <= $S{putin_date_end}
                 )
             )
             
@@ -161,13 +161,13 @@
                (
                $ISNULL{putin_date_start}
                or 
-               a.putin_date > $S{putin_date_start}
+               a.putin_date >= $S{putin_date_start}
                )
                and
                (
                 $ISNULL{putin_date_end}
                 or
-                a.putin_date < $S{putin_date_end}
+                a.putin_date <= $S{putin_date_end}
                 )
             )
       
