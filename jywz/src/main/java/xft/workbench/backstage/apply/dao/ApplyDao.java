@@ -43,14 +43,8 @@ public class ApplyDao extends ComnDao{
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", applyId);
 		SqlResult sr =this.exeQuery("JY3001EQ003", params);
-		
 		List<ApplyDetail> results= new ArrayList<ApplyDetail>();
-		while (sr.next()) {
-			ApplyDetail detail = new ApplyDetail();
-			detail=(ApplyDetail)ObjectMapUtil.sqlResultToObject(sr, detail);
-			results.add(detail);
-		}
-		
+		results = (List<ApplyDetail>)ObjectMapUtil.sqlResultToObject(sr,ApplyDetail.class);
 		return results;
 	}
 	
