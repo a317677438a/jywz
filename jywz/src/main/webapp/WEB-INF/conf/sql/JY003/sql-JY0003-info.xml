@@ -65,7 +65,8 @@
 		review_user = $N{review_user}, 
 		storehouse_user = $N{storehouse_user}, 
 		apply_storehouse_code = $S{apply_storehouse_code}, 
-		remark = $S{remark}
+		remark = $S{remark},
+		status = 1
 		WHERE
 			id = $N{id};
 		]]></sql>
