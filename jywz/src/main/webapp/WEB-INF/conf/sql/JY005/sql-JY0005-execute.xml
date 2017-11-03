@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlexecutes SYSTEM "../../dtd/sql-execute.dtd">
+<sqlexecutes>
+
+	<sqlexecute exeid="JY5001EU001" datasource="dsSys">
+		<exename>新增物资使用信息</exename>
+		<sqlids>JY5001U001</sqlids>
+	</sqlexecute>
+	
+	
+	
+	<sqlexecute exeid="JY5001EQ001" datasource="dsSys">
+		<exename>查询当前用户物资使用信息</exename>
+		<sqlids>JY5001Q001</sqlids>
+	</sqlexecute>
+	
+	
+	<sqlexecute exeid="JY5001EQ002" datasource="dsSys">
+		<exename>查询所有用户物资使用信息</exename>
+		<sqlids>JY5001Q002</sqlids>
+	</sqlexecute>
+	
+	
+</sqlexecutes>

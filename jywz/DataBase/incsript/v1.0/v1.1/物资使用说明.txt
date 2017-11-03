@@ -1,0 +1,67 @@
+运行管理 - 使用登记
+
+1、所有物资下拉列表 ：公共接口说明.txt - 6
+
+2、当前用户持有某个物资库存
+http://localhost:8081/jywz/materialuse/materialOwnNumber.json
+{ 
+"material_id":"2" //物资ID
+}
+
+响应：
+{"success":"true","returnmsg":"查询物资库存成功","returndata":{"ownNumber":"1"}}
+
+
+3、新增物资使用信息。
+http://localhost:8081/jywz/materialuse/add.json
+{ 
+materialUseInfo:
+{"jy_material_id":"1",
+"use_date":"20171011",
+"use_number":"1",
+"remark":"test"
+}
+}
+
+响应：
+{"success":"true","returnmsg":"新增成功","returndata":{}}
+
+
+4、查询物资使用信息。
+请求：
+http://localhost:8081/jywz/base/listquery.json
+{start:0,limit:10,exeid:'JY5001EQ001',
+id:'1',  //物资使用信息ID  可选
+jy_material_id:'1', //物资信息ID  可选
+date_start:'', //物资使用时间开始时间  可选
+date_end:''  //物资使用时间结束时间  可选
+}
+
+响应：
+{"success":"true","returnmsg":"查询成功","returndata":
+{"results":"1","rows":[
+{"id":"1","jy_material_id":"2","material_code":"WZ0","material_name":"大米",
+"model":"101","supplier":"金龙鱼","use_user":"10","user_name":"sq01",
+"use_date":"20171011","use_number":"1","remark":"test","status":"1"}
+]}}
+
+
+运行管理 - 使用登记查询
+
+5、查询物资使用信息。
+请求：
+http://localhost:8081/jywz/base/listquery.json
+{start:0,limit:10,exeid:'JY5001EQ002',
+id:'1',  //物资使用信息ID  可选
+jy_material_id:'1', //物资信息ID  可选
+date_start:'', //物资使用时间开始时间  可选
+date_end:'',  //物资使用时间结束时间  可选
+use_user_name:'sq' //物资登录用户名 模糊查询  可选
+}
+
+响应：
+{"success":"true","returnmsg":"查询成功","returndata":{"results":"1","rows":[
+{"id":"1","jy_material_id":"2","material_code":"WZ0","material_name":"大米",
+"model":"101","supplier":"金龙鱼","use_user":"10","user_name":"sq01","use_date":"20171011",
+"use_number":"1","remark":"test","status":"1"}
+]}}
