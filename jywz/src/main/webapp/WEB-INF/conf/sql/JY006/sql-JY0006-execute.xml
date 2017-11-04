@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlexecutes SYSTEM "../../dtd/sql-execute.dtd">
+<sqlexecutes>
+
+	<sqlexecute exeid="JY6001EU001" datasource="dsSys">
+		<exename>新增物资退回主表信息</exename>
+		<sqlids>JY6001U001</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY6001EU002" datasource="dsSys">
+		<exename>新增物资退回明细信息</exename>
+		<sqlids>JY6001U002</sqlids>
+	</sqlexecute>
+	
+	
+	<sqlexecute exeid="JY6001EU003" datasource="dsSys">
+		<exename>修改物资退回信息</exename>
+		<sqlids>JY6001U003</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY6001EU004" datasource="dsSys">
+		<exename>确认入库</exename>
+		<sqlids>JY6001U004</sqlids>
+	</sqlexecute>
+	
+	
+	<sqlexecute exeid="JY6001EQ001" datasource="dsSys">
+		<exename>查询新增物资退回信息的id</exename>
+		<sqlids>JY6001Q001</sqlids>
+	</sqlexecute>
+	
+	
+	<sqlexecute exeid="JY6001EQ002" datasource="dsSys">
+		<exename>查询当前用户的物资退回信息</exename>
+		<sqlids>JY6001Q002</sqlids>
+	</sqlexecute>
+	
+	
+	<sqlexecute exeid="JY6001EQ003" datasource="dsSys">
+		<exename>查询物资退回明细信息通过主表id</exename>
+		<sqlids>JY6001Q003</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY6001EQ004" datasource="dsSys">
+		<exename>查询物资退回状态通过主表id</exename>
+		<sqlids>JY6001Q004</sqlids>
+	</sqlexecute>
+	
+	
+	<sqlexecute exeid="JY6001ED001" datasource="dsSys">
+		<exename>删除入库单</exename>
+		<sqlids>JY6001D001</sqlids>
+	</sqlexecute>
+	
+	
+	<sqlexecute exeid="JY6001ED002" datasource="dsSys">
+		<exename>删除入库单详细信息</exename>
+		<sqlids>JY6001D002</sqlids>
+	</sqlexecute>
+	
+	
+</sqlexecutes>

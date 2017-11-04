@@ -65,3 +65,58 @@ use_user_name:'sq' //物资登录用户名 模糊查询  可选
 "model":"101","supplier":"金龙鱼","use_user":"10","user_name":"sq01","use_date":"20171011",
 "use_number":"1","remark":"test","status":"1"}
 ]}}
+
+
+运行管理 - 物资退回
+
+
+1、所有物资下拉列表 ：公共接口说明.txt - 6
+
+2、当前用户持有某个物资库存
+
+
+6、新增物资退回
+请求：
+http://localhost:8081/jywz/materialback/add.json
+{ 
+materialBackInfo:
+{"putin_code":"TH20171104111908", //退回单
+"putin_user":"1",  //退回仓管在仓库员
+"putin_date":"20171104",  //退回时间
+"putin_storehouse_code":"storehouse03",  //退回仓库编码
+"remark":"test"
+},
+materialBackDetails:[
+{jy_material_id:2,putin_number:1},
+{jy_material_id:3,putin_number:1}
+]
+}
+
+响应：
+{"success":"true","returnmsg":"新增成功","returndata":{}}
+
+
+7、修改物资退回
+http://localhost:8081/jywz/materialback/modify.json
+{ 
+materialBackInfo:
+{
+"id":"9", //退回单ID
+"putin_user":"1",  //退回仓管在仓库员
+"putin_date":"20171104",  //退回时间
+"putin_storehouse_code":"storehouse04",  //退回仓库编码
+"remark":"test1"
+},
+materialBackDetails:[
+{jy_material_id:2,putin_number:2},
+{jy_material_id:3,putin_number:2}
+]
+}
+
+响应：
+{"success":"true","returnmsg":"修改成功","returndata":{}}
+
+
+
+
+

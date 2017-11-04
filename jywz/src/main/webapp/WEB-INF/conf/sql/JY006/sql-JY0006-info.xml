@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlinfos SYSTEM "../../dtd/sql-info.dtd">
+
+<sqlinfos>
+	<sqlinfo sqlid="JY6001U001">
+		<sqlname>新增物资退回主表信息</sqlname>
+		<sql><![CDATA[
+			INSERT INTO jy_storehouse_in (
+			    putin_code,
+			    putin_type,
+				putin_user,
+				putin_date,
+				putin_storehouse_code,
+				cancel_user,
+				status,
+				remark,
+				inputuser,
+				crt_date,
+				crt_time
+			)
+			VALUES
+			(
+				$S{putin_code},
+				$S{putin_type},
+				$N{putin_user},
+				$S{putin_date},
+				$S{putin_storehouse_code},
+				$N{sys_user_id},
+				$N{status},
+				$S{remark},
+				$N{sys_user_id},
+				$S{SYSDATE},
+				$S{SYSTIME}
+			);
+		]]></sql>
+	</sqlinfo>
+	
+	<sqlinfo sqlid="JY6001U002">
+		<sqlname>新增物资退回明细信息</sqlname>
+		<sql><![CDATA[
+			INSERT INTO jy_storehouse_in_detail (
+			jy_storehouse_in_id,
+			jy_material_id,
+			putin_number
+		)
+		VALUES
+		(
+			$N{jy_storehouse_in_id},
+			$N{jy_material_id},
+			$N{putin_number}
+		);
+		]]></sql>
+	</sqlinfo>
+	
+	  
+	<sqlinfo sqlid="JY6001U003">
+		<sqlname>修改物资退回信息</sqlname>
+		<sql><![CDATA[
+			UPDATE jy_storehouse_in
+			SET 
+			putin_user = $N{putin_user}, 
+			putin_date = $S{putin_date}, 
+			putin_storehouse_code = $S{putin_storehouse_code}, 
+			remark = $S{remark}
+			WHERE
+				id = $N{id};
+		]]></sql>
+	</sqlinfo>
+	
+	<sqlinfo sqlid="JY6001U004">
+		<sqlname>确认入库</sqlname>
+		<sql><![CDATA[
+		UPDATE jy_storehouse_in SET
+			status=2
+			WHERE id=$N{id}
+		]]></sql>
+	</sqlinfo>
+	
+	
+	<sqlinfo sqlid="JY6001Q001">
+		<sqlname>查询新增物资退回信息的id</sqlname>
+		<sql><![CDATA[
+		SELECT
+				id
+			FROM
+				jy_storehouse_in
+			WHERE
+				putin_code =$S{putin_code};
+		]]></sql>
+	</sqlinfo>
+	
+	
+	<sqlinfo sqlid="JY6001Q002">
+		<sqlname>查询当前用户的物资退回信息</sqlname>
+		<sql><![CDATA[
+			SELECT
+				t0.id,
+				t0.putin_type,
+				t0.putin_code,
+				t0.putin_user,
+				u1.`name` putin_user_name,
+				t0.putin_date,
+				t0.putin_storehouse_code,
+				p1.param_name putin_storehouse_name,
+				t0.contract_no,
+				t0.cancel_user,
+				u2.`name` cancel_user_name,
+				t0.putout_storehouse_code,
+				p2.param_name putout_storehouse_name,
+				t0.`status`,
+			    t0.remark
+			FROM
+				jy_storehouse_in t0
+			LEFT JOIN jy_user u1 ON t0.putin_user = u1.id
+			LEFT JOIN jy_user u2 ON t0.cancel_user = u2.id
+			LEFT JOIN jy_params p1 ON t0.putin_storehouse_code = p1.param_code
+			LEFT JOIN jy_params p2 ON t0.putout_storehouse_code = p2.param_code
+				WHERE 
+				(
+	                $ISNULL{id}
+	                OR t0.id = $N{id}
+	            ) 
+	     			and
+				(
+	                $ISNULL{putin_type}
+	                OR t0.putin_type = $N{putin_type}
+	            ) 
+	     			and
+					(
+	                $ISNULL{putin_user}
+	                OR t0.putin_user = $N{putin_user}
+	            ) 
+	     			and
+						(
+	                $ISNULL{putin_code}
+	                OR t0.putin_code like '%$U{putin_code}%'
+	            ) 
+     			and
+            	(
+               		$ISNULL{date_start}
+               		or 
+               		t0.putin_date >= $S{date_start}
+               	)
+               	and
+               	(
+                	$ISNULL{date_end}
+                	or
+                	t0.putin_date <= $S{date_end}
+                )
+	            
+        ]]></sql>
+	</sqlinfo>
+	
+	
+	<sqlinfo sqlid="JY6001Q003">
+		<sqlname>查询物资退回明细信息通过主表id</sqlname>
+		<sql><![CDATA[
+			SELECT
+				t2.id jy_material_id,
+				t2.`code` code,
+				t2.`name` name,
+				t2.model,
+				t2.supplier,
+				t3.`code` material_type_code,
+				t3.`name` codename,
+				t1.putin_number
+			FROM
+				jy_storehouse_in_detail t1
+			LEFT JOIN jy_material t2 ON t1.jy_material_id = t2.id
+			LEFT JOIN jy_material_type t3 ON t2.jy_material_type_id = t3.id
+			WHERE
+				t2.id IS NOT NULL
+			AND t1.jy_storehouse_in_id = $U{id}
+		]]>
+		</sql>
+	</sqlinfo>
+	
+	
+	<sqlinfo sqlid="JY6001Q004">
+		<sqlname>查询物资退回状态通过主表id</sqlname>
+		<sql><![CDATA[
+		   SELECT
+				status
+			FROM
+				jy_storehouse_in
+			WHERE
+				id =$N{id};
+		]]></sql>
+	</sqlinfo>
+	
+	
+	<sqlinfo sqlid="JY6001D001">
+		<sqlname>删除入库单</sqlname>
+		<sql><![CDATA[
+			DELETE FROM jy_storehouse_in where id = $N{id}
+		]]></sql>
+	</sqlinfo>
+	
+	<sqlinfo sqlid="JY6001D002">
+		<sqlname>删除入库单详细信息</sqlname>
+		<sql><![CDATA[
+			DELETE FROM jy_storehouse_in_detail where jy_storehouse_in_id = $N{id}
+		]]></sql>
+	</sqlinfo>
+	
+	
+	
+	
+	
+</sqlinfos>
