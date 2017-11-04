@@ -162,7 +162,31 @@ http://localhost:8081/jywz/materialback/delete.json
 {"success":"true","returnmsg":"删除成功","returndata":{}}
 
 
-11、物资退回确认
+
+入库管理 - 退库入库
+
+11、查询物资退回单列表
+请求：
+http://localhost:8081/jywz/base/listquery.json
+{start:0,limit:10,exeid:'JY6001EQ002',
+putin_type:'2',  //2、退库入库   必输
+putin_code:'TH20171104111908', //入库单号 可选
+cancel_user_name:'sq',  //退库人员名称（退回申请人）    可选
+date_start:'', //物资退回开始时间  可选
+date_end:''  //物资退回结束时间  可选
+}
+
+响应：
+{"success":"true","returnmsg":"查询成功","returndata":{"results":"1",
+"rows":[
+{"id":"9","putin_type":"2","putin_code":"TH20171104111908","putin_user":"1",
+"putin_user_name":"cc","putin_date":"20171104","putin_storehouse_code":"storehouse04",
+"putin_storehouse_name":"仓库04","contract_no":"","cancel_user":"10",
+"cancel_user_name":"sq01","putout_storehouse_code":"","putout_storehouse_name":"",
+"status":"1","remark":"test1"}
+]}}
+
+12、物资退回确认
 http://localhost:8081/jywz/materialback/confirm.json
 {id:'9'  //2、物资退回入库单ID   必输
 }
