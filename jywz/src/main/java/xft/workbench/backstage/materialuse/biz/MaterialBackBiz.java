@@ -83,7 +83,7 @@ public class MaterialBackBiz {
 			throw new KPromptException("此状态不可进行删除操作！");
 		}
 		//确认入库
-		materialBackDao.confirmation(status);
+		materialBackDao.confirmation(stockId);
 	}
 	
 	

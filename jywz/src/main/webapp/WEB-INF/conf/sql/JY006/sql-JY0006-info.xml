@@ -117,6 +117,11 @@
 			LEFT JOIN jy_params p2 ON t0.putout_storehouse_code = p2.param_code
 				WHERE 
 				(
+	                t0.putin_user = $N{sys_user_id}
+	                OR t0.cancel_user = $N{sys_user_id}
+	            ) 
+	     			and
+				(
 	                $ISNULL{id}
 	                OR t0.id = $N{id}
 	            ) 
@@ -126,12 +131,8 @@
 	                OR t0.putin_type = $N{putin_type}
 	            ) 
 	     			and
-					(
-	                $ISNULL{putin_user}
-	                OR t0.putin_user = $N{putin_user}
-	            ) 
-	     			and
-						(
+					
+				(
 	                $ISNULL{putin_code}
 	                OR t0.putin_code like '%$U{putin_code}%'
 	            ) 

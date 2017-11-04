@@ -70,10 +70,11 @@ use_user_name:'sq' //物资登录用户名 模糊查询  可选
 运行管理 - 物资退回
 
 
-1、所有物资下拉列表 ：公共接口说明.txt - 6
+1》、所有物资下拉列表 ：公共接口说明.txt - 6
 
-2、当前用户持有某个物资库存
+2》、当前用户持有某个物资库存
 
+3》、退回单：公共接口说明.txt-5自动生成编码 HT
 
 6、新增物资退回
 请求：
@@ -116,7 +117,55 @@ materialBackDetails:[
 响应：
 {"success":"true","returnmsg":"修改成功","returndata":{}}
 
+8、查询物资退回单列表
+请求：
+http://localhost:8081/jywz/base/listquery.json
+{start:0,limit:10,exeid:'JY6001EQ002',
+putin_type:'2',  //2、退库入库   必输
+putin_code:'TH20171104111908', //入库单号 可选
+date_start:'', //物资退回开始时间  可选
+date_end:''  //物资退回结束时间  可选
+}
+
+响应：
+{"success":"true","returnmsg":"查询成功","returndata":{"results":"1",
+"rows":[
+{"id":"9","putin_type":"2","putin_code":"TH20171104111908","putin_user":"1",
+"putin_user_name":"cc","putin_date":"20171104","putin_storehouse_code":"storehouse04",
+"putin_storehouse_name":"仓库04","contract_no":"","cancel_user":"10",
+"cancel_user_name":"sq01","putout_storehouse_code":"","putout_storehouse_name":"",
+"status":"1","remark":"test1"}
+]}}
+
+9、查询物资退回明细
+http://localhost:8081/jywz/base/listquery.json
+{exeid:'JY6001EQ003',
+id:'9'  //2、物资退回入库单ID   必输
+}
+
+响应：
+{"success":"true","returnmsg":"查询成功","returndata":{"results":"2",
+"rows":[
+{"jy_material_id":"2","code":"WZ0","name":"大米","model":"101",
+"supplier":"金龙鱼","material_type_code":"","codename":"","putin_number":"2"},
+{"jy_material_id":"3","code":"WZ2","name":"大米","model":"101",
+"supplier":"金龙鱼","material_type_code":"","codename":"","putin_number":"2"}
+]}}
 
 
+10、物资退回删除
+http://localhost:8081/jywz/materialback/delete.json
+{id:'9'  //2、物资退回入库单ID   必输
+}
+
+响应：
+{"success":"true","returnmsg":"删除成功","returndata":{}}
 
 
+11、物资退回确认
+http://localhost:8081/jywz/materialback/confirm.json
+{id:'9'  //2、物资退回入库单ID   必输
+}
+
+响应：
+{"success":"true","returnmsg":"确认入库成功","returndata":{}}

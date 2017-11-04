@@ -86,4 +86,19 @@ public class MaterialBackAction extends ABSBaseController{
 		return this.updateReturnJson(true, "确认入库成功", null);
     }
 	
+	
+	@RequestMapping(value = "/materialback/delete.json")
+	public  @ResponseBody String  materialBackDelete(){
+		Map<String, Object> params = null; 
+		try {
+			params = this.getRequestParams();
+			Integer id = Integer.valueOf((String)params.get("id")) ;
+			materialBackBiz.deleteMaterialBack(id);
+			
+		} catch (Exception e) {// 获取返回提示的错误
+			return this.updateErrorJson(e);
+		}
+		return this.updateReturnJson(true, "删除成功", null);
+    }
+	
 }
