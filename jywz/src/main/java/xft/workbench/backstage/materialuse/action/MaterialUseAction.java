@@ -69,7 +69,7 @@ public class MaterialUseAction extends ABSBaseController{
 		JSONArray resultsArray=new JSONArray();
 		try {
 			params = this.getRequestParams();
-			List<OwnMaterialInfo> results=materialUserBiz.queryOwnMaterialInfo();
+			List<OwnMaterialInfo> results=materialUserBiz.queryOwnMaterialInfo(params);
 			for (int i = 0; results !=null &&  i < results.size(); i++) {
 				JSONObject object= new JSONObject(results.get(i));
 				resultsArray.put(object);

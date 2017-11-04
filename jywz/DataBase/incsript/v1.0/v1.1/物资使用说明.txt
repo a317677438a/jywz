@@ -198,7 +198,7 @@ http://localhost:8081/jywz/materialback/confirm.json
 运行管理  - 查看持有情况
 13、当前用户的物资持有情况
 http://localhost:8081/jywz/materialown/materialsOwnNumber.json
-{}
+{jy_material_id:'8'}
 
 响应：
 {"success":"true","returnmsg":"查询物资持有信息成功","returndata":[

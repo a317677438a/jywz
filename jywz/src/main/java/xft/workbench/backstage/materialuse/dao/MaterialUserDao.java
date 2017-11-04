@@ -34,8 +34,7 @@ public class MaterialUserDao extends ComnDao{
 	 * 查询当前用户物资持有信息（申请物资数量）
 	 * 
 	 */
-	public List<OwnMaterialInfo> queryApplyNumber() throws Exception{
-		Map<String, Object> params = new HashMap<String, Object>();
+	public List<OwnMaterialInfo> queryApplyNumber(Map<String, Object> params) throws Exception{
 		GlobalMessage.addMapSessionInfo(params);
 		SqlResult sr =this.exeQuery("JY5001EQ003", params);
 		List<OwnMaterialInfo> results= new ArrayList<OwnMaterialInfo>();

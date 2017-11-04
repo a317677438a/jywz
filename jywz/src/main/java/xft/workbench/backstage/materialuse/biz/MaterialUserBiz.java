@@ -1,6 +1,7 @@
 package xft.workbench.backstage.materialuse.biz;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,10 +35,10 @@ public class MaterialUserBiz {
 	 * 查询当前用户物资持有信息（申请物资数量）
 	 * 
 	 */
-	public List<OwnMaterialInfo> queryOwnMaterialInfo() throws Exception{
+	public List<OwnMaterialInfo> queryOwnMaterialInfo(Map<String, Object> params) throws Exception{
 		
 		//查询当前用户物资申请物资数量
-		List<OwnMaterialInfo> listsInfos=materialUserDao.queryApplyNumber();
+		List<OwnMaterialInfo> listsInfos=materialUserDao.queryApplyNumber(params);
 	
 		for(int i =0; listsInfos != null && i<listsInfos.size();i++ ){
 			OwnMaterialInfo info = listsInfos.get(i);

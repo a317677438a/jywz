@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -327,7 +328,7 @@ public class DownloadAction extends ABSBaseController{
            
             String fileName="物资持有数量-"+new SimpleDateFormat("yyyyMMdd").format(new Date())+".csv";
             
-            List<OwnMaterialInfo> results=materialUserBiz.queryOwnMaterialInfo();
+            List<OwnMaterialInfo> results=materialUserBiz.queryOwnMaterialInfo(new HashMap<String, Object>());
 			
             response.setCharacterEncoding("UTF-8");
             // 设置文档打开类型
