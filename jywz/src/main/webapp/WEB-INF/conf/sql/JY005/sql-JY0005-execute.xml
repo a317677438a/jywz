@@ -21,4 +21,10 @@
 	</sqlexecute>
 	
 	
+	<sqlexecute exeid="JY5001EQ003" datasource="dsSys">
+		<exename>查询当前用户物资持有信息（申请物资数量）</exename>
+		<sqlids>JY5001Q003</sqlids>
+	</sqlexecute>
+	
+	
 </sqlexecutes>

@@ -5,12 +5,14 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,6 +25,8 @@ import xft.workbench.backstage.base.enumeration.apply.PutoutType;
 import xft.workbench.backstage.base.util.EnumUtil;
 import xft.workbench.backstage.base.util.FileUtil;
 import xft.workbench.backstage.base.util.GlobalMessage;
+import xft.workbench.backstage.materialuse.biz.MaterialUserBiz;
+import xft.workbench.backstage.materialuse.model.OwnMaterialInfo;
 
 import com.kayak.web.base.exception.KPromptException;
 import com.kayak.web.base.service.abs.ComnServiceAbstract;
@@ -35,10 +39,14 @@ public class DownloadAction extends ABSBaseController{
 	
 	@Resource
 	private ComnServiceAbstract comnService;
+	
+	
+	@Autowired
+	MaterialUserBiz materialUserBiz;
 	 /**
      * 描述 : 文档下载、打开
      * <p>
-     * 樊东新
+     * 
      *
      * @param request
      * @param response
@@ -301,5 +309,102 @@ public class DownloadAction extends ABSBaseController{
     
     
 	
+    
+    
+    /**
+     * 下载物资持有数量
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "/materialown/downloadOwnNumber.json")
+    public @ResponseBody
+    String downloadOwnNumber(HttpServletRequest request, HttpServletResponse response) {
+        BufferedOutputStream bos = null;
+        try {
+            Map<String, Object> params = this.getRequestParams();
+            bos = new BufferedOutputStream(response.getOutputStream());
+           
+            String fileName="物资持有数量-"+new SimpleDateFormat("yyyyMMdd").format(new Date())+".csv";
+            
+            List<OwnMaterialInfo> results=materialUserBiz.queryOwnMaterialInfo();
+			
+            response.setCharacterEncoding("UTF-8");
+            // 设置文档打开类型
+            response.setContentType("application/octet-stream;charset=GBK");
+            // 设置报文头为attachment响应类型
+            response.setHeader("Content-disposition",
+                    "attachment;" + FileUtil.encodeFileName(request, fileName));
+
+            byte[] bytes = this.createFileOwnMaterialInfo(results);  // 读取字节流
+
+            if (null == bytes || bytes.length == 0) {
+                throw new KPromptException("文件服务器上不存在此文件！");
+            }
+            response.setHeader("Content-Length", String.valueOf(bytes.length));
+
+            bos.write(bytes, 0, bytes.length);
+            return updateReturnJson(true, "文件下载成功", null);
+        } catch (Exception e) {
+            try {
+                response.setContentType("text/html;charset=UTF-8");
+                byte[] bb = this.updateErrorJson(e).getBytes();
+                bos.write(bb, 0, bb.length);
+            } catch (UnsupportedEncodingException e1) {
+                e1.printStackTrace();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            return null;
+        } finally {
+            try {
+                if (bos != null) {
+                    bos.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+	
+     
+    private byte[] createFileOwnMaterialInfo(List<OwnMaterialInfo> results) throws Exception{
+    	StringBuffer fileContent = new StringBuffer("物资名称,物资类型,规格型号,供应商,申请数量,使用数量,退回数量,剩余数量");
+    	fileContent.append("\r\n");
+    	
+    	for(int i =0; results!=null && i<results.size();i++){
+    		OwnMaterialInfo materialInfo = results.get(i);
+    		
+    		fileContent.append(materialInfo.getMaterial_name()+",")
+    					.append(materialInfo.getMaterial_type_name()+",")
+    					.append(materialInfo.getModel()+",")
+    					.append(materialInfo.getSupplier()+",")
+    					.append(materialInfo.getApply_number()+",")
+    					.append(materialInfo.getUse_number()+",")
+    					.append(materialInfo.getBack_number()+",")
+    					.append(materialInfo.getOwn_number())
+    					.append("\r\n");
+    	}
+    	
+    	return fileContent.toString().getBytes();
+    	
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 	
 }

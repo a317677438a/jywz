@@ -130,11 +130,17 @@
 	                $ISNULL{putin_type}
 	                OR t0.putin_type = $N{putin_type}
 	            ) 
-	     			and
+	     		and
 					
 				(
 	                $ISNULL{putin_code}
 	                OR t0.putin_code like '%$U{putin_code}%'
+	            ) 
+	            and
+					
+				(
+	                $ISNULL{cancel_user_name}
+	                OR u2.`name` like '%$U{cancel_user_name}%'
 	            ) 
      			and
             	(

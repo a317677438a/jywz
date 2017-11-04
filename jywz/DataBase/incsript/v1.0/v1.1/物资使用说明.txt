@@ -193,3 +193,22 @@ http://localhost:8081/jywz/materialback/confirm.json
 
 响应：
 {"success":"true","returnmsg":"确认入库成功","returndata":{}}
+
+
+运行管理  - 查看持有情况
+13、当前用户的物资持有情况
+http://localhost:8081/jywz/materialown/materialsOwnNumber.json
+{}
+
+响应：
+{"success":"true","returnmsg":"查询物资持有信息成功","returndata":[
+{"model":"fd","material_type_name":"饮料","material_code":"WZ3","material_type_code":"002",
+"material_name":"fdsf","back_number":"0","own_number":"100","supplier":"fds",
+"jy_material_id":"8","apply_number":"100","use_number":"0"}
+]}
+
+14、下当前用户的物资持有情况
+http://localhost:8081/jywz/materialown/downloadOwnNumber.json
+{}
+
+响应： ？？？？

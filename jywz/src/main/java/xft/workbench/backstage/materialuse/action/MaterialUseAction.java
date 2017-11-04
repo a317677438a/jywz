@@ -1,7 +1,9 @@
 package xft.workbench.backstage.materialuse.action;
 
+import java.util.List;
 import java.util.Map;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import xft.workbench.backstage.base.action.ABSBaseController;
 import xft.workbench.backstage.base.util.ObjectMapUtil;
 import xft.workbench.backstage.materialuse.biz.MaterialUserBiz;
 import xft.workbench.backstage.materialuse.model.MaterialUse;
+import xft.workbench.backstage.materialuse.model.OwnMaterialInfo;
 
 @Controller
 public class MaterialUseAction extends ABSBaseController{
@@ -23,6 +26,8 @@ public class MaterialUseAction extends ABSBaseController{
 	
 	@Autowired 
 	private ApplyBiz applyBiz;
+	
+	
 	
 	@RequestMapping(value = "/materialuse/materialOwnNumber.json")
 	public  @ResponseBody String  materialOwnNumber(){
@@ -56,4 +61,23 @@ public class MaterialUseAction extends ABSBaseController{
 		}
 		return this.updateReturnJson(true, "新增成功", null);
 	}
+	
+	
+	@RequestMapping(value = "/materialown/materialsOwnNumber.json")
+	public  @ResponseBody String  materialsOwnNumber(){
+		Map<String, Object> params = null; 
+		JSONArray resultsArray=new JSONArray();
+		try {
+			params = this.getRequestParams();
+			List<OwnMaterialInfo> results=materialUserBiz.queryOwnMaterialInfo();
+			for (int i = 0; results !=null &&  i < results.size(); i++) {
+				JSONObject object= new JSONObject(results.get(i));
+				resultsArray.put(object);
+			}  
+		} catch (Exception e) {// 获取返回提示的错误
+			return this.updateErrorJson(e);
+		}
+		return this.updateReturnJson(true, "查询物资持有信息成功", resultsArray);
+	}
+	
 }

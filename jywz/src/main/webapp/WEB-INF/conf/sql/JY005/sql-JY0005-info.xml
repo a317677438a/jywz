@@ -147,7 +147,40 @@
 		]]></sql>
 	</sqlinfo>
 
-	
+	<sqlinfo sqlid="JY5001Q003">
+		<sqlname>查询当前用户物资持有信息（申请物资数量）</sqlname>
+		<sql><![CDATA[
+			SELECT
+				t1.jy_material_id,
+				sum(t1.apply_number) apply_number,
+				t2.`code` material_code,
+				t2.`name` material_name,
+				t2.model,
+				t2.supplier,
+				t3.`code` material_type_code,
+				t3.`name` material_type_name
+			FROM
+				jy_apply t0
+			LEFT JOIN jy_apply_detail t1 ON t0.id = t1.jy_apply_id
+			LEFT JOIN jy_material t2 ON t1.jy_material_id = t2.id
+			LEFT JOIN jy_material_type t3 ON t2.jy_material_type_id = t3.id
+			WHERE
+				t0.`status` = 4
+				and
+				(
+	                t0.apply_user = $N{sys_user_id}
+	            ) 
+	             AND
+				(
+	                $ISNULL{jy_material_id}
+	                OR t1.jy_material_id = $N{jy_material_id}
+	            ) 
+	     			
+			ORDER BY
+				t1.jy_material_id
+			
+        ]]></sql>
+	</sqlinfo>
 	
 	
 </sqlinfos>

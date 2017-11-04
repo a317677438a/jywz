@@ -90,6 +90,7 @@ public class ApplyBiz {
 		Integer useNumber = applyDao.queryUseNumber(material_id, UseStatus.use.getValue());
 		if(useNumber==null) useNumber=0;
 		Integer backNumber = applyDao.queryBackNumber(material_id, PutinStatus.ok.getValue());
+		if(backNumber==null) backNumber=0;
 		return applyNumber-useNumber-backNumber;
 	}
 	

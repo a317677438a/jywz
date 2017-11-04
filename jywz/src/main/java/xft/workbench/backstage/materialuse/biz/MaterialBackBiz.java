@@ -45,7 +45,7 @@ public class MaterialBackBiz {
 	public void modifyMaterialBack(Stock stock,List<StockDetails> details ) throws Exception{
 		Integer status = materialBackDao.getStockStatus(stock.getId());
 		if(PutinStatus.wait.getValue()!=status){
-			throw new KPromptException("此状态不可进行删除操作！");
+			throw new KPromptException("此状态不可进行修改操作！");
 		}
 		
 		//修改主表：
@@ -80,7 +80,7 @@ public class MaterialBackBiz {
 	public void confirmation(Integer stockId) throws Exception{
 		Integer status = materialBackDao.getStockStatus(stockId);
 		if(PutinStatus.wait.getValue()!=status){
-			throw new KPromptException("此状态不可进行删除操作！");
+			throw new KPromptException("此状态不可进行确认入库操作！");
 		}
 		//确认入库
 		materialBackDao.confirmation(stockId);
