@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlexecutes SYSTEM "../../dtd/sql-execute.dtd">
+<sqlexecutes>
+
+	<sqlexecute exeid="JY7001EU001" datasource="dsSys">
+		<exename>新增物资仓储调拨信息</exename>
+		<sqlids>JY7001U001</sqlids>
+	</sqlexecute>
+	
+	
+	<sqlexecute exeid="JY7001EU002" datasource="dsSys">
+		<exename>新增物资仓储调拨信息明细</exename>
+		<sqlids>JY7001U002</sqlids>
+	</sqlexecute>
+	
+	
+	<sqlexecute exeid="JY7001EU003" datasource="dsSys">
+		<exename>修改物资仓储调拨信息明细</exename>
+		<sqlids>JY7001U003</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY7001EU004" datasource="dsSys">
+		<exename>修改物资仓储调拨状态信息</exename>
+		<sqlids>JY7001U004</sqlids>
+	</sqlexecute>
+	
+	
+	<sqlexecute exeid="JY7001EQ001" datasource="dsSys">
+		<exename>查询物资仓储调拨基本信息的id</exename>
+		<sqlids>JY7001Q001</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY7001EQ002" datasource="dsSys">
+		<exename>查询物资仓储调拨基本信息</exename>
+		<sqlids>JY7001Q002</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY7001EQ003" datasource="dsSys">
+		<exename>查询物资仓储调拨明细信息通过主表id</exename>
+		<sqlids>JY7001Q003</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY7001EQ004" datasource="dsSys">
+		<exename>查询物资仓储调拨明细的状态</exename>
+		<sqlids>JY7001Q004</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY7001ED001" datasource="dsSys">
+		<exename>删除物资仓储调拨主表</exename>
+		<sqlids>JY7001D001</sqlids>
+	</sqlexecute>
+	
+	
+	<sqlexecute exeid="JY7001ED002" datasource="dsSys">
+		<exename>删除物资仓储调拨明细</exename>
+		<sqlids>JY7001D002</sqlids>
+	</sqlexecute>
+	
+	
+	
+	
+</sqlexecutes>

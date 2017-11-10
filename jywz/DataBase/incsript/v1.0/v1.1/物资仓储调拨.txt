@@ -1,0 +1,113 @@
+仓储调拨 - 仓储调拨
+
+1、所有物资下拉列表 ：公共接口说明.txt - 6
+
+2、当前出库仓库管理员对应仓库的物资库存
+请求：
+http://localhost:8081/jywz/transfer/storeNumber.json
+{storehouse_code:'storehouse03',
+material_id:'2'
+}
+
+响应：
+{"success":"true","returnmsg":"查询物资库存成功","returndata":
+{"storeNumber":"246"}
+}
+
+
+3、新增物资调拨信息。
+请求：
+http://localhost:8081/jywz/transfer/addTransfer.json
+{ 
+transferInfo:
+{"transfer_code":"DB20171110080808",
+"transfer_date":"20171011",
+"transfer_type":"1",
+"putin_user":"2",
+"putin_storehouse_code":"storehouse05",
+"putout_user":"2",
+"putout_storehouse_code":"storehouse05",
+"remark":"test"
+},
+transferDetails:[
+{jy_material_id:2,transfer_number:2},
+{jy_material_id:3,transfer_number:3}
+]
+}
+
+响应：
+{"success":"true","returnmsg":"新增成功","returndata":{}}
+
+
+
+4、修改物资调拨信息。
+请求：
+http://localhost:8081/jywz/transfer/modifyTransfer.json
+{ 
+transferInfo:
+{
+"id":"1",
+"transfer_date":"20171011",
+"transfer_type":"1",
+"putin_user":"2",
+"putin_storehouse_code":"storehouse04",
+"putout_user":"2",
+"putout_storehouse_code":"storehouse06",
+"remark":"test"
+},
+transferDetails:[
+{jy_material_id:2,transfer_number:3},
+{jy_material_id:3,transfer_number:4}
+]
+}
+
+响应：
+{"success":"true","returnmsg":"修改成功","returndata":{}}
+
+
+5、查询物资调拨信息
+请求：
+http://localhost:8081/jywz/base/listquery.json
+{start:0,limit:10,exeid:'JY7001EQ002',
+id:'1',  //物资使用信息ID  可选
+transfer_code:'DB20171110080808', //调拨单号  可选
+transfer_type:'1', //调拨类型  可选
+putin_user:'2', //入库人  可选
+putin_storehouse_code:'storehouse04', //入库仓库编码  可选
+putout_user:'2', //出库人  可选
+putout_storehouse_code:'storehouse06', //出库仓库编码  可选
+date_start:'20171011', //物资调拨开始时日期间  可选
+date_end:'20171110'  //物资调拨结束时间日期  可选
+}
+
+响应：
+{"success":"true","returnmsg":"查询成功","returndata":{"results":"1","rows":
+[
+{"id":"1","transfer_code":"DB20171110080808","transfer_date":"20171011",
+"transfer_type":"1","
+putin_user":"2","putin_user_name":"huangyao",
+"putin_storehouse_code":"storehouse04","putin_storehouse_name":"仓库04",
+"putout_user":"2","putout_user_name":"huangyao",
+"putout_storehouse_code":"storehouse06","putout_storehouse_name":"仓库06",
+"status":"1","remark":"test","inputuser":"10","crt_date":"20171110","crt_time":"212905"}
+]}}
+
+
+6、查询物资调拨明细
+请求：
+http://localhost:8081/jywz/base/listquery.json
+{exeid:'JY7001EQ003',
+id:'1'
+}
+
+响应：
+{"success":"true","returnmsg":"查询成功","returndata":{"results":"2","rows":[
+{"jy_transfer_id":"1","jy_material_id":"2","transfer_number":"3",
+"material_code":"WZ0","material_name":"大米","model":"101","supplier":"金龙鱼",
+"material_type_code":"","material_type_name":""},
+{"jy_transfer_id":"1","jy_material_id":"3","transfer_number":"4",
+"material_code":"WZ2","material_name":"大米","model":"101","supplier":"金龙鱼",
+"material_type_code":"","material_type_name":""}
+]}}
+
+
