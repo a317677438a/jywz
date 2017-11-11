@@ -1,0 +1,100 @@
+仓库盘点 - 库存盘点
+
+1、所有仓库下拉列表
+
+2、所有物资下拉列表 ：公共接口说明.txt - 6
+
+3、查询某个仓库的库存，进行盘点。
+http://localhost:8081/jywz/takestock/materialNumber.json
+{ 
+"storehouse_code":"storehouse03", //仓库编码 必填
+"material_id":"2" //物资ID 可选
+}
+
+响应：
+{"success":"true","returnmsg":"查询成功","returndata":[
+{"putin_storehouse_name":"仓库03","jy_material_id":"2","putin_number":"1934",
+"material_code":"WZ0","material_name":"大米","model":"101","supplier":"金龙鱼",
+"material_type_code":"","material_type_name":"",
+"putout_number":"0","store_number":"1934"}
+]}
+
+
+4、下载仓库的库存盘点数据
+请求：
+http://localhost:8081/jywz/takestock/downloadTakestock.json
+{ 
+"storehouse_code":"storehouse03", //仓库编码 必填
+"material_id":"2" //物资ID 可选
+}
+
+响应：？？？？
+
+
+
+仓库盘点 - 库存预警
+5、新增库存预警
+http://localhost:8081/jywz/materialwarn/add.json
+请求：
+{ 
+materialWarnInfo:
+{"jy_material_id":"2",
+"warn_storehouse_code":"storehouse03",
+"warn_number":"2",
+"remark":"remark_warn"
+}}
+
+响应：
+{"success":"true","returnmsg":"新增成功","returndata":{}}
+
+
+6、删除库存预警
+http://localhost:8081/jywz/materialwarn/delete.json
+请求：
+{"id":"1"
+}
+
+响应：
+{"success":"true","returnmsg":"删除成功","returndata":{}}
+
+
+7、查询库存预警
+http://localhost:8081/jywz/base/listquery.json
+请求：
+{start:0,limit:10,exeid:'JY8001EQ003',
+warn_storehouse_code:'storehouse03', //仓库编码  可选
+jy_material_id:'2' //物资ID  可选
+}  
+  
+响应：
+{"success":"true","returnmsg":"查询成功","returndata":{"results":"1","rows":[
+{"id":"2","warn_storehouse_code":"storehouse03","warn_storehouse_name":"仓库03",
+"jy_material_id":"2","warn_number":"2","inputuser":"10","remark":"remark_warn",
+"crt_date":"20171111","material_code":"WZ0","material_name":"大米","model":"101",
+"supplier":"金龙鱼","material_type_code":"","material_type_name":""}
+]
+}}
+
+8、消息提示个数
+http://localhost:8081/jywz/base/infoquery.json
+请求：
+{exeid:'JY8001EQ005'
+}  
+响应：
+{"success":"true","returnmsg":"查询成功","returndata":{"number":"2"}}
+
+9、消息提示列表
+http://localhost:8081/jywz/base/listquery.json
+请求：
+{start:0,limit:10,exeid:'JY8001EQ006'
+}  
+
+响应：
+{"success":"true","returnmsg":"查询成功","returndata":{"results":"2","rows":[
+{"id":"1","message_user":"10","message_title":"仓库物资预警",
+"message_content":"仓库03的大米仓库数量：246达到预警值：2000,请注意！","status":"1",
+"inputuser":"","crt_date":"20171111","crt_time":"174546"},
+{"id":"2","message_user":"10","message_title":"仓库物资预警",
+"message_content":"仓库03的大米仓库数量：246达到预警值：2000,请注意！","status":"1",
+"inputuser":"","crt_date":"20171111","crt_time":"175803"}
+]}}
