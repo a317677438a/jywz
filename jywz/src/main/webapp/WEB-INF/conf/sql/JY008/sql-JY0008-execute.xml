@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlexecutes SYSTEM "../../dtd/sql-execute.dtd">
+<sqlexecutes>
+
+	<sqlexecute exeid="JY8001EQ001" datasource="dsSys">
+		<exename>查询仓库物资入库数量信息</exename>
+		<sqlids>JY8001Q001</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY8001EQ002" datasource="dsSys">
+		<exename>查询仓库物资入库数量信息</exename>
+		<sqlids>JY8001Q002</sqlids>
+	</sqlexecute>
+	
+	
+	
+</sqlexecutes>

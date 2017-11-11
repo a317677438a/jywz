@@ -93,7 +93,7 @@ CREATE TABLE jy_storehouse_in (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='入库单主表';
 
 
-
+alter table jy_storehouse_in add index jsi_putin_scode_index (putout_storehouse_code);
 
 
 /*==============================================================*/
@@ -132,6 +132,8 @@ CREATE TABLE jy_storehouse_out (
   crt_time			  	char(6) comment '创建时间',
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='入库单主表';
+
+alter table jy_storehouse_out add index jso_putout_scode_index (putout_storehouse_code);
 
 
 /*==============================================================*/

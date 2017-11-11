@@ -1,0 +1,34 @@
+仓库盘点 - 库存盘点
+
+1、所有仓库下拉列表
+
+2、所有物资下拉列表 ：公共接口说明.txt - 6
+
+3、查询某个仓库的库存，进行盘点。
+http://localhost:8081/jywz/takestock/materialNumber.json
+{ 
+"storehouse_code":"storehouse03", //仓库编码 必填
+"material_id":"2" //物资ID 可选
+}
+
+响应：
+{"success":"true","returnmsg":"查询成功","returndata":[
+{"putin_storehouse_name":"仓库03","jy_material_id":"2","putin_number":"1934",
+"material_code":"WZ0","material_name":"大米","model":"101","supplier":"金龙鱼",
+"material_type_code":"","material_type_name":"",
+"putout_number":"0","store_number":"1934"}
+]}
+
+
+4、下载仓库的库存盘点数据
+请求：
+http://localhost:8081/jywz/takestock/downloadTakestock.json
+{ 
+"storehouse_code":"storehouse03", //仓库编码 必填
+"material_id":"2" //物资ID 可选
+}
+
+响应：？？？？
+
+
+
