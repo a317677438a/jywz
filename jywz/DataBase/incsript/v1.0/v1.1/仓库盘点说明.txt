@@ -64,7 +64,7 @@ http://localhost:8081/jywz/base/listquery.json
 {start:0,limit:10,exeid:'JY8001EQ003',
 warn_storehouse_code:'storehouse03', //仓库编码  可选
 jy_material_id:'2' //物资ID  可选
-}
+}  
   
 响应：
 {"success":"true","returnmsg":"查询成功","returndata":{"results":"1","rows":[
