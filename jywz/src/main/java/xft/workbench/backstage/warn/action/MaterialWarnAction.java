@@ -2,6 +2,7 @@ package xft.workbench.backstage.warn.action;
 
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,5 +53,21 @@ public class MaterialWarnAction extends ABSBaseController{
 	}
 	
 	
+	@RequestMapping(value = "/message/read.json")
+	public  @ResponseBody String  messageRead(){
+		Map<String, Object> params = null; 
+		try {
+			params = this.getRequestParams();
+			Integer id = null;
+			if(params.containsKey("id") && !StringUtils.isEmpty((String)params.get("id"))){
+				id = Integer.valueOf((String)params.get("id"));
+			}
+			materialWarnBiz.readMessage(id);
+			
+		} catch (Exception e) {// 获取返回提示的错误
+			return this.updateErrorJson(e);
+		}
+		return this.updateReturnJson(true, "读消息成功", null);
+	}
 	
 }

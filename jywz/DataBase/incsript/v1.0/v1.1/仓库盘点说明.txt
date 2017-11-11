@@ -98,3 +98,15 @@ http://localhost:8081/jywz/base/listquery.json
 "message_content":"仓库03的大米仓库数量：246达到预警值：2000,请注意！","status":"1",
 "inputuser":"","crt_date":"20171111","crt_time":"175803"}
 ]}}
+
+
+10、读提示消息
+http://localhost:8081/jywz/message/read.json
+请求：
+{
+id:'2' //可选，  不上送则读所有未读消息。
+}  
+
+
+响应：
+{"success":"true","returnmsg":"读消息成功","returndata":{}}

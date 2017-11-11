@@ -3,6 +3,7 @@ package xft.workbench.backstage.warn.dao;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 
 import xft.workbench.backstage.base.util.GlobalMessage;
@@ -33,6 +34,21 @@ public class MaterialWarnDao extends ComnDao{
 	public void addMessage(Message message) throws Exception{
 		Map<String, Object> params = ObjectMapUtil.getFieldVlaue2(message);
 		this.exeUpdate("JY8001EU002", params);
+	}
+	
+	
+	
+	/**
+	 * 读信息提示
+	 * 
+	 */
+	public void readMessage(Integer messageId) throws Exception{
+		Map<String, Object> params =new HashMap<String, Object>();
+		if(messageId != null && !StringUtils.isEmpty(messageId.toString())){
+			params.put("id", messageId);
+		}
+		GlobalMessage.addMapSessionInfo(params);
+		this.exeUpdate("JY8001EU003", params);
 	}
 	
 	/**

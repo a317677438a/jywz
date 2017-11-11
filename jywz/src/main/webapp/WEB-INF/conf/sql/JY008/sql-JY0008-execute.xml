@@ -42,6 +42,11 @@
 		<sqlids>JY8001U002</sqlids>
 	</sqlexecute>
 	
+	<sqlexecute exeid="JY8001EU003" datasource="dsSys">
+		<exename>更新信息提示状态</exename>
+		<sqlids>JY8001U003</sqlids>
+	</sqlexecute>
+	
 	
 	<sqlexecute exeid="JY8001ED001" datasource="dsSys">
 		<exename>删除物资仓储预警信息</exename>

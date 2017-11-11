@@ -50,7 +50,7 @@ public class MaterialWarnBiz {
         				inputuser,
         				"仓库物资预警", 
         				warn_storehouse_name+"的"+material_name+"仓库数量："+store_number+
-        				"达到预警值："+warn_number+",请注意！", 
+        				",达到预警值："+warn_number+",请注意！", 
         				MessageStatus.noread.getValue(), 
         				null, 
         				null, 
@@ -58,5 +58,11 @@ public class MaterialWarnBiz {
         		materialWarnDao.addMessage(message);
         	}
         }
+	}
+	
+	
+	
+	public void readMessage(Integer messageId) throws Exception{
+			materialWarnDao.readMessage(messageId);
 	}
 }

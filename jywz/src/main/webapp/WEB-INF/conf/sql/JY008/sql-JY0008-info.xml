@@ -221,6 +221,21 @@
 	</sqlinfo>
 	
 
+	<sqlinfo sqlid="JY8001U003">
+			<sqlname>更新信息提示状态</sqlname>
+			<sql><![CDATA[
+				UPDATE jy_message
+				SET STATUS = 2
+				WHERE
+					(
+		                $ISNULL{id}
+		                OR id = $N{id}
+		            ) 
+		            AND
+		            	message_user = $N{sys_user_id}
+			]]></sql>
+	</sqlinfo>
+    
 
 	<sqlinfo sqlid="JY8001D001">
 		<sqlname>删除物资仓储预警信息</sqlname>
