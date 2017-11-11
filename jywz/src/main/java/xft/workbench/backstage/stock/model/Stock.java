@@ -60,13 +60,14 @@ public class Stock {
 		this.putin_code = putin_code;
 	}
 
-	public Stock(Integer id, Integer putin_type, Integer putin_user,
+	public Stock(Integer id, String putin_code,Integer putin_type, Integer putin_user,
 			String putin_date, String putin_storehouse_code,
 			Integer cancel_user, String contract_no,
 			String putout_storehouse_code, String status, String remark,
 			String inputuser, String crt_date, String crt_time) {
 		super();
 		this.id = id;
+		this.putin_code = putin_code;
 		this.putin_type = putin_type;
 		this.putin_user = putin_user;
 		this.putin_date = putin_date;

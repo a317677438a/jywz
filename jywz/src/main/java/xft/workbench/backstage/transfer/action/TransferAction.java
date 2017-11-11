@@ -10,8 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kayak.web.base.exception.KPromptException;
-
 import xft.workbench.backstage.apply.biz.ApplyBiz;
 import xft.workbench.backstage.base.action.ABSBaseController;
 import xft.workbench.backstage.base.util.GlobalMessage;
@@ -22,6 +20,8 @@ import xft.workbench.backstage.transfer.model.Transfer;
 import xft.workbench.backstage.transfer.model.TransferDetail;
 import xft.workbench.backstage.user.biz.LoginManangerBiz;
 import xft.workbench.backstage.user.model.UserLoginInfo;
+
+import com.kayak.web.base.exception.KPromptException;
 @Controller
 public class TransferAction extends ABSBaseController{
 
@@ -132,7 +132,7 @@ public class TransferAction extends ABSBaseController{
 		    	throw new KPromptException("请另一位仓库员进行身份认证！");
 		    }
 			
-			transferBiz.comfirmTransfer(transferId);
+			transferBiz.comfirmTransfer(transferId,transfer); 
 		} catch (Exception e) {// 获取返回提示的错误
 			return this.updateErrorJson(e);
 		}

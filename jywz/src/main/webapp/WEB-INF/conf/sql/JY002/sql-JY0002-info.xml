@@ -12,6 +12,8 @@
 				putin_date,
 				putin_storehouse_code,
 				contract_no,
+				cancel_user,
+				putout_storehouse_code,
 				STATUS,
 				remark,
 				inputuser,
@@ -26,11 +28,13 @@
 				$S{putin_date},
 				$S{putin_storehouse_code},
 				$S{contract_no},
+				$N{cancel_user},
+				$S{putout_storehouse_code},
 				$N{status},
 				$S{remark},
-				$S{inputuser},
-				$S{crt_date},
-				$S{crt_time},
+				$N{sys_user_id},
+				$S{SYSDATE},
+				$S{SYSTIME},
 				$S{putin_code}
 			)
 		]]></sql>
@@ -61,9 +65,7 @@
 			FROM
 				jy_storehouse_in
 			WHERE
-				crt_date =$S{crt_date}
-				and
-				crt_time =$S{crt_time}
+				putin_code =$S{putin_code}
 		]]></sql>
 	</sqlinfo>
 	

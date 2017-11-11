@@ -1,11 +1,14 @@
 package xft.workbench.backstage.transfer.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
 import xft.workbench.backstage.apply.model.Apply;
+import xft.workbench.backstage.apply.model.ApplyDetail;
 import xft.workbench.backstage.base.util.GlobalMessage;
 import xft.workbench.backstage.base.util.ObjectMapUtil;
 import xft.workbench.backstage.transfer.model.Transfer;
@@ -26,11 +29,25 @@ public class TransferDao extends ComnDao{
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", transferId);
 		GlobalMessage.addMapSessionInfo(params);
-		SqlResult sr =this.exeQuery("JY7001EU002", params);
+		SqlResult sr =this.exeQuery("JY7001EQ002", params);
 		
 		Transfer transfer = new Transfer();
 		transfer=(Transfer)ObjectMapUtil.sqlResultToObject(sr, transfer);
 		return transfer;
+	}
+	
+	
+	/**
+	 * 查询明细信息
+	 * 
+	 */
+	public List<TransferDetail> queryTransferDetailByid(Integer transferId) throws Exception{
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", transferId);
+		SqlResult sr =this.exeQuery("JY7001EQ003", params);
+		List<TransferDetail> results= new ArrayList<TransferDetail>();
+		results = (List<TransferDetail>)ObjectMapUtil.sqlResultToObject(sr,TransferDetail.class);
+		return results;
 	}
 	
 	/**

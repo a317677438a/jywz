@@ -111,3 +111,22 @@ id:'1'
 ]}}
 
 
+7、确认物资调拨。
+http://localhost:8081/jywz/transfer/comfirmTransfer.json
+{id:'1',
+loginname:'huangyao',
+passwd:'123'
+}
+
+响应：
+{"success":"true","returnmsg":"审核成功","returndata":{}}
+
+
+
+8、删除物资调拨。
+http://localhost:8081/jywz/transfer/deleteTransfer.json
+{id:'1'
+}
+
+响应：
+{"success":"false","returnmsg":"此状态不可进行删除操作！"}

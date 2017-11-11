@@ -32,10 +32,9 @@ public class StockDao extends ComnDao{
 	 * 获取基础信息id
 	 * 
 	 */
-	public int getStockId(String crt_date,String crt_time) throws Exception{
+	public int getStockId(String putin_code) throws Exception{
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("crt_date", crt_date);
-		params.put("crt_time", crt_time);
+		params.put("putin_code", putin_code);
 		SqlResult sqlResult = this.exeQuery("JY2001EQ001", params);
 		while (sqlResult.next()) {
 			return sqlResult.getInteger("id");

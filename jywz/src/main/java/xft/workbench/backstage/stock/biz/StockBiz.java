@@ -32,7 +32,7 @@ public class StockBiz {
 		stockDao.addStock(stock);
 		
 		//查询入库基础信息id
-		int id = stockDao.getStockId(stock.getCrt_date(),stock.getCrt_time());
+		int id = stockDao.getStockId(stock.getPutin_code());
 		
 		//新增入库明细
 		for (StockDetails stockDetail : stockDetails) {
