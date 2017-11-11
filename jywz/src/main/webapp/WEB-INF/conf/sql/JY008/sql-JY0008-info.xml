@@ -58,5 +58,84 @@
 	</sqlinfo>
 
 
+	<sqlinfo sqlid="JY8001Q003">
+		<sqlname>查询物资仓储预警信息</sqlname>
+		<sql><![CDATA[
+			SELECT
+				t1.id,
+				t1.warn_storehouse_code,
+				p1.param_name warn_storehouse_name,
+				t1.jy_material_id,
+				t1.warn_number,
+				t1.inputuser,
+				t1.remark,
+				t1.crt_date,
+				t2.`code` material_code,
+				t2.`name` material_name,
+				t2.model,
+				t2.supplier,
+				t3.`code` material_type_code,
+				t3.`name` material_type_name
+			FROM
+				jy_material_warn t1
+			LEFT JOIN jy_material t2 ON t1.jy_material_id = t2.id
+			LEFT JOIN jy_material_type t3 ON t2.jy_material_type_id = t3.id
+			LEFT JOIN jy_params p1 ON t1.warn_storehouse_code = p1.param_code
+			WHERE
+			(
+				t1.inputuser = $N{sys_user_id} 
+			)
+			AND
+			(
+                $ISNULL{id}
+                OR t1.id = $N{id}
+            )
+            AND
+			(
+                $ISNULL{warn_storehouse_code}
+                OR t1.warn_storehouse_code = $S{warn_storehouse_code}
+            )
+            AND
+			(
+                $ISNULL{jy_material_id}
+                OR t1.jy_material_id = $N{jy_material_id}
+            )
+			
+		]]></sql>
+	</sqlinfo>
+
+
+	<sqlinfo sqlid="JY8001U001">
+		<sqlname>新增物资仓储预警信息</sqlname>
+		<sql><![CDATA[
+			INSERT INTO jy_material_warn (
+			    jy_material_id,
+			    warn_storehouse_code,
+			    warn_number,
+				remark,
+				inputuser,
+				crt_date,
+				crt_time
+			)
+			VALUES
+			(
+				$S{jy_material_id},
+				$S{warn_storehouse_code},
+				$N{warn_number},
+				$S{remark},
+				$N{sys_user_id},
+				$S{SYSDATE},
+				$S{SYSTIME}
+			);
+		]]></sql>
+	</sqlinfo>
+
+
+	<sqlinfo sqlid="JY8001D001">
+		<sqlname>删除物资仓储预警信息</sqlname>
+		<sql><![CDATA[
+			DELETE FROM jy_material_warn where id = $N{id}
+		]]></sql>
+	</sqlinfo>
 	
 </sqlinfos>

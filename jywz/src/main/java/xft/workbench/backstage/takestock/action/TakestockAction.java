@@ -147,6 +147,9 @@ public class TakestockAction extends ABSBaseController{
 			log.error(e.getMessage(), e);
 		}
 		
+		if(arrayIn.length()==0){
+			 throw new KPromptException("无法查到相关物资库存信息！");
+		}
 		
 		//查仓库物资出库信息exeid:'JY8001EQ002'
 		map.put("exeid", "JY8001EQ002");
