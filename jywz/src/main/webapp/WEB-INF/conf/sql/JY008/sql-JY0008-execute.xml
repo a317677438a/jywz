@@ -17,10 +17,31 @@
 		<sqlids>JY8001Q003</sqlids>
 	</sqlexecute>
 	
+	<sqlexecute exeid="JY8001EQ004" datasource="dsSys">
+		<exename>查询所有物资仓储预警信息</exename>
+		<sqlids>JY8001Q004</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY8001EQ005" datasource="dsSys">
+		<exename>查询当前用户未读信息个数</exename>
+		<sqlids>JY8001Q005</sqlids>
+	</sqlexecute>
+	
+	<sqlexecute exeid="JY8001EQ006" datasource="dsSys">
+		<exename>查询当前用户信息列表</exename>
+		<sqlids>JY8001Q006</sqlids>
+	</sqlexecute>
+	
 	<sqlexecute exeid="JY8001EU001" datasource="dsSys">
 		<exename>新增物资仓储预警信息</exename>
 		<sqlids>JY8001U001</sqlids>
 	</sqlexecute>
+	
+	<sqlexecute exeid="JY8001EU002" datasource="dsSys">
+		<exename>新增信息提示</exename>
+		<sqlids>JY8001U002</sqlids>
+	</sqlexecute>
+	
 	
 	<sqlexecute exeid="JY8001ED001" datasource="dsSys">
 		<exename>删除物资仓储预警信息</exename>

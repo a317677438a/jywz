@@ -297,3 +297,21 @@ create table sys_param
    primary key (paraid, moduleid)
 )engine=innodb default charset=utf8;
 alter table sys_param comment '系统参数表';
+
+
+
+/*==============================================================*/
+/* table: jy_message         2017/11/11		*/
+/*==============================================================*/
+drop table if exists jy_message;
+CREATE TABLE jy_message (
+  id int(11) NOT NULL AUTO_INCREMENT COMMENT '系统id',	
+  message_user int(11) NOT NULL  COMMENT '消息提示人',
+  message_title varchar(100) NOT NULL  COMMENT '消息题目',
+  message_content varchar(1000) comment '消息内容',
+  status int(11) COMMENT '1:未读，2、已读',
+  inputuser		  	varchar(30) comment '操作人',
+  crt_date			  	char(8) comment '创建日期',
+  crt_time			  	char(6) comment '创建时间',
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='消息表';

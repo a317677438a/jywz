@@ -103,6 +103,71 @@
 			
 		]]></sql>
 	</sqlinfo>
+	
+	
+	
+	
+	
+	<sqlinfo sqlid="JY8001Q004">
+		<sqlname>查询物资仓储预警信息</sqlname>
+		<sql><![CDATA[
+			SELECT
+				t1.id,
+				t1.warn_storehouse_code,
+				p1.param_name warn_storehouse_name,
+				t1.jy_material_id,
+				t1.warn_number,
+				t1.inputuser,
+				t1.remark,
+				t1.crt_date,
+				t2.`code` material_code,
+				t2.`name` material_name,
+				t2.model,
+				t2.supplier,
+				t3.`code` material_type_code,
+				t3.`name` material_type_name
+			FROM
+				jy_material_warn t1
+			LEFT JOIN jy_material t2 ON t1.jy_material_id = t2.id
+			LEFT JOIN jy_material_type t3 ON t2.jy_material_type_id = t3.id
+			LEFT JOIN jy_params p1 ON t1.warn_storehouse_code = p1.param_code
+		]]></sql>
+	</sqlinfo>
+	
+	
+	<sqlinfo sqlid="JY8001Q005">
+		<sqlname>查询当前用户未读信息个数</sqlname>
+		<sql><![CDATA[
+			SELECT
+				count(1) number
+			FROM
+				jy_message t
+			WHERE
+					t.message_user = $N{sys_user_id} 
+				AND
+					t.status = 1;
+		]]></sql>
+	</sqlinfo>
+	
+	<sqlinfo sqlid="JY8001Q006">
+		<sqlname>查询当前用户信息列表</sqlname>
+		<sql><![CDATA[
+			SELECT
+				t.id,
+				t.message_user,
+				t.message_title,
+				t.message_content,
+				t.status,
+				t.inputuser,
+				t.crt_date,
+				t.crt_time
+			FROM
+				jy_message t
+			WHERE
+				t.message_user = $N{sys_user_id} 
+		]]></sql>
+	</sqlinfo>
+	
 
 
 	<sqlinfo sqlid="JY8001U001">
@@ -129,6 +194,32 @@
 			);
 		]]></sql>
 	</sqlinfo>
+	
+	
+	
+	<sqlinfo sqlid="JY8001U002">
+		<sqlname>新增信息提示</sqlname>
+		<sql><![CDATA[
+			INSERT INTO jy_message (
+			    message_user,
+			    message_title,
+			    message_content,
+			    status,
+				crt_date,
+				crt_time
+			)
+			VALUES
+			(
+				$N{message_user},
+				$S{message_title},
+				$S{message_content},
+				$N{status},
+				$S{SYSDATE},
+				$S{SYSTIME}
+			);
+		]]></sql>
+	</sqlinfo>
+	
 
 
 	<sqlinfo sqlid="JY8001D001">

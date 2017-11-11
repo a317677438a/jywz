@@ -15,5 +15,12 @@
 	default-lazy-init="true">
 
 	
+	<!-- 1.增加调度定时任务 -->
+	<task:scheduled-tasks>
+		<!--设定任务-->
+		<task:scheduled ref="materialWarnBiz"
+			method="materialWarn" cron="0 58 17 * * ?"/>
+	</task:scheduled-tasks>
+	
 	
 </beans>
