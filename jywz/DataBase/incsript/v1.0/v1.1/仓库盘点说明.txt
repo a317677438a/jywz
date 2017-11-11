@@ -32,3 +32,46 @@ http://localhost:8081/jywz/takestock/downloadTakestock.json
 
 
 
+仓库盘点 - 库存预警
+5、新增库存预警
+http://localhost:8081/jywz/materialwarn/add.json
+请求：
+{ 
+materialWarnInfo:
+{"jy_material_id":"2",
+"warn_storehouse_code":"storehouse03",
+"warn_number":"2",
+"remark":"remark_warn"
+}}
+
+响应：
+{"success":"true","returnmsg":"新增成功","returndata":{}}
+
+
+6、删除库存预警
+http://localhost:8081/jywz/materialwarn/delete.json
+请求：
+{"id":"1"
+}
+
+响应：
+{"success":"true","returnmsg":"删除成功","returndata":{}}
+
+
+7、查询库存预警
+http://localhost:8081/jywz/base/listquery.json
+请求：
+{start:0,limit:10,exeid:'JY8001EQ003',
+warn_storehouse_code:'storehouse03', //仓库编码  可选
+jy_material_id:'2' //物资ID  可选
+}  
+  
+响应：
+{"success":"true","returnmsg":"查询成功","returndata":{"results":"1","rows":[
+{"id":"2","warn_storehouse_code":"storehouse03","warn_storehouse_name":"仓库03",
+"jy_material_id":"2","warn_number":"2","inputuser":"10","remark":"remark_warn",
+"crt_date":"20171111","material_code":"WZ0","material_name":"大米","model":"101",
+"supplier":"金龙鱼","material_type_code":"","material_type_name":""}
+]
+}}
+
