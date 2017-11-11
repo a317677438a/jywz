@@ -347,6 +347,11 @@
 	            ) 
 	            and
 				(
+	                $ISNULL{putin_type}
+	                OR t0.putin_type = $S{putin_type}
+	            ) 
+	            and
+				(
 	                $ISNULL{putin_user_name}
 	                OR u1.name like '%$U{putin_user_name}%'
 	            ) 

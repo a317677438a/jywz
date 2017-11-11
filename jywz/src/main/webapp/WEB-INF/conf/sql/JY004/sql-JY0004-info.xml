@@ -154,6 +154,11 @@
 	            ) 
 	            and
 				(
+	                $ISNULL{putout_type}
+	                OR t0.putout_type = $S{putout_type}
+	            ) 
+	            and
+				(
 	                $ISNULL{putout_user_name}
 	                OR u2.name like '%$U{putout_user_name}%'
 	            ) 

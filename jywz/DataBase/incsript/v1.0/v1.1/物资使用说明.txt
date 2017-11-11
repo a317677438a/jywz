@@ -121,7 +121,7 @@ materialBackDetails:[
 请求：
 http://localhost:8081/jywz/base/listquery.json
 {start:0,limit:10,exeid:'JY6001EQ002',
-putin_type:'2',  //2、退库入库   必输
+putin_type:'2',  //2、退库入库、3、移库入库   必输
 putin_code:'TH20171104111908', //入库单号 可选
 date_start:'', //物资退回开始时间  可选
 date_end:''  //物资退回结束时间  可选

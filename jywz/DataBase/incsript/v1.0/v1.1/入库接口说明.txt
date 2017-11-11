@@ -4,6 +4,7 @@ http://localhost:8081/jywz/base/listquery.json
 {start:0,limit:10,exeid:'JY2001EQ009',
 putin_storehouse_code:'storehouse03',
 putin_code:'CG20171008081009',
+putin_type：'1',
 putin_user_name:'c',
 putin_date_start:'',
 putin_date_end:''

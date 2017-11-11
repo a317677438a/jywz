@@ -130,3 +130,18 @@ http://localhost:8081/jywz/transfer/deleteTransfer.json
 
 响应：
 {"success":"false","returnmsg":"此状态不可进行删除操作！"}
+
+
+出库管理-移库出库
+
+9、查询移库出库单信息列表。《出库接口说明.txt》第1个接口。
+
+
+入库管理-移库入库
+
+10、查询移库入库单列表。《物资使用说明.txt》第8个接口。
+
+
+
+
+

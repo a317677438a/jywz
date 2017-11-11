@@ -1,4 +1,4 @@
-1、查询出库单信息列表。
+1、查询出库单信息列表。|| 出库管理-移库出库
 请求：
 http://localhost:8081/jywz/base/listquery.json
 {start:0,limit:10,exeid:'JY4001EQ002',putout_type:1,putout_code:'SQ201710111950011'}
@@ -36,6 +36,7 @@ http://localhost:8081/jywz/base/listquery.json
 {start:0,limit:10,exeid:'JY4001EQ004',
 putout_storehouse_code:'storehouse01',
 putout_code:'SQ201710111950888',
+putout_type：'1',
 putout_user_name:'c'
 }
 
