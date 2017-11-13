@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -19,18 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import xft.workbench.backstage.base.action.ABSBaseController;
-import xft.workbench.backstage.base.enumeration.apply.PutoutStatus;
-import xft.workbench.backstage.base.enumeration.apply.PutoutType;
-import xft.workbench.backstage.base.util.EnumUtil;
 import xft.workbench.backstage.base.util.FileUtil;
-import xft.workbench.backstage.base.util.GlobalMessage;
 
-import com.google.gson.JsonObject;
 import com.kayak.web.base.exception.KPromptException;
 import com.kayak.web.base.service.abs.ComnServiceAbstract;
 import com.kayak.web.base.sql.SqlResult;
 import com.kayak.web.base.system.KResult;
-import com.kayak.web.base.system.RequestSupport;
 @Controller
 public class TakestockAction extends ABSBaseController{
 
@@ -121,7 +116,7 @@ public class TakestockAction extends ABSBaseController{
     					.append(object.getString("supplier")+",")
     					.append(object.getString("putin_number")+",")
     					.append(object.getString("putout_number")+",")
-    					.append(object.getString("store_number")+",")
+    					.append(object.getString("store_number"))
     					.append("\r\n");
     	}
     	
@@ -141,7 +136,11 @@ public class TakestockAction extends ABSBaseController{
 		try {
 			while (sResultIn.next()) {
 				JSONObject jo = new JSONObject(sResultIn.getRow());
-				arrayIn.put(jo);
+				if(!StringUtils.isEmpty(jo.getString("jy_material_id")) && 
+						!StringUtils.isEmpty(jo.getString("putin_number")) &&
+						!"null".equals(jo.getString("putin_number"))){
+					arrayIn.put(jo);
+				}
 			}
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
