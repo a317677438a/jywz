@@ -172,13 +172,13 @@
 	               (
 	               $ISNULL{putout_date_start}
 	               or 
-	               t0.putout_date > $S{putout_date_start}
+	               t0.putout_date >= $S{putout_date_start}
 	               )
 	               and
 	               (
 	                $ISNULL{putout_date_end}
 	                or
-	                t0.putout_date < $S{putout_date_end}
+	                t0.putout_date <= $S{putout_date_end}
 	                )
 	            )  
 	            and

@@ -19,7 +19,7 @@
 	<task:scheduled-tasks>
 		<!--设定任务-->
 		<task:scheduled ref="materialWarnBiz"
-			method="materialWarn" cron="0 58 17 * * ?"/>
+			method="materialWarn" cron="0 01 8 * * ?"/>
 	</task:scheduled-tasks>
 	
 	

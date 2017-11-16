@@ -136,7 +136,7 @@ public class TransferAction extends ABSBaseController{
 		} catch (Exception e) {// 获取返回提示的错误
 			return this.updateErrorJson(e);
 		}
-		return this.updateReturnJson(true, "审核成功", null);
+		return this.updateReturnJson(true, "调拨成功", null);
 	}
 	
 	
