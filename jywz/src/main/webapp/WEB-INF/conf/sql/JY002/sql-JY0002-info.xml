@@ -107,6 +107,10 @@
 			LEFT JOIN jy_params p2 ON t0.putout_storehouse_code = p2.param_code
 				WHERE 
 				(
+				t0.putin_user = $N{sys_user_id} 
+			)
+			AND
+				(
                 $ISNULL{id}
                 OR t0.id = $N{id}
             ) 

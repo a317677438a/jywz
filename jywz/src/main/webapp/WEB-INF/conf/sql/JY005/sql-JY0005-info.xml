@@ -176,7 +176,7 @@
 	                OR t1.jy_material_id = $N{jy_material_id}
 	            ) 
 	     			
-			ORDER BY
+			GROUP BY
 				t1.jy_material_id
 			
         ]]></sql>
