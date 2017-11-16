@@ -169,7 +169,7 @@ public class TakestockAction extends ABSBaseController{
 			JSONObject object=arrayIn.getJSONObject(i);
 			Integer putin_number = object.getInt("putin_number");
 			if(out_map.containsKey(object.getString("jy_material_id"))){
-				Integer putout_number=(Integer)out_map.get("jy_material_id");
+				Integer putout_number=(Integer)out_map.get(object.getString("jy_material_id"));
 				object.put("putout_number", putout_number);
 				object.put("store_number", putin_number-putout_number);
 			}else{

@@ -29,7 +29,7 @@
 	                OR t1.jy_material_id = $N{material_id}
 	            )
 	        AND t0.`status` = 2
-			ORDER BY
+			GROUP BY
 				t1.jy_material_id;
 		]]></sql>
 	</sqlinfo>
@@ -45,14 +45,14 @@
 				jy_storehouse_out t0
 			LEFT JOIN jy_storehouse_out_detail t1 ON t0.id = t1.jy_storehouse_out_id
 			WHERE
-				t0.putin_storehouse_code = $S{storehouse_code}
+				t0.putout_storehouse_code = $S{storehouse_code}
 			AND
 				(
 	                $ISNULL{material_id}
 	                OR t1.jy_material_id = $N{material_id}
 	            )
 	        AND t0.`status` = 2
-			ORDER BY
+			GROUP BY
 				t1.jy_material_id;
 		]]></sql>
 	</sqlinfo>
