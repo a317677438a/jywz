@@ -7,6 +7,8 @@
 		<sql><![CDATA[
 			INSERT INTO jy_material_use (
 			    jy_material_id,
+			    use_type,
+				use_workno,
 				use_user,
 				use_date,
 				use_number,
@@ -19,6 +21,8 @@
 			VALUES
 			(
 				$N{jy_material_id},
+				$N{use_type},
+				$S{use_workno},
 				$N{sys_user_id},
 				$S{use_date},
 				$N{use_number},
@@ -39,6 +43,8 @@
 		SELECT
 			t1.id,
 			t1.jy_material_id,
+			t1.use_type,
+			t1.use_workno,
 			m1.`code` material_code,
 			m1.`name` material_name,
 			m1.model,
@@ -84,6 +90,11 @@
                 or
                 t1.use_date <= $S{date_end}
             )
+            AND
+			(
+                $ISNULL{use_workno}
+                OR t1.use_workno = $S{use_workno}
+            ) 
              
 		]]></sql>
 	</sqlinfo>
@@ -95,6 +106,8 @@
 		SELECT
 			t1.id,
 			t1.jy_material_id,
+			t1.use_type,
+			t1.use_workno,
 			m1.`code` material_code,
 			m1.`name` material_name,
 			m1.model,
@@ -142,7 +155,11 @@
 				$ISNULL{use_user_name}
                 OR u1.`name` like '%$U{use_user_name}%'
 			)
-			
+			AND
+			(
+                $ISNULL{use_workno}
+                OR t1.use_workno = $S{use_workno}
+            )
              
 		]]></sql>
 	</sqlinfo>
