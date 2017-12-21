@@ -195,6 +195,8 @@ drop table if exists jy_material_use;
 CREATE TABLE jy_material_use (
   id int(11) NOT NULL AUTO_INCREMENT COMMENT '系统id',	
   jy_material_id int(11) NOT NULL  COMMENT '物资表系统id',
+  use_type  int(2) comment '使用类型：1：安装使用，2、培训使用',
+  use_workno varchar(100) comment '营销系统工作单号,当安装使用时必需存在值',
   use_user  int(11) comment '使用人',
   use_date  char(8) comment '使用日期',
   use_number int(11) COMMENT '使用数量',

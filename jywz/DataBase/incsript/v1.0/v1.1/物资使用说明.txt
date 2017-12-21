@@ -17,6 +17,8 @@ http://localhost:8081/jywz/materialuse/add.json
 { 
 materialUseInfo:
 {"jy_material_id":"1",
+"use_type":"1",
+"use_workno":"A2108170111111",
 "use_date":"20171011",
 "use_number":"1",
 "remark":"test"
@@ -33,6 +35,7 @@ http://localhost:8081/jywz/base/listquery.json
 {start:0,limit:10,exeid:'JY5001EQ001',
 id:'1',  //物资使用信息ID  可选
 jy_material_id:'1', //物资信息ID  可选
+use_workno:"A2108170111111", 营销系统工作单号 可选
 date_start:'', //物资使用时间开始时间  可选
 date_end:''  //物资使用时间结束时间  可选
 }
@@ -42,7 +45,7 @@ date_end:''  //物资使用时间结束时间  可选
 {"results":"1","rows":[
 {"id":"1","jy_material_id":"2","material_code":"WZ0","material_name":"大米",
 "model":"101","supplier":"金龙鱼","use_user":"10","user_name":"sq01",
-"use_date":"20171011","use_number":"1","remark":"test","status":"1"}
+"use_type":"1","use_workno":"A2108170111111","use_date":"20171011","use_number":"1","remark":"test","status":"1"}
 ]}}
 
 
