@@ -109,6 +109,7 @@
 			m.NAME,
 			m.model,
 			m.supplier,
+			m.use_limit,
 		  	n.code as type_code,
 			n.NAME as codeName
 		FROM
@@ -125,6 +126,10 @@
             	$ISNULL{id}
                 OR m.id = $N{id}
             )
+            and (
+            	$ISNULL{jy_material_type_id}
+                OR m.jy_material_type_id = $N{jy_material_type_id}
+            )
             
 					order by m.id
 		]]></sql>
@@ -136,12 +141,19 @@
 			SELECT COUNT(a.id) num FROM jy_material a
 				WHERE 
 					(
-                $ISNULL{code}
-                OR a.CODE like '%$U{code}%'
-            ) or (
-            	$ISNULL{name}
-                OR a.name like '%$U{name}%'
-            )
+		                $ISNULL{code}
+		                OR a.code like '%$U{code}%'
+		            ) and (
+		            	$ISNULL{name}
+		                OR a.name like '%$U{name}%'
+		            ) and (
+		            	$ISNULL{id}
+		                OR a.id = $N{id}
+		            )
+		            and (
+		            	$ISNULL{jy_material_type_id}
+		                OR a.jy_material_type_id = $N{jy_material_type_id}
+		            )
 		]]></sql>
 	</sqlinfo>
 	
@@ -193,6 +205,15 @@
 			name=$S{name},
 			model=$S{model},
 			supplier=$S{supplier}
+			WHERE id=$N{id}
+		]]></sql>
+	</sqlinfo>
+	
+	<sqlinfo sqlid="JY0002U003">
+		<sqlname>修改物资申领限制</sqlname>
+		<sql><![CDATA[
+			UPDATE jy_material SET
+			use_limit = $N{use_limit}
 			WHERE id=$N{id}
 		]]></sql>
 	</sqlinfo>

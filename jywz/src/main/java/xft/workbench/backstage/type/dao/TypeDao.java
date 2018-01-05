@@ -165,6 +165,20 @@ public class TypeDao extends ComnDao{
 		exeUpdate("JY0002EU002", param);
 		
 	}
+	
+	/**
+	 * 修改物资申请限制信息
+	 *
+	 */
+	public void modifyMaterialUselimit(Integer materialId,Integer use_limit) throws Exception {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("id", materialId);
+		param.put("use_limit", use_limit);
+		exeUpdate("JY0002EU003", param);
+		
+	}
+	
+	
 	/**
 	 * 删除物资
 	 * @param id

@@ -2,6 +2,8 @@
 ALTER TABLE jy_material_use ADD use_type  int(2) comment '使用类型：1：安装使用，2、培训使用';
 ALTER TABLE jy_material_use ADD use_workno varchar(100) comment '营销系统工作单号,当安装使用时必需存在值';
 
+/*20170103 新增物资申请限制数量 */
+ALTER TABLE jy_material ADD use_limit int(11)  COMMENT '申领限制数量';
 
 
 delete from jy_params;

@@ -71,6 +71,11 @@
 		<sqlids>JY0002U002</sqlids>
 	</sqlexecute>
 	
+	<sqlexecute exeid="JY0002EU003" datasource="dsSys">
+		<exename>修改物资申领限制</exename>
+		<sqlids>JY0002U003</sqlids>
+	</sqlexecute>
+	
 	<sqlexecute exeid="JY0002ED001" datasource="dsSys">
 		<exename>删除物资</exename>
 		<sqlids>JY0002D001</sqlids>

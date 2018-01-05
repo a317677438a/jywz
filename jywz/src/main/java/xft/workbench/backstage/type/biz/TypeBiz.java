@@ -95,6 +95,17 @@ public class TypeBiz {
 		// 修改物资信息
 		typeDao.modifyMaterial(material);
 	}
+	
+	
+	@Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
+	public void modifyMaterialUselimit(Integer materialId,Integer use_limit) throws Exception {
+		
+		// 修改物资申领限制
+		typeDao.modifyMaterialUselimit(materialId, use_limit);
+	}
+	
+	
+	
 	/**
 	 * 删除物资
 	 * 
