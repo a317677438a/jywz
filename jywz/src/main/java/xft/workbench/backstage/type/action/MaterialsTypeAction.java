@@ -305,17 +305,17 @@ public class MaterialsTypeAction extends ABSBaseController{
 	}
 	
 	/**
-	 * 修改物资信息
+	 * 设置物资申请限制
 	 * 
 	 */
 	@RequestMapping(value="/materialsType/modifyMaterialUselimit.json")
 	public @ResponseBody String modifyMaterialUselimit(){
 		try {
 			Map<String, Object> param = this.getRequestParams();//获取请求参数
-			Material material = new Material();
-			ObjectMapUtil.setObjectFileValue(material, param);
-			typeBiz.modifyMaterial(material);
-			return updateReturnJson(true, "修改物资信息成功", null);
+			Integer materialId = Integer.valueOf((String)param.get("materialId"));
+			Integer use_limit  = Integer.valueOf((String)param.get("use_limit"));
+			typeBiz.modifyMaterialUselimit(materialId, use_limit);
+			return updateReturnJson(true, "设置成功", null);
 		} catch (Exception e) {
 			return this.updateErrorJson(e);
 		}
